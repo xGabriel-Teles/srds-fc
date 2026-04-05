@@ -130,7 +130,10 @@ const SRDS = {
       position: "Goleiro",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/edu-azul.png", 
+        uni2: "img/players/edu-amarelo.png"
+      },
       stats: { matches: 3, goals: 0, assists: 0, points: 9 },
       awards: []
     },
