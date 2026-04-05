@@ -55,7 +55,10 @@ const SRDS = {
       position: "Ala",
       foot: "Direito",
       age: 28,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/gabriel-azul.png", 
+        uni2: "img/players/gabriel-vermelho.png"
+      },
       stats: { matches: 5, goals: 4, assists: 6, points: 12 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
