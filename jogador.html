@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRDS FC — Perfil do Atleta</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<header class="site-header"></header>
+
+<main class="player-profile-page">
+
+  <!-- ── Navigation arrows ── -->
+  <nav class="player-nav" id="playerNav"></nav>
+
+  <!-- ── Profile hero ── -->
+  <div class="profile-hero" id="profileHero"></div>
+
+  <!-- ── Stats grid ── -->
+  <div class="profile-stats-grid" id="statsGrid"></div>
+
+  <!-- ── Averages ── -->
+  <section>
+    <h3 style="font-size:20px; color:var(--branco); margin-bottom:14px;">
+      Médias por <span style="color:var(--ouro)">Partida</span>
+    </h3>
+    <div class="averages-grid" id="averagesGrid"></div>
+  </section>
+
+  <!-- ── Awards ── -->
+  <section class="awards-section">
+    <h3 class="awards-title">Prêmios <span>Individuais</span></h3>
+    <div class="awards-grid" id="awardsGrid"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script>
+  renderHeader('jogador.html');
+  renderFooter();
+
+  // ── Get player from URL ──
+  const params = new URLSearchParams(window.location.search);
+  const playerId = params.get('id');
+  const player = getPlayerById(playerId);
+
+  if (!player) {
+    document.querySelector('.player-profile-page').innerHTML = `
+      <div style="text-align:center; padding:80px 20px;">
+        <h2 style="font-size:32px; color:var(--cinza); margin-bottom:16px;">Atleta não encontrado</h2>
+        <a href="index.html" style="color:var(--ouro); font-family:'Barlow Semi Condensed',sans-serif;">← Voltar à tabela</a>
+      </div>`;
+  } else {
+    renderPlayerProfile(player);
+  }
+
+  function renderPlayerProfile(p) {
+    document.title = `SRDS FC — ${p.name}`;
+
+    // ── Alphabetical navigation ──
+    const alpha = getAlphabetical();
+    const idx   = alpha.findIndex(x => x.id === p.id);
+    const prev  = idx > 0 ? alpha[idx - 1] : alpha[alpha.length - 1];
+    const next  = idx < alpha.length - 1 ? alpha[idx + 1] : alpha[0];
+
+    document.getElementById('playerNav').innerHTML = `
+      <a href="jogador.html?id=${prev.id}" class="player-nav-btn">
+        ${chevronLeft()} ${prev.name}
+      </a>
+      <div class="player-nav-center">${idx + 1} / ${alpha.length}</div>
+      <a href="jogador.html?id=${next.id}" class="player-nav-btn">
+        ${next.name} ${chevronRight()}
+      </a>
+    `;
+
+    // ── Ranks ──
+    const ranks = getPlayerRanks(p);
+    const avgs  = getPlayerAverages(p);
+
+    // ── Profile hero ──
+    const hasPhoto1 = p.photo && p.photo.uni1;
+    const hasPhoto2 = p.photo && p.photo.uni2;
+
+    const num1Label = p.number.uni1 !== null ? `#${p.number.uni1}` : '';
+    const num2Label = p.number.uni2 !== null ? `#${p.number.uni2}` : '';
+
+    // Photo / silhouette content
+    const frontPhoto = hasPhoto1
+      ? `<div class="flip-card-avatar"><img src="${p.photo.uni1}" alt="${p.name} - Uniforme Azul" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>`
+      : `<div class="flip-card-avatar">${avatarSVG('#c99f40')}</div>`;
+
+    const backPhoto = hasPhoto2
+      ? `<div class="flip-card-avatar"><img src="${p.photo.uni2}" alt="${p.name} - Uniforme Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>`
+      : `<div class="flip-card-avatar">${avatarSVG('#ead186')}</div>`;
+
+    // Build tag list
+    let tags = `<span class="profile-tag tag-position">${p.position}</span>`;
+    if (num1Label || num2Label) {
+      const numDisplay = num1Label && num2Label && num1Label !== num2Label
+        ? `${num1Label} · ${num2Label}`
+        : num1Label || num2Label;
+      tags += `<span class="profile-tag tag-number">${numDisplay}</span>`;
+    }
+    if (p.foot) tags += `<span class="profile-tag tag-foot">Pé ${p.foot}</span>`;
+    if (p.age)  tags += `<span class="profile-tag tag-foot">${p.age} anos</span>`;
+    if (p.nickname && p.nickname !== p.name) tags += `<span class="profile-tag tag-foot">"${p.nickname}"</span>`;
+
+    // Rank indicators
+    const rankItems = [
+      { label: 'Pontos', rank: ranks.points, icon: '🏆' },
+      { label: 'Gols',   rank: ranks.goals,  icon: '⚽' },
+      { label: 'Assist.', rank: ranks.assists, icon: '🎯' },
+    ].map(r => `
+      <div class="rank-indicator">
+        ${r.icon}
+        <span class="rank-num">${rankSuffix(r.rank)}</span>
+        <span>${r.label}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('profileHero').innerHTML = `
+      <!-- Flip card -->
+      <div>
+        <div class="flip-card-container" id="flipCardContainer" title="Clique para ver o outro uniforme">
+          <div class="flip-card" id="flipCard">
+            <!-- Front: Uniforme 1 (Azul) -->
+            <div class="flip-card-front">
+              <div class="flip-card-inner">
+                ${frontPhoto}
+                <div class="flip-card-name-bar">
+                  <div>
+                    <div class="flip-card-name">${p.name}</div>
+                    <div class="flip-card-uni-label">Uniforme Azul</div>
+                  </div>
+                  ${num1Label ? `<div class="flip-card-number">${p.number.uni1}</div>` : ''}
+                </div>
+              </div>
+            </div>
+            <!-- Back: Uniforme 2 (Vermelho) -->
+            <div class="flip-card-back">
+              <div class="flip-card-inner">
+                ${backPhoto}
+                <div class="flip-card-name-bar">
+                  <div>
+                    <div class="flip-card-name">${p.name}</div>
+                    <div class="flip-card-uni-label">Uniforme Vermelho</div>
+                  </div>
+                  ${num2Label ? `<div class="flip-card-number">${p.number.uni2}</div>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="flip-hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Clique para girar
+        </p>
+      </div>
+
+      <!-- Info -->
+      <div class="profile-info">
+        <div>
+          <h1 class="profile-name">${p.name}</h1>
+          ${p.fullName && p.fullName !== p.name ? `<div class="profile-fullname">${p.fullName}</div>` : ''}
+        </div>
+        <div class="profile-tags">${tags}</div>
+        <div class="profile-ranks">${rankItems}</div>
+      </div>
+    `;
+
+    // Flip interaction
+    const container = document.getElementById('flipCard');
+    document.getElementById('flipCardContainer').addEventListener('click', () => {
+      container.classList.toggle('flipped');
+    });
+
+    // ── Stats grid ──
+    const stats = [
+      { value: p.stats.matches,  label: 'Partidas Jogadas' },
+      { value: p.stats.goals,    label: 'Gols' },
+      { value: p.stats.assists,  label: 'Assistências' },
+      { value: p.stats.points,   label: 'Pontos' },
+    ];
+    document.getElementById('statsGrid').innerHTML = stats.map(s => `
+      <div class="profile-stat-card">
+        <div class="profile-stat-value">${s.value}</div>
+        <div class="profile-stat-label">${s.label}</div>
+      </div>
+    `).join('');
+
+    // ── Averages ──
+    const averagesData = [
+      { value: avgs.goals,         label: 'Gols/Partida' },
+      { value: avgs.assists,       label: 'Assist./Partida' },
+      { value: avgs.participation, label: 'Participação/Partida' },
+    ];
+    document.getElementById('averagesGrid').innerHTML = averagesData.map(a => `
+      <div class="avg-card">
+        <div class="avg-value">${a.value}</div>
+        <div class="avg-label">${a.label}</div>
+      </div>
+    `).join('');
+
+    // ── Awards ──
+    const awardsEl = document.getElementById('awardsGrid');
+    if (p.awards.length === 0) {
+      awardsEl.innerHTML = `<p class="no-awards">Nenhum prêmio individual registrado ainda.</p>`;
+    } else {
+      awardsEl.innerHTML = p.awards.map(a => `
+        <div class="award-card">
+          <div class="award-icon">${a.icon}</div>
+          <div class="award-info">
+            <div class="award-title">${a.title}</div>
+            <div class="award-year">Temporada ${a.year}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+</script>
+</body>
+</html>

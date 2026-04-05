@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRDS FC — Ranking de Assistências 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<header class="site-header"></header>
+
+<main class="section fade-in">
+
+  <div class="section-header">
+    <h2 class="section-title">Ranking de <span>Assistências</span></h2>
+    <span class="section-meta">Temporada 2026</span>
+  </div>
+  <div class="gold-line"></div>
+
+  <p class="page-intro">
+    Classificação dos garçons da temporada 2026. Clique no atleta para ver o perfil completo.
+  </p>
+
+  <div class="ranking-list" id="rankingList"></div>
+
+</main>
+
+<footer class="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script>
+  renderHeader('assistencias.html');
+  renderFooter();
+
+  const players = getAssistsRanking();
+  const maxAssists = players[0]?.stats.assists || 1;
+
+  const list = document.getElementById('rankingList');
+
+  players.forEach((p, i) => {
+    const rank = i + 1;
+    const pct  = maxAssists > 0 ? (p.stats.assists / maxAssists) * 100 : 0;
+    const posClass = rank <= 3 ? ` top${rank}` : '';
+
+    const item = document.createElement('div');
+    item.className = 'ranking-item';
+    item.innerHTML = `
+      <div class="ranking-pos${posClass}">${rank}</div>
+      <div class="ranking-bar-wrap">
+        <div class="ranking-name">${p.name}
+          <span style="font-size:11px; color:var(--cinza); font-weight:400; margin-left:6px;">${p.position}</span>
+        </div>
+        <div class="ranking-bar-bg">
+          <div class="ranking-bar-fill red" style="width:${pct}%"></div>
+        </div>
+      </div>
+      <div class="ranking-value red">${p.stats.assists}</div>
+      <div class="ranking-position">${p.stats.assists === 1 ? 'assist.' : 'assist.'}</div>
+    `;
+    item.addEventListener('click', () => { window.location.href = `jogador.html?id=${p.id}`; });
+    list.appendChild(item);
+  });
+</script>
+</body>
+</html>

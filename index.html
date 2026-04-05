@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRDS FC — Tabela de Pontuação 2026</title>
+  <meta name="description" content="Tabela de classificação, estatísticas e rankings do SRDS FC — temporada 2026.">
+  <meta property="og:title" content="SRDS FC — Temporada 2026">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header"></header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-crest" id="heroCrest"></div>
+  <h1 class="hero-title font-display">SRDS FC</h1>
+  <p class="hero-subtitle">Porto Alegre · Temporada 2026</p>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- ── TABELA DE PONTUAÇÃO ── -->
+<main class="section fade-in">
+  <div class="section-header">
+    <h2 class="section-title">Tabela de <span>Pontuação</span></h2>
+    <span class="section-meta" id="matchesPlayed"></span>
+  </div>
+  <div class="gold-line"></div>
+
+  <div class="standings-table-wrap">
+    <table class="standings-table" id="standingsTable">
+      <thead>
+        <tr>
+          <th class="col-rank">#</th>
+          <th class="col-name">Atleta</th>
+          <th title="Partidas Jogadas">PJ</th>
+          <th title="Gols">G</th>
+          <th title="Assistências">A</th>
+          <th title="Participação em Gols (Gols + Assistências)">G+A</th>
+          <th title="Pontos">PTS</th>
+        </tr>
+      </thead>
+      <tbody id="standingsBody"></tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:14px; font-size:12px; color:var(--cinza); font-family:'Barlow Semi Condensed',sans-serif;">
+    * PTS: Vitória = 3 pts · Empate = 1 pt · Derrota = 0 pts &nbsp;|&nbsp; Clique no atleta para ver o perfil completo.
+  </p>
+</main>
+
+<!-- ── SOBRE ── -->
+<section class="section fade-in-delay">
+  <div class="section-header">
+    <h2 class="section-title">Sobre o <span>SRDS FC</span></h2>
+  </div>
+  <div class="gold-line"></div>
+
+  <div class="about-grid">
+    <p class="about-text" id="aboutText"></p>
+    <div class="about-stats-grid" id="aboutStats"></div>
+  </div>
+</section>
+
+<!-- ── ÚLTIMAS PARTIDAS ── -->
+<section class="section fade-in-delay2">
+  <div class="section-header">
+    <h2 class="section-title">Rodadas <span>2026</span></h2>
+  </div>
+  <div class="gold-line"></div>
+  <div class="matches-grid" id="matchesGrid"></div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script>
+  // ── Init ──
+  renderHeader('index.html');
+  renderFooter();
+
+  // ── Hero crest ──
+  document.getElementById('heroCrest').innerHTML = getCrestSVGFull();
+
+  // ── Matches count badge ──
+  document.getElementById('matchesPlayed').textContent =
+    `${SRDS.matches.length} rodada${SRDS.matches.length !== 1 ? 's' : ''} disputada${SRDS.matches.length !== 1 ? 's' : ''}`;
+
+  // ── Standings table ──
+  const standings = getStandings();
+  const tbody = document.getElementById('standingsBody');
+
+  standings.forEach((p, i) => {
+    const rank = i + 1;
+    const rowClass = rank <= 3 ? ` row-top${rank}` : '';
+    const ga = p.stats.goals + p.stats.assists;
+
+    let rankCell;
+    if (rank <= 3) {
+      rankCell = `<td class="col-rank"><span class="rank-badge rank-${rank}">${rank}</span></td>`;
+    } else {
+      rankCell = `<td class="col-rank">${rank}</td>`;
+    }
+
+    const tr = document.createElement('tr');
+    tr.className = rowClass;
+    tr.innerHTML = `
+      ${rankCell}
+      <td class="col-name">
+        <div class="player-name-cell">
+          ${p.name}
+          <span class="player-pos-pill">${p.position}</span>
+        </div>
+      </td>
+      <td>${p.stats.matches}</td>
+      <td>${p.stats.goals}</td>
+      <td>${p.stats.assists}</td>
+      <td>${ga}</td>
+      <td class="col-points">${p.stats.points}</td>
+    `;
+    tr.addEventListener('click', () => {
+      window.location.href = `jogador.html?id=${p.id}`;
+    });
+    tbody.appendChild(tr);
+  });
+
+  // ── About ──
+  document.getElementById('aboutText').textContent = SRDS.club.about;
+
+  const totalGoals = SRDS.players.reduce((s, p) => s + p.stats.goals, 0);
+  const totalAssists = SRDS.players.reduce((s, p) => s + p.stats.assists, 0);
+  const activeCount = SRDS.players.filter(p => p.stats.matches > 0).length;
+
+  const aboutStats = [
+    { value: SRDS.players.length, label: 'Atletas cadastrados' },
+    { value: activeCount, label: 'Jogaram em 2026' },
+    { value: SRDS.matches.length, label: 'Rodadas em 2026' },
+    { value: totalGoals, label: 'Gols na temporada' },
+  ];
+
+  document.getElementById('aboutStats').innerHTML = aboutStats.map(s => `
+    <div class="stat-box">
+      <div class="stat-box-value">${s.value}</div>
+      <div class="stat-box-label">${s.label}</div>
+    </div>
+  `).join('');
+
+  // ── Matches grid ──
+  const matchesGrid = document.getElementById('matchesGrid');
+  matchesGrid.innerHTML = SRDS.matches.map(m => `
+    <div class="match-card">
+      <div class="match-round">Rodada ${m.round}</div>
+      <div class="match-date">${m.date}</div>
+      <span class="match-badge">Realizada</span>
+    </div>
+  `).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRDS FC — Patrocinadores</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<header class="site-header"></header>
+
+<main class="section fade-in">
+
+  <div class="section-header">
+    <h2 class="section-title">Nossos <span>Patrocinadores</span></h2>
+    <span class="section-meta">Temporada 2026</span>
+  </div>
+  <div class="gold-line"></div>
+
+  <p class="page-intro">
+    As marcas e parceiros que apoiam o SRDS FC e tornam a temporada possível.
+    Obrigado pelo apoio! ❤️
+  </p>
+
+  <div class="sponsors-grid" id="sponsorsGrid"></div>
+
+</main>
+
+<footer class="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script>
+  renderHeader('patrocinadores.html');
+  renderFooter();
+
+  const grid = document.getElementById('sponsorsGrid');
+  const sponsors = SRDS.sponsors;
+
+  if (!sponsors || sponsors.length === 0) {
+    grid.innerHTML = `
+      <div class="sponsors-empty">
+        <div class="sponsors-empty-icon">🤝</div>
+        <p>
+          Nenhum patrocinador cadastrado ainda.<br>
+          Para adicionar patrocinadores, edite o array <code>sponsors</code> no arquivo <strong>js/data.js</strong>.
+        </p>
+      </div>
+    `;
+  } else {
+    grid.innerHTML = sponsors.map(s => `
+      <a href="${s.link || '#'}" target="_blank" rel="noopener" class="sponsor-card">
+        <div class="sponsor-logo-wrap">
+          ${s.logo
+            ? `<img src="${s.logo}" alt="${s.name}">`
+            : `<div class="sponsor-placeholder">${s.name.charAt(0)}</div>`
+          }
+        </div>
+        <div class="sponsor-name">${s.name}</div>
+        <div class="sponsor-desc">${s.description || ''}</div>
+        ${s.link ? `<div class="sponsor-link-icon">Ver perfil →</div>` : ''}
+      </a>
+    `).join('');
+  }
+</script>
+</body>
+</html>
