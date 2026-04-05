@@ -248,7 +248,7 @@ Registros DNS configurados no registro.br:
 
 <div align="center">
 
-Desenvolvido com ❤️ por **Gabriel Teles**
+Desenvolvido por **Gabriel Teles**
 
 [![Instagram](https://img.shields.io/badge/@srds.fc-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/srds.fc)
 [![GitHub](https://img.shields.io/badge/xGabriel--Teles-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xGabriel-Teles)
