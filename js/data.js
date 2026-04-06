@@ -94,15 +94,18 @@ const SRDS = {
       awards: []
     },
     {
-      id: "viny",
+      id: "biro",
       name: "Vinicius 'Biro' Félix",
-      fullName: "Félix",
+      fullName: "Vinicius Da Silva Félix",
       nickname: "Biro",
       number: { uni1: 6, uni2: 6 },
       position: "Ala",
       foot: "Direito",
       age: 34,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/biro-azul.png", 
+        uni2: "img/players/biro-vermelho.png"
+      },
       stats: { matches: 4, goals: 0, assists: 0, points: 9 },
       awards: []
     },
@@ -153,7 +156,7 @@ const SRDS = {
     {
       id: "cabelo",
       name: "Wellerson 'Cabelo' Souza",
-      fullName: "Souza",
+      fullName: "Wellerson Souza",
       nickname: "Cabelo",
       number: { uni1: 2, uni2: 2 },
       position: "Fixo",
@@ -308,7 +311,10 @@ const SRDS = {
       position: "Meia",
       foot: "Direito",
       age: 35,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/vander-azul.png", 
+        uni2: "img/players/vander-vermelho.png"
+      },
       stats: { matches: 4, goals: 2, assists: 0, points: 3 },
       awards: []
     },
@@ -328,7 +334,7 @@ const SRDS = {
     {
       id: "valdir",
       name: "Valdir Jr.",
-      fullName: "Valdir Jr.",
+      fullName: "Valdir Rodrigues Junior.",
       nickname: null,
       number: { uni1: 11, uni2: 11 },
       position: "Meia",
@@ -399,7 +405,7 @@ const SRDS = {
     {
       id: "alemao",
       name: "Edson 'Alemão' Muzikant",
-      fullName: "Edson ",
+      fullName: "Edson Muzikant",
       nickname: "Alemão",
       number: { uni1: 7, uni2: 7 },
       position: "Fixo",
