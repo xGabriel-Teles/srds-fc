@@ -218,7 +218,10 @@ const SRDS = {
       position: "Centroavante",
       foot: "Esquerdo",
       age: 39,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/rodrigop-azul.png", 
+        uni2: "img/players/rodrigop-vermelho.png"
+      },
       stats: { matches: 4, goals: 10, assists: 6, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Atacante", icon: "🥇" }
@@ -285,7 +288,10 @@ const SRDS = {
       position: "Meia",
       foot: "Direito",
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/jean-azul.png", 
+        uni2: "img/players/jean-vermelho.png"
+      },
       stats: { matches: 2, goals: 2, assists: 0, points: 3 },
       awards: []
     },
@@ -327,7 +333,10 @@ const SRDS = {
       position: "Ala",
       foot: "Direito",
       age: 31,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/iago-azul.png", 
+        uni2: "img/players/iago-vermelho.png"
+      },
       stats: { matches: 2, goals: 3, assists: 1, points: 3 },
       awards: []
     },
@@ -455,7 +464,7 @@ const SRDS = {
       awards: []
     },
     {
-      id: "felipe",
+      id: "filipe",
       name: "Filipe Alves",
       fullName: "Filipe Alves Pizzinato",
       nickname: "Lipe",
@@ -463,7 +472,10 @@ const SRDS = {
       position: "Ponta",
       foot: "Direito",
       age: 30,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/filipe-azul.png", 
+        uni2: "img/players/filipe-vermelho.png"
+      },
       stats: { matches: 2, goals: 2, assists: 0, points: 0 },
       awards: []
     },
