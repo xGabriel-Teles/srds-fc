@@ -563,7 +563,7 @@ const SRDS = {
     id: "dana",
     name: "Dana Containers",
     description: "Transformando espaços em experiências únicas, um container de cada vez. 🚀 #ArquiteturaContêiner",
-    logo: "img/sponsors/dana1.png",
+    logo: "img/sponsors/dana1.PNG",
     link: "https://www.instagram.com/containers_dana/"
   },
   {
