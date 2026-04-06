@@ -112,7 +112,7 @@ const SRDS = {
     {
       id: "germano",
       name: "Germano",
-      fullName: "Germano Araujo",
+      fullName: "Germano Luiz Brites de Araujo",
       nickname: null,
       number: { uni1: 4, uni2: 4 },
       position: "Fixo",
@@ -149,7 +149,10 @@ const SRDS = {
       position: "Ponta",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/rodrigoc-azul.png", 
+        uni2: "img/players/rodrigoc-vermelho.png"
+      },
       stats: { matches: 2, goals: 1, assists: 0, points: 6 },
       awards: []
     },
@@ -169,7 +172,7 @@ const SRDS = {
     {
       id: "rafael-isco",
       name: "Rafael 'Isco' Souza",
-      fullName: "Rafael Souza",
+      fullName: "Rafael Souza de Araujo",
       nickname: "Isco",
       number: { uni1: 8, uni2: 8 },
       position: "Meia",
@@ -230,7 +233,7 @@ const SRDS = {
     {
       id: "augusto",
       name: "Augusto",
-      fullName: "Augusto Souza",
+      fullName: "Luis Augusto Souza de Araujo",
       nickname: null,
       number: { uni1: 21, uni2: 21 },
       position: "Centroavante",
@@ -282,7 +285,7 @@ const SRDS = {
     {
       id: "jean",
       name: "Jean Patrick",
-      fullName: "Jean Patrick",
+      fullName: "Jean Patrick de Souza Pizzinatto",
       nickname: null,
       number: { uni1: 8, uni2: 8 },
       position: "Meia",
@@ -327,7 +330,7 @@ const SRDS = {
     {
       id: "iago",
       name: "Iago",
-      fullName: "Iago Vieira",
+      fullName: "Iago Matheus Pinto Vieira",
       nickname: null,
       number: { uni1: 8, uni2: 10 },
       position: "Ala",
@@ -420,7 +423,10 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: 42,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/edson-azul.png", 
+        uni2: "img/players/edson-vermelho.png"
+      },
       stats: { matches: 2, goals: 1, assists: 0, points: 0 },
       awards: []
     },
