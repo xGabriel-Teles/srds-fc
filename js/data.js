@@ -73,7 +73,10 @@ const SRDS = {
       position: "Centroavante",
       foot: "Direito",
       age: 35,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/marcelo-azul.png", 
+        uni2: "img/players/marcelo-vermelho.png"
+      },
       stats: { matches: 5, goals: 11, assists: 2, points: 9 },
       awards: [
         { year: 2025, title: "Artilheiro", icon: "⚽" },
@@ -118,7 +121,10 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: 50,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/germano-azul.png", 
+        uni2: "img/players/germano-vermelho.png"
+      },
       stats: { matches: 4, goals: 1, assists: 2, points: 9 },
       awards: [
         { year: 2025, title: "Melhor Zagueiro", icon: "🥇" }
@@ -191,7 +197,10 @@ const SRDS = {
       position: "Goleiro",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/vinicius-azul.png", 
+        uni2: "img/players/vinicius-amarelo.png"
+      },
       stats: { matches: 4, goals: 0, assists: 0, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Goleiro", icon: "🧤" }
@@ -252,7 +261,10 @@ const SRDS = {
       position: "Meia",
       foot: "Direito",
       age: 33,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/baracy-azul.png", 
+        uni2: "img/players/baracy-vermelho.png"
+      },
       stats: { matches: 1, goals: 0, assists: 0, points: 3 },
       awards: []
     },
@@ -307,7 +319,10 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: 30,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/milica-azul.png", 
+        uni2: "img/players/milica-vermelho.png"
+      },
       stats: { matches: 4, goals: 6, assists: 0, points: 3 },
       awards: []
     },
@@ -352,7 +367,10 @@ const SRDS = {
       position: "Meia",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/valdir-azul.png", 
+        uni2: "img/players/valdir-vermelho.png"
+      },
       stats: { matches: 3, goals: 2, assists: 1, points: 3 },
       awards: []
     },
@@ -395,7 +413,10 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: 25,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/erig-azul.png", 
+        uni2: "img/players/erig-vermelho.png"
+      },
       stats: { matches: 2, goals: 0, assists: 0, points: 3 },
       awards: []
     },
@@ -408,7 +429,10 @@ const SRDS = {
       position: "Meia",
       foot: "Direito",
       age: 28,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/wesley-azul.png", 
+        uni2: "img/players/wesley-vermelho.png"
+      },
       stats: { matches: 3, goals: 1, assists: 1, points: 3 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
@@ -494,7 +518,10 @@ const SRDS = {
       position: "Meia",
       foot: "Ambos",
       age: 22,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/gustavo-azul.png", 
+        uni2: "img/players/gustavo-vermelho.png"
+      },
       stats: { matches: 2, goals: 0, assists: 1, points: 0 },
       awards: []
     },
@@ -507,7 +534,10 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/ivan-azul.png", 
+        uni2: "img/players/ivan-vermelho.png"
+      },
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -520,7 +550,10 @@ const SRDS = {
       position: "Ala",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/keke-azul.png", 
+        uni2: "img/players/keke-vermelho.png"
+      },
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -533,7 +566,10 @@ const SRDS = {
       position: "Meia",
       foot: "Esquerdo",
       age: 25,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/krigor-azul.png", 
+        uni2: "img/players/krigor-vermelho.png"
+      },
       stats: { matches: 2, goals: 0, assists: 2, points: 0 },
       awards: []
     },
