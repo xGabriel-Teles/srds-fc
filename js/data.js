@@ -31,7 +31,7 @@ const SRDS = {
     seasons: ["2024 (parcial)", "2025", "2026 (em andamento)"]
   },
 
-  /**
+  /*
    * =============================================
    *  PARTIDAS — TEMPORADA 2026
    *  Preencha time, local, escalação e gols após cada rodada.
@@ -208,6 +208,39 @@ const SRDS = {
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" }
       ]
+    },
+    {
+      round: 6,
+      date: "11/04/2026",
+      time: "10:00",
+      location: "MCM Porto Seco",
+      result: { azul: 0, vermelho: 0 },
+      mvp: null,
+      teamAzul: ["vinicius", "germano","alemao", "erig","alexandre", "iago", "rafael-isco", "rodrigo-costa", "marcelo", "augusto"],
+      teamVermelho: ["edu", "milica", "thiago","ivan", "adler", "biro", "vander", "wesley", "alef", "rodrigo-p"],
+      scorers: [/*
+        { playerId: "alef", team: "azul" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "everson", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+      */],
+      assists: [/*
+        { playerId: "alef", team: "azul" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { guestName: "Nine", team: "azul" },
+        { guestName: "Nine", team: "azul" },
+        { guestName: "Adriel", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" }
+      */]
     }
   ],
 
@@ -461,7 +494,10 @@ const SRDS = {
       position: "Meia",
       foot: "Direto",
       age: 31,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/giovane-azul.png", 
+        uni2: "img/players/giovane-vermelho.png"
+      },
       stats: { matches: 1, goals: 4, assists: 1, points: 3 },
       awards: []
     },
@@ -626,15 +662,18 @@ const SRDS = {
       awards: []
     },
     {
-      id: "allan",
-      name: "Allan",
-      fullName: "Allan",
+      id: "juliano",
+      name: "Juliano",
+      fullName: "Juliano Dias Teles",
       nickname: null,
       number: { uni1: null, uni2: null },
-      position: "Campo",
-      foot: null,
-      age: null,
-      photo: { uni1: null, uni2: null },
+      position: "Meia",
+      foot: "Direito",
+      age: 35,
+      photo: {
+        uni1: "img/players/juliano-azul.png", 
+        uni2: "img/players/juliano-vermelho.png"
+      },
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
