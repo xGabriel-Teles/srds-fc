@@ -1,13 +1,13 @@
 /**
- * SRDS FC — Componentes compartilhados
- * Injeta header e footer em todas as páginas.
+ * SRDS FC — Componentes compartilhados v1.1
  */
 
 function renderHeader(activePage) {
   const pages = [
-    { href: 'index.html',         label: 'Tabela' },
+    { href: 'tabela.html',        label: 'Tabela' },
     { href: 'gols.html',          label: 'Gols' },
     { href: 'assistencias.html',  label: 'Assistências' },
+    { href: 'partidas.html',      label: 'Partidas' },
     { href: 'patrocinadores.html',label: 'Patrocinadores' },
   ];
 
@@ -47,14 +47,12 @@ function renderHeader(activePage) {
     </nav>
   `;
 
-  // Hamburger toggle
   const btn = document.getElementById('hamburgerBtn');
   const drawer = document.getElementById('navDrawer');
   btn.addEventListener('click', () => {
     btn.classList.toggle('open');
     drawer.classList.toggle('open');
   });
-  // Close on link click
   drawer.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => { btn.classList.remove('open'); drawer.classList.remove('open'); });
   });
@@ -69,9 +67,10 @@ function renderFooter() {
         <div class="footer-sub">Porto Alegre, RS · Temporada ${SRDS.club.season}</div>
       </div>
       <div class="footer-links">
-        <a href="index.html" class="footer-link">Tabela</a>
+        <a href="tabela.html" class="footer-link">Tabela</a>
         <a href="gols.html" class="footer-link">Gols</a>
         <a href="assistencias.html" class="footer-link">Assistências</a>
+        <a href="partidas.html" class="footer-link">Partidas</a>
         <a href="https://instagram.com/${SRDS.club.instagram}" target="_blank" rel="noopener" class="footer-link" style="color:var(--ouro)">
           Instagram
         </a>
@@ -83,7 +82,6 @@ function renderFooter() {
   `;
 }
 
-/* ── Logo real do SRDS FC ── */
 function getCrestSVG(size = 44) {
   return `<img src="img/logo/logo-srds2.png" alt="SRDS FC" class="header-logo-img" style="width:${size}px;height:${size}px;object-fit:contain;flex-shrink:0;">`;
 }
@@ -112,7 +110,6 @@ function chevronRight() {
   </svg>`;
 }
 
-/* Avatar SVG silhouette for players without photo */
 function avatarSVG(color = '#c99f40') {
   return `<svg class="avatar-silhouette" viewBox="0 0 90 110" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="28" rx="18" ry="20" fill="${color}" opacity="0.3"/>

@@ -1,19 +1,21 @@
 /**
  * SRDS FC — Dados da Temporada 2026
  * Para atualizar os dados, edite os arrays abaixo.
- * 
- * Estrutura do jogador:
- *  id         → slug único para URL (jogador.html?id=ESTE_ID)
- *  name       → nome curto exibido na tabela
- *  fullName   → nome completo para o perfil
- *  nickname   → apelido (opcional)
- *  number     → { uni1: número uniforme azul, uni2: número uniforme vermelho }
- *  position   → posição principal
- *  foot       → "Destro" | "Canhoto" | "Ambidestro" | null
- *  age        → número | null
- *  photo      → { uni1: "caminho/foto1.png", uni2: "caminho/foto2.png" } — null enquanto não tiver foto
- *  stats      → { matches, goals, assists, points }
- *  awards     → array de { year, title, icon }
+ *
+ * NOVO EM v1.1:
+ *  matches agora suporta dados completos de cada rodada:
+ *    round      → número da rodada
+ *    date       → data (DD/MM/AAAA)
+ *    time       → horário (HH:MM) — null se não definido
+ *    location   → local da partida — null se não definido
+ *    result     → { azul: N, vermelho: N } — null se não realizada
+ *    teamAzul   → array de IDs de jogadores do Time Azul
+ *                 Para atletas avulsos: { guest: true, name: "Nome do Atleta" }
+ *    teamVermelho → array de IDs de jogadores do Time Vermelho (mesmo formato)
+ *    scorers    → array de { playerId, team: "azul"|"vermelho" }
+ *                 Para gols de atleta avulso: { guestName: "Nome", team: "azul"|"vermelho" }
+ *    assists    → array de { playerId, team: "azul"|"vermelho" }
+ *                 Para assistências de atleta avulso: { guestName: "Nome", team: "azul"|"vermelho" }
  */
 
 const SRDS = {
@@ -25,19 +27,188 @@ const SRDS = {
     country: "Brasil",
     founded: "2024",
     season: "2026",
-    about: `O SRDS FC nasceu em 2024 como um grupo de amigos unidos pela paixão pelo futebol. O que começou de forma despretensiosa foi crescendo junto com a dedicação de cada jogador — e com o tempo, o grupo foi se profissionalizando: uniformes personalizados, filmagens dos jogos, equipamentos próprios e perfis oficiais nas redes sociais.\n\nHoje, com cerca de duas temporadas completas e a terceira em andamento, o SRDS FC é mais do que um pelada entre amigos. É uma comunidade, uma tradição, um compromisso. As partidas acontecem em quadras de Porto Alegre, com frequência de 2 a 3 vezes por mês durante a temporada 2026.`,
+    about: `O SRDS FC nasceu em 2024 como um grupo de amigos unidos pela paixão pelo futebol. O que começou de forma despretensiosa foi crescendo junto com a dedicação de cada jogador — e com o tempo, o grupo foi se profissionalizando: uniformes personalizados, filmagens dos jogos, equipamentos próprios e perfis oficiais nas redes sociais.\n\nHoje, com cerca de duas temporadas completas e a terceira em andamento, o SRDS FC é mais do que uma pelada entre amigos. É uma comunidade, uma tradição, um compromisso. As partidas acontecem em quadras de Porto Alegre, com frequência de 2 a 3 vezes por mês durante a temporada 2026.`,
     seasons: ["2024 (parcial)", "2025", "2026 (em andamento)"]
   },
 
   /**
-   * Datas das 5 rodadas da temporada 2026 (atualize conforme novas rodadas)
+   * =============================================
+   *  PARTIDAS — TEMPORADA 2026
+   *  Preencha time, local, escalação e gols após cada rodada.
+   * =============================================
    */
   matches: [
-    { round: 1, date: "07/02/2026" },
-    { round: 2, date: "21/02/2026" },
-    { round: 3, date: "07/03/2026" },
-    { round: 4, date: "14/03/2026" },
-    { round: 5, date: "21/03/2026" }
+    {
+      round: 1,
+      date: "07/02/2026",
+      time: "11:00",
+      location: "Soccer City",
+      result: { azul: 5, vermelho: 6 },
+      mvp: "vinicius",
+      teamAzul: ["miliquinha", "germano", "alemao", "iago", "adler", "vander", "krigor", {guest: true, name: "Daniel"}, "everson", "rodrigo-p"],
+      teamVermelho: ["vinicius", "cabelo", "biro", {guest: true, name: "Rafael Nascimento"}, {guest: true, name: "Diego"}, "gabriel", "rafael-isco", "marcelo", "augusto"],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "alexandre", team: "vermelho" },
+        { guestName: "Diego", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+        { playerId: "iago", team: "azul" },
+      ],
+      assists: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "rafael-isco", team: "vermelho" },
+        { playerId: "krigor", team: "azul" },
+      ]
+    },
+    {
+      round: 2,
+      date: "21/02/2026",
+      time: "09:30",
+      location: "HD Sports",
+      result: { azul: 4, vermelho: 5 },
+      mvp: "gabriel",
+      teamAzul: ["vinicius", "milica","chico", "alexandre", "adler", "wesley", "gustavo", "filipe", "alef", "augusto"],
+      teamVermelho: ["edu", "thiago", "germano", "biro", "gabriel", "diego", "baracy", "rodrigo-costa", "weslley", "marcelo"],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "germano", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "diego", team: "vermelho" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+        { playerId: "alef", team: "azul" },
+      ],
+      assists: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "gustavo", team: "azul" }
+      ]
+    },
+    {
+      round: 3,
+      date: "07/03/2026",
+      time: "10:00",
+      location: "MCM Porto Seco",
+      result: { azul: 14, vermelho: 3 },
+      mvp: "giovane",
+      teamAzul: ["edu", "milica","gabriel", "alexandre", "jean", "giovane", "vander", "rodrigo-costa", "rodrigo-p"],
+      teamVermelho: [{guest: true, name: "Rafael"}, "biro", "erig", "adler", "everson", "wesley", "krigor", "valdir", "augusto", "marcelo"],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "everson", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "giovane", team: "azul" },
+        { playerId: "giovane", team: "azul" },
+        { playerId: "giovane", team: "azul" },
+        { playerId: "giovane", team: "azul" },
+        { playerId: "rodrigo-costa", team: "azul" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "vander", team: "azul" },
+        { playerId: "vander", team: "azul" },
+        { playerId: "jean", team: "azul" },
+        { playerId: "jean", team: "azul" }
+      ],
+      assists: [
+        { playerId: "adler", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "gabriel", team: "azul" },        
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "giovane", team: "azul" }
+      ]
+    },
+    {
+      round: 4,
+      date: "14/03/2026",
+      time: "10:00",
+      location: "MCM Porto Seco",
+      result: { azul: 12, vermelho: 6 },
+      mvp: "rodrigo-p",
+      teamAzul: ["vinicius", "germano","alexandre", "iago","cabelo", "rafael-isco", "ausguto", "valdir", "weslley", "rodrigo-p"],
+      teamVermelho: ["miliquinha", "alemao", "milica", "gustavo", "vander", "adler", {guest: true, name: "Leo"}, "gabriel", "alef", "marcelo"],
+      scorers: [
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "valdir", team: "azul" },
+        { playerId: "valdir", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "alemao", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { guestName: "Leo", team: "vermelho" }
+      ],
+      assists: [
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "valdir", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },        
+        { playerId: "iago", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },        
+        { playerId: "rafael-isco", team: "azul" },
+        { playerId: "alexandre", team: "azul" }
+      ]
+    },
+    {
+      round: 5,
+      date: "21/03/2026",
+      time: "10:00",
+      location: "Complexo 4º Distrito",
+      result: { azul: 7, vermelho: 3 },
+      mvp: "marcelo",
+      teamAzul: ["edu", "germano","erig", "biro","adler", "gabriel", "Wesley", "alef", "marcelo", {guest: true, name: "Nine"}],
+      teamVermelho: ["vinicius", "milica", "thiago","cabelo", "alexandre", "jean", "valdir", "everson", "rodrigo-p",  {guest: true, name: "Adriel"}],
+      scorers: [
+        { playerId: "alef", team: "azul" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "everson", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+      ],
+      assists: [
+        { playerId: "alef", team: "azul" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { guestName: "Nine", team: "azul" },
+        { guestName: "Nine", team: "azul" },
+        { guestName: "Adriel", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" }
+      ]
+    }
   ],
 
   /**
@@ -283,7 +454,7 @@ const SRDS = {
     },
     {
       id: "giovane",
-      name: "Giovane 'Maninho' Maleski",
+      name: "Giovane 'Maninho'",
       fullName: "Giovane Maleski Franco",
       nickname: "Maninho",
       number: { uni1: 77, uni2: 77 },
@@ -587,7 +758,7 @@ const SRDS = {
       awards: []
     },
     {
-      id: "gabriel-milica",
+      id: "miliquinha",
       name: "Gabriel 'Miliquinha'",
       fullName: "Gabriel De Oliveira Teixeira",
       nickname: "Miliquinha",
@@ -605,48 +776,48 @@ const SRDS = {
    * Patrocinadores — adicione logo (PNG), nome, descrição e link de rede social
    */
   sponsors: [
-  {
-    id: "monello",
-    name: "Monello",
-    description: "O que define família é o amor. #Monellovers",
-    logo: "img/sponsors/monello.png",
-    link: "https://www.instagram.com/monello_oficial/"
-  },
-  {
-    id: "wc-store",
-    name: "WC Store",
-    description: null,
-    logo: "img/sponsors/wc-store.png",
-    link: "https://www.instagram.com/wc_store10/"
-  },
-  {
-    id: "dana",
-    name: "Dana Containers",
-    description: "Transformando espaços em experiências únicas, um container de cada vez. 🚀 #ArquiteturaContêiner",
-    logo: "img/sponsors/dana1.PNG",
-    link: "https://www.instagram.com/containers_dana/"
-  },
-  {
-    id: "wess-tattoo",
-    name: "Wess Tattoo",
-    description: null,
-    logo: "img/sponsors/wess-tattoo.png",
-    link: "https://www.instagram.com/wess_tattoo/"
-  },
-  {
-    id: "sulutta",
-    name: "Sulutta Doces & Delicias",
-    description: "Alegrando os momentos doces da vida!",
-    logo: "img/sponsors/sulutta.png",
-    link: "https://www.facebook.com/sulutadelicias/"
-  },
-  {
-    id: "alinox",
-    name: "Alinox",
-    description: null,
-    logo: "img/sponsors/alinox.png",
-    link: null
-  }
+    {
+      id: "monello",
+      name: "Monello",
+      description: "O que define família é o amor. #Monellovers",
+      logo: "img/sponsors/monello.png",
+      link: "https://www.instagram.com/monello_oficial/"
+    },
+    {
+      id: "wc-store",
+      name: "WC Store",
+      description: null,
+      logo: "img/sponsors/wc-store.png",
+      link: "https://www.instagram.com/wc_store10/"
+    },
+    {
+      id: "dana",
+      name: "Dana Containers",
+      description: "Transformando espaços em experiências únicas, um container de cada vez. 🚀 #ArquiteturaContêiner",
+      logo: "img/sponsors/dana1.PNG",
+      link: "https://www.instagram.com/containers_dana/"
+    },
+    {
+      id: "wess-tattoo",
+      name: "Wess Tattoo",
+      description: null,
+      logo: "img/sponsors/wess-tattoo.png",
+      link: "https://www.instagram.com/wess_tattoo/"
+    },
+    {
+      id: "sulutta",
+      name: "Sulutta Doces & Delicias",
+      description: "Alegrando os momentos doces da vida!",
+      logo: "img/sponsors/sulutta.png",
+      link: "https://www.facebook.com/sulutadelicias/"
+    },
+    {
+      id: "alinox",
+      name: "Alinox",
+      description: null,
+      logo: "img/sponsors/alinox.png",
+      link: null
+    }
   ]
 };
 
@@ -654,7 +825,6 @@ const SRDS = {
    FUNÇÕES UTILITÁRIAS — não altere abaixo desta linha
    ============================================================ */
 
-/** Retorna os jogadores ordenados por pontos (e por nome em caso de empate) */
 function getStandings() {
   return [...SRDS.players].sort((a, b) => {
     if (b.stats.points !== a.stats.points) return b.stats.points - a.stats.points;
@@ -666,7 +836,6 @@ function getStandings() {
   });
 }
 
-/** Retorna os jogadores ordenados por gols */
 function getGoalsRanking() {
   return [...SRDS.players].sort((a, b) => {
     if (b.stats.goals !== a.stats.goals) return b.stats.goals - a.stats.goals;
@@ -674,7 +843,6 @@ function getGoalsRanking() {
   });
 }
 
-/** Retorna os jogadores ordenados por assistências */
 function getAssistsRanking() {
   return [...SRDS.players].sort((a, b) => {
     if (b.stats.assists !== a.stats.assists) return b.stats.assists - a.stats.assists;
@@ -682,24 +850,19 @@ function getAssistsRanking() {
   });
 }
 
-/** Retorna os jogadores em ordem alfabética (para navegação de perfil) */
 function getAlphabetical() {
   return [...SRDS.players].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
-/** Busca jogador por ID */
 function getPlayerById(id) {
   return SRDS.players.find(p => p.id === id) || null;
 }
 
-/** Calcula rank de um jogador por categoria */
 function getPlayerRanks(player) {
   const standings = getStandings();
   const goals = getGoalsRanking();
   const assists = getAssistsRanking();
-
   const findRank = (arr, p) => arr.findIndex(x => x.id === p.id) + 1;
-
   return {
     points: findRank(standings, player),
     goals: findRank(goals, player),
@@ -707,7 +870,6 @@ function getPlayerRanks(player) {
   };
 }
 
-/** Calcula médias do jogador */
 function getPlayerAverages(player) {
   const m = player.stats.matches;
   if (m === 0) return { goals: 0, assists: 0, participation: 0 };
@@ -716,4 +878,26 @@ function getPlayerAverages(player) {
     assists: (player.stats.assists / m).toFixed(2),
     participation: ((player.stats.goals + player.stats.assists) / m).toFixed(2)
   };
+}
+
+/** Resolve um item de escalação (ID ou objeto guest) para { name, photo, number, position, isGuest } */
+function resolveLineupEntry(entry, team) {
+  if (typeof entry === 'string') {
+    const p = getPlayerById(entry);
+    if (!p) return null;
+    const photo  = team === 'azul' ? p.photo?.uni1 : p.photo?.uni2;
+    const number = team === 'azul' ? p.number?.uni1 : p.number?.uni2;
+    return { id: p.id, name: p.name, photo: photo || null, number: number ?? null, position: p.position, isGuest: false };
+  }
+  if (entry && entry.guest) {
+    return { id: null, name: entry.name, photo: null, number: null, position: null, isGuest: true };
+  }
+  return null;
+}
+
+/** Resolve um scorer/assist para nome de exibição */
+function resolveEventName(event) {
+  if (event.guestName) return event.guestName;
+  const p = getPlayerById(event.playerId);
+  return p ? p.name : '?';
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRDS FC — Partidas 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+<header class="site-header"></header>
+<main class="section fade-in">
+  <div class="section-header">
+    <h2 class="section-title">Partidas <span>2026</span></h2>
+    <span class="section-meta" id="matchCount"></span>
+  </div>
+  <div class="gold-line"></div>
+  <p class="page-intro">Histórico de rodadas da temporada 2026. Clique em uma partida para ver os detalhes completos.</p>
+  <div class="partidas-grid" id="partidasGrid"></div>
+</main>
+<footer class="site-footer"></footer>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script>
+  renderHeader('partidas.html');
+  renderFooter();
+  document.getElementById('matchCount').textContent =
+    `${SRDS.matches.length} rodada${SRDS.matches.length !== 1 ? 's' : ''}`;
+  const grid = document.getElementById('partidasGrid');
+  SRDS.matches.forEach(m => {
+    const hasResult  = m.result !== null;
+    const hasDetails = hasResult || m.location || m.time ||
+                       (m.teamAzul && m.teamAzul.length > 0) ||
+                       (m.teamVermelho && m.teamVermelho.length > 0);
+    let winClass = '';
+    if (hasResult) {
+      if (m.result.azul > m.result.vermelho)      winClass = 'card-win-azul';
+      else if (m.result.vermelho > m.result.azul) winClass = 'card-win-vermelho';
+      else                                         winClass = 'card-win-empate';
+    }
+    let scoreLine = '';
+    if (hasResult) {
+      scoreLine = `
+        <div class="partida-score">
+          <span class="partida-score-team azul">Time Azul</span>
+          <span class="partida-score-placar">${m.result.azul} — ${m.result.vermelho}</span>
+          <span class="partida-score-team vermelho">Time Verm.</span>
+        </div>`;
+    } else {
+      scoreLine = `<div class="partida-score-pending">Resultado não registrado</div>`;
+    }
+    const card = document.createElement('div');
+    card.className = ('partida-card' + (hasDetails ? ' clickable' : '') + ' ' + winClass).trim();
+    card.innerHTML = `
+      <div class="partida-card-top">
+        <div class="partida-round">Rodada ${m.round}</div>
+        <div class="partida-date-info">
+          <span class="partida-date">${m.date}</span>
+          ${m.time ? `<span class="partida-time">${m.time}</span>` : ''}
+        </div>
+      </div>
+      ${m.location ? `<div class="partida-location">📍 ${m.location}</div>` : ''}
+      ${scoreLine}
+      ${hasDetails ? `<div class="partida-link">Ver detalhes →</div>` : ''}
+    `;
+    if (hasDetails) {
+      card.addEventListener('click', () => { window.location.href = `partida.html?round=${m.round}`; });
+    }
+    grid.appendChild(card);
+  });
+</script>
+</body>
+</html>

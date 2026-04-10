@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRDS FC — Detalhes da Partida</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<header class="site-header"></header>
+
+<main class="player-profile-page" id="matchPage">
+  <div style="text-align:center; padding:80px 20px;">
+    <p style="color:var(--cinza);">Carregando...</p>
+  </div>
+</main>
+
+<footer class="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script>
+  renderHeader('partidas.html');
+  renderFooter();
+
+  const params   = new URLSearchParams(window.location.search);
+  const roundNum = parseInt(params.get('round'), 10);
+  const match    = SRDS.matches.find(m => m.round === roundNum);
+  const page     = document.getElementById('matchPage');
+
+  if (!match) {
+    page.innerHTML = `
+      <div style="text-align:center; padding:80px 20px;">
+        <h2 style="font-size:32px; color:var(--cinza); margin-bottom:16px;">Rodada não encontrada</h2>
+        <a href="partidas.html" style="color:var(--ouro); font-family:'Barlow Semi Condensed',sans-serif;">← Voltar às partidas</a>
+      </div>`;
+  } else {
+    renderMatch(match);
+  }
+
+  function renderMatch(m) {
+    document.title = `SRDS FC — Rodada ${m.round}`;
+
+    const total    = SRDS.matches.length;
+    const prevRound = m.round > 1 ? m.round - 1 : null;
+    const nextRound = m.round < total ? m.round + 1 : null;
+
+    const navHtml = `
+      <nav class="player-nav" style="margin-bottom:32px;">
+        ${prevRound
+          ? `<a href="partida.html?round=${prevRound}" class="player-nav-btn">${chevronLeft()} Rodada ${prevRound}</a>`
+          : `<span class="player-nav-btn" style="opacity:0.3;pointer-events:none">${chevronLeft()} —</span>`}
+        <div class="player-nav-center">Rodada ${m.round} / ${total}</div>
+        ${nextRound
+          ? `<a href="partida.html?round=${nextRound}" class="player-nav-btn">Rodada ${nextRound} ${chevronRight()}</a>`
+          : `<span class="player-nav-btn" style="opacity:0.3;pointer-events:none">— ${chevronRight()}</span>`}
+      </nav>`;
+
+    /* ── Meta info ── */
+    const metaItems = [];
+    if (m.date)     metaItems.push(`<span class="partida-detail-meta-item">📅 ${m.date}</span>`);
+    if (m.time)     metaItems.push(`<span class="partida-detail-meta-item">🕐 ${m.time}</span>`);
+    if (m.location) metaItems.push(`<span class="partida-detail-meta-item">📍 ${m.location}</span>`);
+
+    /* ── Placar (ajuste 5: ambos os nomes acima, vencedor realçado com efeito dourado) ── */
+    let placarHtml = '';
+    if (m.result) {
+      const azulWin = m.result.azul > m.result.vermelho;
+      const vermWin = m.result.vermelho > m.result.azul;
+      const empate  = m.result.azul === m.result.vermelho;
+      placarHtml = `
+        <div class="placar-wrap">
+          <div class="placar-side ${azulWin ? 'winner' : ''}">
+            <div class="placar-team-label azul">Time Azul</div>
+            <div class="placar-num ${azulWin ? 'winner-num' : ''}">${m.result.azul}</div>
+          </div>
+          <div class="placar-sep">
+            <div class="placar-x">×</div>
+            ${empate ? `<div class="placar-status">Empate</div>` : ''}
+          </div>
+          <div class="placar-side ${vermWin ? 'winner' : ''}">
+            <div class="placar-team-label vermelho">Time Verm.</div>
+            <div class="placar-num ${vermWin ? 'winner-num' : ''}">${m.result.vermelho}</div>
+          </div>
+        </div>`;
+    } else {
+      placarHtml = `<div class="placar-pending">Resultado não registrado</div>`;
+    }
+
+    /* ── MVP badge ── */
+    const mvpPlayer = m.mvp ? getPlayerById(m.mvp) : null;
+    const mvpHtml = mvpPlayer ? `
+      <div class="match-mvp-banner">
+        🏆 <strong>MVP da Partida:</strong> ${mvpPlayer.name}
+      </div>` : '';
+
+    /* ── Eventos agrupados (ajuste 4: emojis agrupados por jogador) ── */
+    function buildEvents(scorerArr, assistArr) {
+      // agrupa gols e assists pelo mesmo jogador/nome
+      const map = new Map();
+
+      scorerArr.forEach(ev => {
+        const key  = ev.guestName || ev.playerId;
+        const name = ev.guestName || (getPlayerById(ev.playerId)?.name ?? '?');
+        if (!map.has(key)) map.set(key, { name, goals: 0, assists: 0 });
+        map.get(key).goals++;
+      });
+      assistArr.forEach(ev => {
+        const key  = ev.guestName || ev.playerId;
+        const name = ev.guestName || (getPlayerById(ev.playerId)?.name ?? '?');
+        if (!map.has(key)) map.set(key, { name, goals: 0, assists: 0 });
+        map.get(key).assists++;
+      });
+
+      if (map.size === 0) return '<p class="no-events">—</p>';
+
+      return [...map.values()].map(({ name, goals, assists }) => {
+        const icons = '⚽'.repeat(goals) + '🎯'.repeat(assists);
+        return `<div class="match-event">
+          <span class="match-event-name">${name}</span>
+          <span class="match-event-icons">${icons}</span>
+        </div>`;
+      }).join('');
+    }
+
+    const evAzul = buildEvents(
+      m.scorers.filter(s => s.team === 'azul'),
+      m.assists.filter(s => s.team === 'azul')
+    );
+    const evVerm = buildEvents(
+      m.scorers.filter(s => s.team === 'vermelho'),
+      m.assists.filter(s => s.team === 'vermelho')
+    );
+
+    /* ── Escalação (ajuste 2: foto maior | ajuste 3: número | ajuste 7: cores | ajuste 8: mvp) ── */
+    function buildLineup(teamArr, teamKey) {
+      if (!teamArr || teamArr.length === 0) {
+        return `<p class="lineup-empty">Escalação não registrada</p>`;
+      }
+      return teamArr.map(entry => {
+        const info = resolveLineupEntry(entry, teamKey);
+        if (!info) return '';
+
+        const isMvp = m.mvp && info.id && info.id === m.mvp;
+
+        const photoHtml = info.photo
+          ? `<img src="${info.photo}" alt="${info.name}" class="lineup-photo">`
+          : `<div class="lineup-avatar-wrap">${avatarSVG(teamKey === 'azul' ? '#c99f40' : '#ead186')}</div>`;
+
+        const numHtml = info.number !== null
+          ? `<span class="lineup-shirt-number">${info.number}</span>` : '';
+
+        const guestTag = info.isGuest
+          ? `<span class="lineup-guest-tag">Avulso</span>` : '';
+
+        const mvpTag = isMvp
+          ? `<span class="lineup-mvp-tag">🏆 MVP</span>` : '';
+
+        const posHtml = info.position && !info.isGuest
+          ? `<div class="lineup-pos">${info.position}</div>` : '';
+
+        return `
+          <div class="lineup-player${isMvp ? ' lineup-mvp' : ''}">
+            <div class="lineup-photo-wrap ${teamKey}">${photoHtml}</div>
+            ${numHtml}
+            <div class="lineup-player-info">
+              <div class="lineup-player-name">
+                ${info.name}${guestTag}${mvpTag}
+              </div>
+              ${posHtml}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    /* ── Monta o HTML dos times — mobile: tabs | desktop: side-by-side ── */
+    const lineupAzul  = buildLineup(m.teamAzul,      'azul');
+    const lineupVerm  = buildLineup(m.teamVermelho,   'vermelho');
+
+    page.innerHTML = `
+      ${navHtml}
+
+      <div class="partida-detail-header">
+        <div class="section-header" style="margin-bottom:12px;">
+          <h2 class="section-title">Rodada <span>${m.round}</span></h2>
+          <span class="section-meta">Temporada 2026</span>
+        </div>
+        <div class="gold-line"></div>
+        <div class="partida-detail-meta">${metaItems.join('')}</div>
+      </div>
+
+      <div style="margin:28px 0;">
+        ${placarHtml}
+      </div>
+
+      ${mvpHtml}
+
+      <!-- MOBILE: abas sobrepostas (ajuste 1) -->
+      <div class="match-tabs-mobile">
+        <div class="match-tab-buttons">
+          <button class="match-tab-btn active" data-team="azul">Time Azul</button>
+          <button class="match-tab-btn" data-team="vermelho">Time Vermelho</button>
+        </div>
+
+        <div class="match-tab-panel" data-panel="azul">
+          <div class="match-team-section">
+            <div class="match-team-section-title">Escalação</div>
+            <div class="lineup-list">${lineupAzul}</div>
+          </div>
+          <div class="match-team-section">
+            <div class="match-team-section-title">Participações</div>
+            ${evAzul}
+          </div>
+        </div>
+
+        <div class="match-tab-panel hidden" data-panel="vermelho">
+          <div class="match-team-section">
+            <div class="match-team-section-title">Escalação</div>
+            <div class="lineup-list">${lineupVerm}</div>
+          </div>
+          <div class="match-team-section">
+            <div class="match-team-section-title">Participações</div>
+            ${evVerm}
+          </div>
+        </div>
+      </div>
+
+      <!-- DESKTOP: dois lados (ajuste 7: cores internas) -->
+      <div class="match-teams-grid">
+        <div class="match-team-col team-col-azul">
+          <div class="match-team-header azul">Time Azul</div>
+          <div class="match-team-body azul-body">
+            <div class="match-team-section">
+              <div class="match-team-section-title">Escalação</div>
+              <div class="lineup-list">${lineupAzul}</div>
+            </div>
+            <div class="match-team-section">
+              <div class="match-team-section-title">Participações</div>
+              ${evAzul}
+            </div>
+          </div>
+        </div>
+
+        <div class="match-team-col team-col-vermelho">
+          <div class="match-team-header vermelho">Time Vermelho</div>
+          <div class="match-team-body vermelho-body">
+            <div class="match-team-section">
+              <div class="match-team-section-title">Escalação</div>
+              <div class="lineup-list">${lineupVerm}</div>
+            </div>
+            <div class="match-team-section">
+              <div class="match-team-section-title">Participações</div>
+              ${evVerm}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;">
+        <a href="partidas.html"
+           style="font-family:'Barlow Semi Condensed',sans-serif;font-size:13px;color:var(--cinza);display:inline-flex;align-items:center;gap:6px;transition:color 0.2s;"
+           onmouseover="this.style.color='var(--ouro)'" onmouseout="this.style.color='var(--cinza)'">
+          ← Voltar às partidas
+        </a>
+      </div>
+    `;
+
+    /* ── Lógica das abas mobile ── */
+    document.querySelectorAll('.match-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const team = btn.dataset.team;
+        document.querySelectorAll('.match-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.match-tab-panel').forEach(p => p.classList.add('hidden'));
+        btn.classList.add('active');
+        document.querySelector(`.match-tab-panel[data-panel="${team}"]`).classList.remove('hidden');
+      });
+    });
+  }
+</script>
+</body>
+</html>
