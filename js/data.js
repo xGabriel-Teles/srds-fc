@@ -147,7 +147,7 @@ const SRDS = {
       location: "MCM Porto Seco",
       result: { azul: 12, vermelho: 6 },
       mvp: "rodrigo-p",
-      teamAzul: ["vinicius", "germano","alexandre", "iago","cabelo", "rafael-isco", "ausguto", "valdir", "weslley", "rodrigo-p"],
+      teamAzul: ["vinicius", "germano","alexandre", "iago","cabelo", "rafael-isco", "augusto", "valdir", "weslley", "rodrigo-p"],
       teamVermelho: ["miliquinha", "alemao", "milica", "gustavo", "vander", "adler", {guest: true, name: "Leo"}, "gabriel", "alef", "marcelo"],
       scorers: [
         { playerId: "iago", team: "azul" },
@@ -190,7 +190,7 @@ const SRDS = {
       location: "Complexo 4º Distrito",
       result: { azul: 7, vermelho: 3 },
       mvp: "marcelo",
-      teamAzul: ["edu", "germano","erig", "biro","adler", "gabriel", "Wesley", "alef", "marcelo", {guest: true, name: "Nine"}],
+      teamAzul: ["edu", "germano","erig", "biro","adler", "gabriel", "wesley", "alef", "marcelo", {guest: true, name: "Nine"}],
       teamVermelho: ["vinicius", "milica", "thiago","cabelo", "alexandre", "jean", "valdir", "everson", "rodrigo-p",  {guest: true, name: "Adriel"}],
       scorers: [
         { playerId: "alef", team: "azul" },
@@ -311,6 +311,7 @@ const SRDS = {
       foot: "Direito",
       age: 58,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 5, goals: 1, assists: 1, points: 9 },
       awards: []
     },
@@ -327,6 +328,7 @@ const SRDS = {
         uni1: "img/players/biro-azul.png", 
         uni2: "img/players/biro-vermelho.png"
       },
+      injury: null,
       stats: { matches: 4, goals: 0, assists: 0, points: 9 },
       awards: []
     },
@@ -343,6 +345,7 @@ const SRDS = {
         uni1: "img/players/germano-azul.png", 
         uni2: "img/players/germano-vermelho.png"
       },
+      injury: null,
       stats: { matches: 4, goals: 1, assists: 2, points: 9 },
       awards: [
         { year: 2025, title: "Melhor Zagueiro", icon: "🥇" }
@@ -361,6 +364,7 @@ const SRDS = {
         uni1: "img/players/edu-azul.png", 
         uni2: "img/players/edu-amarelo.png"
       },
+      injury: null,
       stats: { matches: 3, goals: 0, assists: 0, points: 9 },
       awards: []
     },
@@ -377,6 +381,7 @@ const SRDS = {
         uni1: "img/players/rodrigoc-azul.png", 
         uni2: "img/players/rodrigoc-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 1, assists: 0, points: 6 },
       awards: []
     },
@@ -390,6 +395,7 @@ const SRDS = {
       foot: null,
       age: null,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 3, goals: 0, assists: 0, points: 6 },
       awards: []
     },
@@ -403,6 +409,7 @@ const SRDS = {
       foot: "Direito",
       age: 23,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 2, goals: 0, assists: 2, points: 6 },
       awards: []
     },
@@ -419,6 +426,7 @@ const SRDS = {
         uni1: "img/players/vinicius-azul.png", 
         uni2: "img/players/vinicius-amarelo.png"
       },
+      injury: null,
       stats: { matches: 4, goals: 0, assists: 0, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Goleiro", icon: "🧤" }
@@ -434,6 +442,7 @@ const SRDS = {
       foot: null,
       age: null,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 2, goals: 3, assists: 4, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Ponta", icon: "🥇" }
@@ -452,6 +461,7 @@ const SRDS = {
         uni1: "img/players/rodrigop-azul.png", 
         uni2: "img/players/rodrigop-vermelho.png"
       },
+      injury: null,
       stats: { matches: 4, goals: 10, assists: 6, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Atacante", icon: "🥇" }
@@ -467,6 +477,7 @@ const SRDS = {
       foot: "Direito",
       age: 31,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 3, goals: 3, assists: 0, points: 3 },
       awards: []
     },
@@ -483,6 +494,7 @@ const SRDS = {
         uni1: "img/players/baracy-azul.png", 
         uni2: "img/players/baracy-vermelho.png"
       },
+      injury: null,
       stats: { matches: 1, goals: 0, assists: 0, points: 3 },
       awards: []
     },
@@ -496,6 +508,7 @@ const SRDS = {
       foot: null,
       age: null,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 1, goals: 1, assists: 1, points: 3 },
       awards: []
     },
@@ -512,6 +525,7 @@ const SRDS = {
         uni1: "img/players/giovane-azul.png", 
         uni2: "img/players/giovane-vermelho.png"
       },
+      injury: null,
       stats: { matches: 1, goals: 4, assists: 1, points: 3 },
       awards: []
     },
@@ -528,6 +542,7 @@ const SRDS = {
         uni1: "img/players/jean-azul.png", 
         uni2: "img/players/jean-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 2, assists: 0, points: 3 },
       awards: []
     },
@@ -544,6 +559,7 @@ const SRDS = {
         uni1: "img/players/milica-azul.png", 
         uni2: "img/players/milica-vermelho.png"
       },
+      injury: null,
       stats: { matches: 4, goals: 6, assists: 0, points: 3 },
       awards: []
     },
@@ -560,6 +576,7 @@ const SRDS = {
         uni1: "img/players/vander-azul.png", 
         uni2: "img/players/vander-vermelho.png"
       },
+      injury: null,
       stats: { matches: 4, goals: 2, assists: 0, points: 3 },
       awards: []
     },
@@ -576,6 +593,7 @@ const SRDS = {
         uni1: "img/players/iago-azul.png", 
         uni2: "img/players/iago-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 3, assists: 1, points: 3 },
       awards: []
     },
@@ -592,6 +610,7 @@ const SRDS = {
         uni1: "img/players/valdir-azul.png", 
         uni2: "img/players/valdir-vermelho.png"
       },
+      injury: null,
       stats: { matches: 3, goals: 2, assists: 1, points: 3 },
       awards: []
     },
@@ -607,6 +626,7 @@ const SRDS = {
       photo: { 
         uni1: "img/players/adler-azul.png",
         uni2: "img/players/adler-vermelho.png" },
+      injury: null,
       stats: { matches: 5, goals: 0, assists: 1, points: 3 },
       awards: []
     },
@@ -622,6 +642,7 @@ const SRDS = {
       photo: { 
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
+      injury: null,
       stats: { matches: 3, goals: 1, assists: 3, points: 3 },
       awards: []
     },
@@ -638,6 +659,7 @@ const SRDS = {
         uni1: "img/players/erig-azul.png", 
         uni2: "img/players/erig-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 0, assists: 0, points: 3 },
       awards: []
     },
@@ -654,6 +676,7 @@ const SRDS = {
         uni1: "img/players/wesley-azul.png", 
         uni2: "img/players/wesley-vermelho.png"
       },
+      injury: null,
       stats: { matches: 3, goals: 1, assists: 1, points: 3 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
@@ -672,6 +695,7 @@ const SRDS = {
         uni1: "img/players/edson-azul.png", 
         uni2: "img/players/edson-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 1, assists: 0, points: 0 },
       awards: []
     },
@@ -688,7 +712,7 @@ const SRDS = {
         uni1: "img/players/juliano-azul.png", 
         uni2: "img/players/juliano-vermelho.png"
       },
-      injury: { name: " Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
+      injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -702,6 +726,7 @@ const SRDS = {
       foot: "Direito",
       age: 45,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 1, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -715,6 +740,7 @@ const SRDS = {
       foot: null,
       age: null,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 3, goals: 2, assists: 0, points: 0 },
       awards: []
     },
@@ -731,6 +757,7 @@ const SRDS = {
         uni1: "img/players/filipe-azul.png", 
         uni2: "img/players/filipe-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 2, assists: 0, points: 0 },
       awards: []
     },
@@ -747,6 +774,7 @@ const SRDS = {
         uni1: "img/players/gustavo-azul.png", 
         uni2: "img/players/gustavo-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 0, assists: 1, points: 0 },
       awards: []
     },
@@ -763,6 +791,7 @@ const SRDS = {
         uni1: "img/players/ivan-azul.png", 
         uni2: "img/players/ivan-vermelho.png"
       },
+      injury: null,
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -779,6 +808,7 @@ const SRDS = {
         uni1: "img/players/keke-azul.png", 
         uni2: "img/players/keke-vermelho.png"
       },
+      injury: null,
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -795,6 +825,7 @@ const SRDS = {
         uni1: "img/players/krigor-azul.png", 
         uni2: "img/players/krigor-vermelho.png"
       },
+      injury: null,
       stats: { matches: 2, goals: 0, assists: 2, points: 0 },
       awards: []
     },
@@ -808,6 +839,7 @@ const SRDS = {
       foot: "Direito",
       age: 35,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 2, goals: 0, assists: 0, points: 0 },
       awards: []
     },
@@ -821,6 +853,7 @@ const SRDS = {
       foot: "Direito",
       age: 15,
       photo: { uni1: null, uni2: null },
+      injury: null,
       stats: { matches: 2, goals: 0, assists: 0, points: 0 },
       awards: []
     }
@@ -879,79 +912,159 @@ const SRDS = {
    FUNÇÕES UTILITÁRIAS — não altere abaixo desta linha
    ============================================================ */
 
+/** Frequência do atleta: partidas jogadas / total de rodadas da temporada */
+function getFrequency(player) {
+  const total = SRDS.matches.length;
+  return total > 0 ? player.stats.matches / total : 0;
+}
+
+/**
+ * Tabela de pontuação.
+ * Critérios de desempate (em ordem):
+ *   1. Pontos
+ *   2. % de frequência (quem jogou proporcionalmente mais)
+ *   3. G+A total
+ *   4. Gols
+ *   5. Nome (alfabético)
+ */
 function getStandings() {
   return [...SRDS.players].sort((a, b) => {
     if (b.stats.points !== a.stats.points) return b.stats.points - a.stats.points;
+    const freqA = getFrequency(a);
+    const freqB = getFrequency(b);
+    if (Math.abs(freqB - freqA) > 0.0001) return freqB - freqA;
     const gaA = a.stats.goals + a.stats.assists;
     const gaB = b.stats.goals + b.stats.assists;
     if (gaB !== gaA) return gaB - gaA;
     if (b.stats.goals !== a.stats.goals) return b.stats.goals - a.stats.goals;
-    return a.name.localeCompare(b.name);
+    return a.name.localeCompare(b.name, 'pt-BR');
   });
 }
 
+/**
+ * Ranking de gols.
+ * Critérios de desempate:
+ *   1. Total de gols
+ *   2. Média de gols por partida (quem fez o mesmo número em menos jogos)
+ *   3. Nome (alfabético)
+ */
 function getGoalsRanking() {
   return [...SRDS.players].sort((a, b) => {
     if (b.stats.goals !== a.stats.goals) return b.stats.goals - a.stats.goals;
-    return a.name.localeCompare(b.name);
+    const avgA = a.stats.matches > 0 ? a.stats.goals / a.stats.matches : 0;
+    const avgB = b.stats.matches > 0 ? b.stats.goals / b.stats.matches : 0;
+    if (Math.abs(avgB - avgA) > 0.0001) return avgB - avgA;
+    return a.name.localeCompare(b.name, 'pt-BR');
   });
 }
 
+/**
+ * Ranking de assistências.
+ * Critérios de desempate:
+ *   1. Total de assistências
+ *   2. Média de assistências por partida
+ *   3. Nome (alfabético)
+ */
 function getAssistsRanking() {
   return [...SRDS.players].sort((a, b) => {
     if (b.stats.assists !== a.stats.assists) return b.stats.assists - a.stats.assists;
-    return a.name.localeCompare(b.name);
+    const avgA = a.stats.matches > 0 ? a.stats.assists / a.stats.matches : 0;
+    const avgB = b.stats.matches > 0 ? b.stats.assists / b.stats.matches : 0;
+    if (Math.abs(avgB - avgA) > 0.0001) return avgB - avgA;
+    return a.name.localeCompare(b.name, 'pt-BR');
   });
 }
 
+/** Jogadores em ordem alfabética (navegação de perfil) */
 function getAlphabetical() {
   return [...SRDS.players].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
 
+/** Busca jogador por ID */
 function getPlayerById(id) {
   return SRDS.players.find(p => p.id === id) || null;
 }
 
+/** Calcula rank de um jogador por categoria */
 function getPlayerRanks(player) {
   const standings = getStandings();
-  const goals = getGoalsRanking();
-  const assists = getAssistsRanking();
-  const findRank = (arr, p) => arr.findIndex(x => x.id === p.id) + 1;
+  const goals     = getGoalsRanking();
+  const assists   = getAssistsRanking();
+  const findRank  = (arr, p) => arr.findIndex(x => x.id === p.id) + 1;
   return {
-    points: findRank(standings, player),
-    goals: findRank(goals, player),
-    assists: findRank(assists, player)
+    points:  findRank(standings, player),
+    goals:   findRank(goals,     player),
+    assists: findRank(assists,   player)
   };
 }
 
+/** Calcula médias do jogador */
 function getPlayerAverages(player) {
   const m = player.stats.matches;
-  if (m === 0) return { goals: 0, assists: 0, participation: 0 };
+  if (m === 0) return { goals: '0.00', assists: '0.00', participation: '0.00' };
   return {
-    goals: (player.stats.goals / m).toFixed(2),
-    assists: (player.stats.assists / m).toFixed(2),
+    goals:         (player.stats.goals / m).toFixed(2),
+    assists:       (player.stats.assists / m).toFixed(2),
     participation: ((player.stats.goals + player.stats.assists) / m).toFixed(2)
   };
 }
 
-/** Resolve um item de escalação (ID ou objeto guest) para { name, photo, number, position, isGuest } */
+/**
+ * Ordem de posições para escalação (ajuste 4).
+ * Goleiro primeiro, centroavante por último.
+ */
+const POSITION_ORDER = {
+  'goleiro':      1,
+  'fixo':         2,
+  'ala':          3,
+  'meia':         4,
+  'ponta':        5,
+  'centroavante': 6
+};
+
+function positionRank(pos) {
+  if (!pos) return 99;
+  return POSITION_ORDER[pos.toLowerCase()] ?? 7;
+}
+
+/**
+ * Resolve um item de escalação e retorna dados completos do jogador.
+ * Guests retornam sem foto, número ou posição.
+ */
 function resolveLineupEntry(entry, team) {
   if (typeof entry === 'string') {
     const p = getPlayerById(entry);
     if (!p) return null;
-    const photo  = team === 'azul' ? p.photo?.uni1 : p.photo?.uni2;
+    const photo  = team === 'azul' ? p.photo?.uni1  : p.photo?.uni2;
     const number = team === 'azul' ? p.number?.uni1 : p.number?.uni2;
-    return { id: p.id, name: p.name, photo: photo || null, number: number ?? null, position: p.position, isGuest: false };
+    return {
+      id:       p.id,
+      name:     p.name,
+      photo:    photo  || null,
+      number:   number ?? null,
+      position: p.position || null,
+      posRank:  positionRank(p.position),
+      isGuest:  false
+    };
   }
   if (entry && entry.guest) {
-    return { id: null, name: entry.name, photo: null, number: null, position: null, isGuest: true };
+    return {
+      id:       null,
+      name:     entry.name,
+      photo:    null,
+      number:   null,
+      position: null,
+      posRank:  99,
+      isGuest:  true
+    };
   }
   return null;
 }
 
-/** Resolve um scorer/assist para nome de exibição */
+/** Resolve scorer/assist para nome de exibição */
 function resolveEventName(event) {
   if (event.guestName) return event.guestName;
   const p = getPlayerById(event.playerId);
   return p ? p.name : '?';
 }
+

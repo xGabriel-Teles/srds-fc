@@ -135,15 +135,19 @@
       m.assists.filter(s => s.team === 'vermelho')
     );
 
-    /* ── Escalação (ajuste 2: foto maior | ajuste 3: número | ajuste 7: cores | ajuste 8: mvp) ── */
+    /* ── Escalação (ordenada por posição) ── */
     function buildLineup(teamArr, teamKey) {
       if (!teamArr || teamArr.length === 0) {
         return `<p class="lineup-empty">Escalação não registrada</p>`;
       }
-      return teamArr.map(entry => {
-        const info = resolveLineupEntry(entry, teamKey);
-        if (!info) return '';
 
+      // Resolve entradas e ordena por posição
+      const resolved = teamArr
+        .map(entry => resolveLineupEntry(entry, teamKey))
+        .filter(Boolean)
+        .sort((a, b) => a.posRank - b.posRank);
+
+      return resolved.map(info => {
         const isMvp = m.mvp && info.id && info.id === m.mvp;
 
         const photoHtml = info.photo
