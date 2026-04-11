@@ -31,6 +31,14 @@
     <div class="averages-grid" id="averagesGrid"></div>
   </section>
 
+  <!-- ── Performance ── -->
+  <section style="margin-top:28px;">
+    <h3 style="font-size:20px; color:var(--branco); margin-bottom:14px;">
+      Aproveitamento & <span style="color:var(--ouro)">Frequência</span>
+    </h3>
+    <div class="performance-grid" id="performanceGrid"></div>
+  </section>
+
   <!-- ── Awards ── -->
   <section class="awards-section">
     <h3 class="awards-title">Prêmios <span>Individuais</span></h3>
@@ -172,6 +180,15 @@
           ${p.fullName && p.fullName !== p.name ? `<div class="profile-fullname">${p.fullName}</div>` : ''}
         </div>
         <div class="profile-tags">${tags}</div>
+        ${p.injury ? `
+          <div class="injury-banner">
+            <span class="injury-banner-icon">🚑</span>
+            <div class="injury-banner-info">
+              <div class="injury-banner-label">Atleta lesionado</div>
+              <div class="injury-banner-name">${p.injury.name}</div>
+              ${p.injury.returnDate ? `<div class="injury-banner-return">Previsão de retorno: <strong>${p.injury.returnDate}</strong></div>` : '<div class="injury-banner-return">Previsão de retorno: a definir</div>'}
+            </div>
+          </div>` : ''}
         <div class="profile-ranks">${rankItems}</div>
       </div>
     `;
@@ -208,6 +225,32 @@
         <div class="avg-label">${a.label}</div>
       </div>
     `).join('');
+
+    // ── Aproveitamento e Frequência ──
+    const totalRodadas = SRDS.matches.length;
+    const maxPontos    = p.stats.matches * 3;
+    const aprovPct     = maxPontos > 0 ? Math.round((p.stats.points / maxPontos) * 100) : 0;
+    const freqPct      = totalRodadas > 0 ? Math.round((p.stats.matches / totalRodadas) * 100) : 0;
+
+    // Cor do card de frequência
+    let freqClass = 'freq-red';
+    if (freqPct > 75)     freqClass = 'freq-green';
+    else if (freqPct > 50) freqClass = 'freq-yellow';
+
+    document.getElementById('performanceGrid').innerHTML = `
+      <div class="perf-card">
+        <div class="perf-icon">🏅</div>
+        <div class="perf-value">${aprovPct}%</div>
+        <div class="perf-label">Aproveitamento</div>
+        <div class="perf-sub">${p.stats.points} pts em ${maxPontos} possíveis</div>
+      </div>
+      <div class="perf-card ${freqClass}">
+        <div class="perf-icon">📅</div>
+        <div class="perf-value">${freqPct}%</div>
+        <div class="perf-label">Frequência</div>
+        <div class="perf-sub">${p.stats.matches} de ${totalRodadas} rodadas</div>
+      </div>
+    `;
 
     // ── Awards ──
     const awardsEl = document.getElementById('awardsGrid');

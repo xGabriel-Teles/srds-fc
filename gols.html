@@ -46,12 +46,13 @@
     const pct  = maxGoals > 0 ? (p.stats.goals / maxGoals) * 100 : 0;
     const posClass = rank <= 3 ? ` top${rank}` : '';
 
+    const injuryTag = p.injury ? `<span class="ranking-injury-tag">🚑</span>` : '';
     const item = document.createElement('div');
     item.className = 'ranking-item';
     item.innerHTML = `
       <div class="ranking-pos${posClass}">${rank}</div>
       <div class="ranking-bar-wrap">
-        <div class="ranking-name">${p.name}
+        <div class="ranking-name">${p.name}${injuryTag}
           <span style="font-size:11px; color:var(--cinza); font-weight:400; margin-left:6px;">${p.position}</span>
         </div>
         <div class="ranking-bar-bg">

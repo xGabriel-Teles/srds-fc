@@ -16,6 +16,13 @@
  *                 Para gols de atleta avulso: { guestName: "Nome", team: "azul"|"vermelho" }
  *    assists    → array de { playerId, team: "azul"|"vermelho" }
  *                 Para assistências de atleta avulso: { guestName: "Nome", team: "azul"|"vermelho" }
+ *    mvp        → ID do jogador MVP da rodada (string) — null se não definido
+ *
+ *  CAMPO DE LESÃO nos jogadores:
+ *    injury: null                                          → atleta sem lesão (padrão)
+ *    injury: { name: "Entorse no tornozelo",
+ *              returnDate: "15/05/2026" }                 → atleta lesionado
+ *    Aparece com 🚑 no ranking e com card de alerta no perfil.
  */
 
 const SRDS = {
@@ -209,7 +216,7 @@ const SRDS = {
         { playerId: "rodrigo-p", team: "vermelho" }
       ]
     },
-    {
+    /*{
       round: 6,
       date: "11/04/2026",
       time: "10:00",
@@ -229,7 +236,7 @@ const SRDS = {
         { playerId: "everson", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
-      */],
+      ],
       assists: [/*
         { playerId: "alef", team: "azul" },
         { playerId: "gabriel", team: "azul" },
@@ -240,8 +247,8 @@ const SRDS = {
         { guestName: "Adriel", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" }
-      */]
-    }
+      ]
+    }*/
   ],
 
   /**
@@ -249,6 +256,11 @@ const SRDS = {
    *  LISTA DE JOGADORES — TEMPORADA 2026
    * =============================================
    */
+
+  
+      // injury: null  →  sem lesão
+      // injury: { name: "Entorse no tornozelo", returnDate: "15/05/2026" }  →  lesionado
+
   players: [
     {
       id: "gabriel",
@@ -263,6 +275,7 @@ const SRDS = {
         uni1: "img/players/gabriel-azul.png", 
         uni2: "img/players/gabriel-vermelho.png"
       },
+      injury: { name: "Septoplastia", returnDate: "10/05/2026" },
       stats: { matches: 5, goals: 4, assists: 6, points: 12 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
@@ -281,6 +294,7 @@ const SRDS = {
         uni1: "img/players/marcelo-azul.png", 
         uni2: "img/players/marcelo-vermelho.png"
       },
+      injury: null,
       stats: { matches: 5, goals: 11, assists: 2, points: 9 },
       awards: [
         { year: 2025, title: "Artilheiro", icon: "⚽" },
@@ -674,6 +688,7 @@ const SRDS = {
         uni1: "img/players/juliano-azul.png", 
         uni2: "img/players/juliano-vermelho.png"
       },
+      injury: { name: " Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
       stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },

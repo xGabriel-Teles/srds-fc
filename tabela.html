@@ -69,11 +69,12 @@
 
     const tr = document.createElement('tr');
     tr.className = rowClass;
+    const injuryTag = p.injury ? ` <span class="ranking-injury-tag">🚑</span>` : '';
     tr.innerHTML = `
       ${rankCell}
       <td class="col-name">
         <div class="player-name-cell">
-          ${p.name}
+          ${p.name}${injuryTag}
           <span class="player-pos-pill">${p.position}</span>
         </div>
       </td>
