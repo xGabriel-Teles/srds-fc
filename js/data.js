@@ -840,7 +840,7 @@ const SRDS = {
       age: 35,
       photo: { uni1: null, uni2: null },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 0, points: 0 },
+      stats: { matches: 2, goals: 0, assists: 0, points: 3 },
       awards: []
     },
     {
