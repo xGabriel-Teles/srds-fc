@@ -222,7 +222,7 @@ const SRDS = {
       time: "10:00",
       location: "MCM Porto Seco",
       result: { azul: 7, vermelho: 11 },
-      mvp: null,
+      mvp: "alef",
       teamAzul: ["vinicius", "germano","alemao", "erig","alexandre", "iago", "rafael-isco", "rodrigo-costa", "marcelo", "augusto"],
       teamVermelho: ["edu", "milica", "thiago","ivan", "adler", "biro", "vander", "wesley", "alef", "rodrigo-p"],
       scorers: [
