@@ -431,7 +431,10 @@ const SRDS = {
       position: "Meia",
       foot: "Direito",
       age: 23,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/rafael-isco-azul.png", 
+        uni2: "img/players/rafael-isco-vermelho.png"
+      },
       injury: null,
       stats: { matches: 3, goals: 0, assists: 2, points: 6 },
       awards: []
@@ -439,7 +442,7 @@ const SRDS = {
     {
       id: "vinicius",
       name: "Vinicius Teles",
-      fullName: "Vinicius Teles de Jesus",
+      fullName: "Vinicius Teles Jesus",
       nickname: null,
       number: { uni1: 12, uni2: 12 },
       position: "Goleiro",
@@ -464,7 +467,10 @@ const SRDS = {
       position: "Ponta",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/wess-azul.png", 
+        uni2: "img/players/wess-vermelho.png"
+      },
       injury: null,
       stats: { matches: 2, goals: 3, assists: 4, points: 6 },
       awards: [
@@ -473,8 +479,8 @@ const SRDS = {
     },
     {
       id: "rodrigo-p",
-      name: "Rodrigo Padrocimo",
-      fullName: "Rodrigo Padrocimo",
+      name: "Rodrigo Prodocimo",
+      fullName: "Rodrigo Prodocimo",
       nickname: null,
       number: { uni1: 11, uni2: 11 },
       position: "Centroavante",
