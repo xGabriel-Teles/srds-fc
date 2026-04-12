@@ -216,39 +216,56 @@ const SRDS = {
         { playerId: "rodrigo-p", team: "vermelho" }
       ]
     },
-    /*{
+    {
       round: 6,
       date: "11/04/2026",
       time: "10:00",
       location: "MCM Porto Seco",
-      result: { azul: 0, vermelho: 0 },
+      result: { azul: 7, vermelho: 11 },
       mvp: null,
       teamAzul: ["vinicius", "germano","alemao", "erig","alexandre", "iago", "rafael-isco", "rodrigo-costa", "marcelo", "augusto"],
       teamVermelho: ["edu", "milica", "thiago","ivan", "adler", "biro", "vander", "wesley", "alef", "rodrigo-p"],
-      scorers: [/*
-        { playerId: "alef", team: "azul" },
-        { playerId: "gabriel", team: "azul" },
+      scorers: [
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
         { playerId: "marcelo", team: "azul" },
         { playerId: "marcelo", team: "azul" },
         { playerId: "marcelo", team: "azul" },
         { playerId: "marcelo", team: "azul" },
-        { playerId: "marcelo", team: "azul" },
-        { playerId: "everson", team: "vermelho" },
+        { playerId: "rodrigo-costa", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" },
+
+      ],
+      assists: [
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
-      ],
-      assists: [/*
-        { playerId: "alef", team: "azul" },
-        { playerId: "gabriel", team: "azul" },
-        { playerId: "germano", team: "azul" },
-        { playerId: "germano", team: "azul" },
-        { guestName: "Nine", team: "azul" },
-        { guestName: "Nine", team: "azul" },
-        { guestName: "Adriel", team: "vermelho" },
-        { playerId: "rodrigo-p", team: "vermelho" },
-        { playerId: "rodrigo-p", team: "vermelho" }
+        { playerId: "milica", team: "vermelho" },,
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },,
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "thiago", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "germano", team: "azul" },        
+        { playerId: "vinicius", team: "azul" },
       ]
-    }*/
+    }
   ],
 
   /**
@@ -295,7 +312,7 @@ const SRDS = {
         uni2: "img/players/marcelo-vermelho.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 11, assists: 2, points: 9 },
+      stats: { matches: 6, goals: 15, assists: 3, points: 9 },
       awards: [
         { year: 2025, title: "Artilheiro", icon: "⚽" },
         { year: 2025, title: "MVP da Temporada", icon: "🏆" }
@@ -310,9 +327,12 @@ const SRDS = {
       position: "Ala",
       foot: "Direito",
       age: 58,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/alexandre-azul.png", 
+        uni2: "img/players/alexandre-vermelho.png"
+      },
       injury: null,
-      stats: { matches: 5, goals: 1, assists: 1, points: 9 },
+      stats: { matches: 6, goals: 1, assists: 1, points: 9 },
       awards: []
     },
     {
@@ -329,7 +349,7 @@ const SRDS = {
         uni2: "img/players/biro-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 0, assists: 0, points: 9 },
+      stats: { matches: 5, goals: 1, assists: 1, points: 12 },
       awards: []
     },
     {
@@ -346,7 +366,7 @@ const SRDS = {
         uni2: "img/players/germano-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 1, assists: 2, points: 9 },
+      stats: { matches: 5, goals: 1, assists: 3, points: 9 },
       awards: [
         { year: 2025, title: "Melhor Zagueiro", icon: "🥇" }
       ]
@@ -365,7 +385,7 @@ const SRDS = {
         uni2: "img/players/edu-amarelo.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 0, assists: 0, points: 9 },
+      stats: { matches: 4, goals: 0, assists: 0, points: 12 },
       awards: []
     },
     {
@@ -382,7 +402,7 @@ const SRDS = {
         uni2: "img/players/rodrigoc-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 1, assists: 0, points: 6 },
+      stats: { matches: 3, goals: 2, assists: 0, points: 6 },
       awards: []
     },
     {
@@ -394,7 +414,10 @@ const SRDS = {
       position: "Fixo",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/cabelo-azul.png", 
+        uni2: "img/players/cabelo-vermelho.png"
+      },
       injury: null,
       stats: { matches: 3, goals: 0, assists: 0, points: 6 },
       awards: []
@@ -410,7 +433,7 @@ const SRDS = {
       age: 23,
       photo: { uni1: null, uni2: null },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 2, points: 6 },
+      stats: { matches: 3, goals: 0, assists: 2, points: 6 },
       awards: []
     },
     {
@@ -427,7 +450,7 @@ const SRDS = {
         uni2: "img/players/vinicius-amarelo.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 0, assists: 0, points: 6 },
+      stats: { matches: 5, goals: 0, assists: 1, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Goleiro", icon: "🧤" }
       ]
@@ -462,7 +485,7 @@ const SRDS = {
         uni2: "img/players/rodrigop-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 10, assists: 6, points: 6 },
+      stats: { matches: 5, goals: 13, assists: 7, points: 9 },
       awards: [
         { year: 2025, title: "Melhor Atacante", icon: "🥇" }
       ]
@@ -476,9 +499,12 @@ const SRDS = {
       position: "Centroavante",
       foot: "Direito",
       age: 31,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/augusto-azul.png", 
+        uni2: "img/players/augusto-vermelho.png"
+      },
       injury: null,
-      stats: { matches: 3, goals: 3, assists: 0, points: 3 },
+      stats: { matches: 4, goals: 3, assists: 0, points: 3 },
       awards: []
     },
     {
@@ -560,7 +586,7 @@ const SRDS = {
         uni2: "img/players/milica-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 6, assists: 0, points: 3 },
+      stats: { matches: 5, goals: 8, assists: 4, points: 6 },
       awards: []
     },
     {
@@ -577,7 +603,7 @@ const SRDS = {
         uni2: "img/players/vander-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 2, assists: 0, points: 3 },
+      stats: { matches: 5, goals: 2, assists: 0, points: 6 },
       awards: []
     },
     {
@@ -594,7 +620,7 @@ const SRDS = {
         uni2: "img/players/iago-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 3, assists: 1, points: 3 },
+      stats: { matches: 3, goals: 5, assists: 2, points: 3 },
       awards: []
     },
     {
@@ -627,7 +653,7 @@ const SRDS = {
         uni1: "img/players/adler-azul.png",
         uni2: "img/players/adler-vermelho.png" },
       injury: null,
-      stats: { matches: 5, goals: 0, assists: 1, points: 3 },
+      stats: { matches: 6, goals: 0, assists: 1, points: 6 },
       awards: []
     },
     {
@@ -643,7 +669,7 @@ const SRDS = {
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
       injury: null,
-      stats: { matches: 3, goals: 1, assists: 3, points: 3 },
+      stats: { matches: 4, goals: 5, assists: 5, points: 6 },
       awards: []
     },
     {
@@ -660,7 +686,7 @@ const SRDS = {
         uni2: "img/players/erig-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 0, points: 3 },
+      stats: { matches: 3, goals: 0, assists: 2, points: 3 },
       awards: []
     },
     {
@@ -677,7 +703,7 @@ const SRDS = {
         uni2: "img/players/wesley-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 1, assists: 1, points: 3 },
+      stats: { matches: 4, goals: 2, assists: 2, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
       ]
@@ -696,7 +722,7 @@ const SRDS = {
         uni2: "img/players/edson-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 1, assists: 0, points: 0 },
+      stats: { matches: 3, goals: 1, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -725,7 +751,10 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: 45,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/chico-azul.png", 
+        uni2: "img/players/chico-vermelho.png"
+      },
       injury: null,
       stats: { matches: 1, goals: 0, assists: 0, points: 0 },
       awards: []
@@ -792,7 +821,7 @@ const SRDS = {
         uni2: "img/players/ivan-vermelho.png"
       },
       injury: null,
-      stats: { matches: 0, goals: 0, assists: 0, points: 0 },
+      stats: { matches: 1, goals: 0, assists: 0, points: 3 },
       awards: []
     },
     {
@@ -838,9 +867,12 @@ const SRDS = {
       position: "Fixo",
       foot: "Direito",
       age: 35,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/thiago-azul.png", 
+        uni2: "img/players/thiago-vermelho.png"
+      },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 0, points: 3 },
+      stats: { matches: 3, goals: 0, assists: 1, points: 6 },
       awards: []
     },
     {
