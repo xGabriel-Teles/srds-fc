@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SRDS FC — Perfil do Atleta | Temporada 2026</title>
-  <meta name="description" content="Perfil completo do atleta do SRDS FC: estatísticas, médias, aproveitamento, frequência e prêmios conquistados na temporada 2026.">
+  <meta name="description"
+    content="Perfil completo do atleta do SRDS FC: estatísticas, médias, aproveitamento, frequência e prêmios conquistados na temporada 2026.">
   <meta name="author" content="SRDS FC">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.srdsfc.com.br/tabela.html">
@@ -31,82 +33,92 @@
     }
   }
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMS5H3L4YL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMS5H3L4YL');
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
+
 <body>
 
-<header class="site-header"></header>
+  <header class="site-header"></header>
 
-<main class="player-profile-page">
+  <main class="player-profile-page">
 
-  <!-- ── Navigation arrows ── -->
-  <nav class="player-nav" id="playerNav"></nav>
+    <!-- ── Navigation arrows ── -->
+    <nav class="player-nav" id="playerNav"></nav>
 
-  <!-- ── Profile hero ── -->
-  <div class="profile-hero" id="profileHero"></div>
+    <!-- ── Profile hero ── -->
+    <div class="profile-hero" id="profileHero"></div>
 
-  <!-- ── Stats grid ── -->
-  <div class="profile-stats-grid" id="statsGrid"></div>
+    <!-- ── Stats grid ── -->
+    <div class="profile-stats-grid" id="statsGrid"></div>
 
-  <!-- ── Averages ── -->
-  <section>
-    <h3 style="font-size:20px; color:var(--branco); margin-bottom:14px;">
-      Médias por <span style="color:var(--ouro)">Partida</span>
-    </h3>
-    <div class="averages-grid" id="averagesGrid"></div>
-  </section>
+    <!-- ── Averages ── -->
+    <section>
+      <h3 style="font-size:20px; color:var(--branco); margin-bottom:14px;">
+        Médias por <span style="color:var(--ouro)">Partida</span>
+      </h3>
+      <div class="averages-grid" id="averagesGrid"></div>
+    </section>
 
-  <!-- ── Performance ── -->
-  <section style="margin-top:28px;">
-    <h3 style="font-size:20px; color:var(--branco); margin-bottom:14px;">
-      Aproveitamento & <span style="color:var(--ouro)">Frequência</span>
-    </h3>
-    <div class="performance-grid" id="performanceGrid"></div>
-  </section>
+    <!-- ── Performance ── -->
+    <section style="margin-top:28px;">
+      <h3 style="font-size:20px; color:var(--branco); margin-bottom:14px;">
+        Aproveitamento & <span style="color:var(--ouro)">Frequência</span>
+      </h3>
+      <div class="performance-grid" id="performanceGrid"></div>
+    </section>
 
-  <!-- ── Awards ── -->
-  <section class="awards-section">
-    <h3 class="awards-title">Prêmios <span>Individuais</span></h3>
-    <div class="awards-grid" id="awardsGrid"></div>
-  </section>
+    <!-- ── Awards ── -->
+    <section class="awards-section">
+      <h3 class="awards-title">Prêmios <span>Individuais</span></h3>
+      <div class="awards-grid" id="awardsGrid"></div>
+    </section>
 
-</main>
+  </main>
 
-<footer class="site-footer"></footer>
+  <footer class="site-footer"></footer>
 
-<script src="js/data.js"></script>
-<script src="js/components.js"></script>
-<script>
-  renderHeader('jogador.html');
-  renderFooter();
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    renderHeader('jogador.html');
+    renderFooter();
 
-  // ── Get player from URL ──
-  const params = new URLSearchParams(window.location.search);
-  const playerId = params.get('id');
-  const player = getPlayerById(playerId);
+    // ── Get player from URL ──
+    const params = new URLSearchParams(window.location.search);
+    const playerId = params.get('id');
+    const player = getPlayerById(playerId);
 
-  if (!player) {
-    document.querySelector('.player-profile-page').innerHTML = `
+    if (!player) {
+      document.querySelector('.player-profile-page').innerHTML = `
       <div style="text-align:center; padding:80px 20px;">
         <h2 style="font-size:32px; color:var(--cinza); margin-bottom:16px;">Atleta não encontrado</h2>
         <a href="index.html" style="color:var(--ouro); font-family:'Barlow Semi Condensed',sans-serif;">← Voltar à tabela</a>
       </div>`;
-  } else {
-    renderPlayerProfile(player);
-  }
+    } else {
+      renderPlayerProfile(player);
+    }
 
-  function renderPlayerProfile(p) {
-    document.title = `SRDS FC — ${p.name}`;
+    function renderPlayerProfile(p) {
+      document.title = `SRDS FC — ${p.name}`;
 
-    // ── Alphabetical navigation ──
-    const alpha = getAlphabetical();
-    const idx   = alpha.findIndex(x => x.id === p.id);
-    const prev  = idx > 0 ? alpha[idx - 1] : alpha[alpha.length - 1];
-    const next  = idx < alpha.length - 1 ? alpha[idx + 1] : alpha[0];
+      // ── Alphabetical navigation ──
+      const alpha = getAlphabetical();
+      const idx = alpha.findIndex(x => x.id === p.id);
+      const prev = idx > 0 ? alpha[idx - 1] : alpha[alpha.length - 1];
+      const next = idx < alpha.length - 1 ? alpha[idx + 1] : alpha[0];
 
-    document.getElementById('playerNav').innerHTML = `
+      document.getElementById('playerNav').innerHTML = `
       <a href="jogador.html?id=${prev.id}" class="player-nav-btn">
         ${chevronLeft()} ${prev.name}
       </a>
@@ -116,44 +128,44 @@
       </a>
     `;
 
-    // ── Ranks ──
-    const ranks = getPlayerRanks(p);
-    const avgs  = getPlayerAverages(p);
+      // ── Ranks ──
+      const ranks = getPlayerRanks(p);
+      const avgs = getPlayerAverages(p);
 
-    // ── Profile hero ──
-    const hasPhoto1 = p.photo && p.photo.uni1;
-    const hasPhoto2 = p.photo && p.photo.uni2;
+      // ── Profile hero ──
+      const hasPhoto1 = p.photo && p.photo.uni1;
+      const hasPhoto2 = p.photo && p.photo.uni2;
 
-    const num1Label = p.number.uni1 !== null ? `#${p.number.uni1}` : '';
-    const num2Label = p.number.uni2 !== null ? `#${p.number.uni2}` : '';
+      const num1Label = p.number.uni1 !== null ? `#${p.number.uni1}` : '';
+      const num2Label = p.number.uni2 !== null ? `#${p.number.uni2}` : '';
 
-    // Photo / silhouette content
-    const frontPhoto = hasPhoto1
-      ? `<div class="flip-card-avatar"><img src="${p.photo.uni1}" alt="${p.name} - Uniforme Azul" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>`
-      : `<div class="flip-card-avatar">${avatarSVG('#c99f40')}</div>`;
+      // Photo / silhouette content
+      const frontPhoto = hasPhoto1
+        ? `<div class="flip-card-avatar"><img src="${p.photo.uni1}" alt="${p.name} - Uniforme Azul" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>`
+        : `<div class="flip-card-avatar">${avatarSVG('#c99f40')}</div>`;
 
-    const backPhoto = hasPhoto2
-      ? `<div class="flip-card-avatar"><img src="${p.photo.uni2}" alt="${p.name} - Uniforme Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>`
-      : `<div class="flip-card-avatar">${avatarSVG('#ead186')}</div>`;
+      const backPhoto = hasPhoto2
+        ? `<div class="flip-card-avatar"><img src="${p.photo.uni2}" alt="${p.name} - Uniforme Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>`
+        : `<div class="flip-card-avatar">${avatarSVG('#ead186')}</div>`;
 
-    // Build tag list
-    let tags = `<span class="profile-tag tag-position">${p.position}</span>`;
-    if (num1Label || num2Label) {
-      const numDisplay = num1Label && num2Label && num1Label !== num2Label
-        ? `${num1Label} · ${num2Label}`
-        : num1Label || num2Label;
-      tags += `<span class="profile-tag tag-number">${numDisplay}</span>`;
-    }
-    if (p.foot) tags += `<span class="profile-tag tag-foot">Pé ${p.foot}</span>`;
-    if (p.age)  tags += `<span class="profile-tag tag-foot">${p.age} anos</span>`;
-    if (p.nickname && p.nickname !== p.name) tags += `<span class="profile-tag tag-foot">"${p.nickname}"</span>`;
+      // Build tag list
+      let tags = `<span class="profile-tag tag-position">${p.position}</span>`;
+      if (num1Label || num2Label) {
+        const numDisplay = num1Label && num2Label && num1Label !== num2Label
+          ? `${num1Label} · ${num2Label}`
+          : num1Label || num2Label;
+        tags += `<span class="profile-tag tag-number">${numDisplay}</span>`;
+      }
+      if (p.foot) tags += `<span class="profile-tag tag-foot">Pé ${p.foot}</span>`;
+      if (p.age) tags += `<span class="profile-tag tag-foot">${p.age} anos</span>`;
+      if (p.nickname && p.nickname !== p.name) tags += `<span class="profile-tag tag-foot">"${p.nickname}"</span>`;
 
-    // Rank indicators
-    const rankItems = [
-      { label: 'Pontos', rank: ranks.points, icon: '🏆' },
-      { label: 'Gols',   rank: ranks.goals,  icon: '⚽' },
-      { label: 'Assist.', rank: ranks.assists, icon: '🎯' },
-    ].map(r => `
+      // Rank indicators
+      const rankItems = [
+        { label: 'Pontos', rank: ranks.points, icon: '🏆' },
+        { label: 'Gols', rank: ranks.goals, icon: '⚽' },
+        { label: 'Assist.', rank: ranks.assists, icon: '🎯' },
+      ].map(r => `
       <div class="rank-indicator">
         ${r.icon}
         <span class="rank-num">${rankSuffix(r.rank)}</span>
@@ -161,7 +173,7 @@
       </div>
     `).join('');
 
-    document.getElementById('profileHero').innerHTML = `
+      document.getElementById('profileHero').innerHTML = `
       <!-- Flip card -->
       <div>
         <div class="flip-card-container" id="flipCardContainer" title="Clique para ver o outro uniforme">
@@ -220,51 +232,51 @@
       </div>
     `;
 
-    // Flip interaction
-    const container = document.getElementById('flipCard');
-    document.getElementById('flipCardContainer').addEventListener('click', () => {
-      container.classList.toggle('flipped');
-    });
+      // Flip interaction
+      const container = document.getElementById('flipCard');
+      document.getElementById('flipCardContainer').addEventListener('click', () => {
+        container.classList.toggle('flipped');
+      });
 
-    // ── Stats grid ──
-    const stats = [
-      { value: p.stats.matches,  label: 'Partidas Jogadas' },
-      { value: p.stats.goals,    label: 'Gols' },
-      { value: p.stats.assists,  label: 'Assistências' },
-      { value: p.stats.points,   label: 'Pontos' },
-    ];
-    document.getElementById('statsGrid').innerHTML = stats.map(s => `
+      // ── Stats grid ──
+      const stats = [
+        { value: p.stats.matches, label: 'Partidas Jogadas' },
+        { value: p.stats.goals, label: 'Gols' },
+        { value: p.stats.assists, label: 'Assistências' },
+        { value: p.stats.points, label: 'Pontos' },
+      ];
+      document.getElementById('statsGrid').innerHTML = stats.map(s => `
       <div class="profile-stat-card">
         <div class="profile-stat-value">${s.value}</div>
         <div class="profile-stat-label">${s.label}</div>
       </div>
     `).join('');
 
-    // ── Averages ──
-    const averagesData = [
-      { value: avgs.goals,         label: 'Gols/Partida' },
-      { value: avgs.assists,       label: 'Assist./Partida' },
-      { value: avgs.participation, label: 'Participação/Partida' },
-    ];
-    document.getElementById('averagesGrid').innerHTML = averagesData.map(a => `
+      // ── Averages ──
+      const averagesData = [
+        { value: avgs.goals, label: 'Gols/Partida' },
+        { value: avgs.assists, label: 'Assist./Partida' },
+        { value: avgs.participation, label: 'Participação/Partida' },
+      ];
+      document.getElementById('averagesGrid').innerHTML = averagesData.map(a => `
       <div class="avg-card">
         <div class="avg-value">${a.value}</div>
         <div class="avg-label">${a.label}</div>
       </div>
     `).join('');
 
-    // ── Aproveitamento e Frequência ──
-    const totalRodadas = SRDS.matches.length;
-    const maxPontos    = p.stats.matches * 3;
-    const aprovPct     = maxPontos > 0 ? Math.round((p.stats.points / maxPontos) * 100) : 0;
-    const freqPct      = totalRodadas > 0 ? Math.round((p.stats.matches / totalRodadas) * 100) : 0;
+      // ── Aproveitamento e Frequência ──
+      const totalRodadas = SRDS.matches.length;
+      const maxPontos = p.stats.matches * 3;
+      const aprovPct = maxPontos > 0 ? Math.round((p.stats.points / maxPontos) * 100) : 0;
+      const freqPct = totalRodadas > 0 ? Math.round((p.stats.matches / totalRodadas) * 100) : 0;
 
-    // Cor do card de frequência
-    let freqClass = 'freq-red';
-    if (freqPct > 75)     freqClass = 'freq-green';
-    else if (freqPct > 50) freqClass = 'freq-yellow';
+      // Cor do card de frequência
+      let freqClass = 'freq-red';
+      if (freqPct > 75) freqClass = 'freq-green';
+      else if (freqPct > 50) freqClass = 'freq-yellow';
 
-    document.getElementById('performanceGrid').innerHTML = `
+      document.getElementById('performanceGrid').innerHTML = `
       <div class="perf-card">
         <div class="perf-icon">🏅</div>
         <div class="perf-value">${aprovPct}%</div>
@@ -279,12 +291,12 @@
       </div>
     `;
 
-    // ── Awards ──
-    const awardsEl = document.getElementById('awardsGrid');
-    if (p.awards.length === 0) {
-      awardsEl.innerHTML = `<p class="no-awards">Nenhum prêmio individual registrado ainda.</p>`;
-    } else {
-      awardsEl.innerHTML = p.awards.map(a => `
+      // ── Awards ──
+      const awardsEl = document.getElementById('awardsGrid');
+      if (p.awards.length === 0) {
+        awardsEl.innerHTML = `<p class="no-awards">Nenhum prêmio individual registrado ainda.</p>`;
+      } else {
+        awardsEl.innerHTML = p.awards.map(a => `
         <div class="award-card">
           <div class="award-icon">${a.icon}</div>
           <div class="award-info">
@@ -293,8 +305,9 @@
           </div>
         </div>
       `).join('');
+      }
     }
-  }
-</script>
+  </script>
 </body>
+
 </html>

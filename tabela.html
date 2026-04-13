@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SRDS FC — Tabela de Pontuação 2026 | Futebol Amador Porto Alegre</title>
-  <meta name="description" content="Tabela de pontuação oficial do SRDS FC na temporada 2026. Ranking completo dos atletas com pontos, gols, assistências e participação em gols.">
+  <meta name="description"
+    content="Tabela de pontuação oficial do SRDS FC na temporada 2026. Ranking completo dos atletas com pontos, gols, assistências e participação em gols.">
   <meta name="author" content="SRDS FC">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.srdsfc.com.br/tabela.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.srdsfc.com.br/tabela.html">
   <meta property="og:title" content="SRDS FC — Tabela de Pontuação 2026">
-  <meta property="og:description" content="Ranking completo dos atletas do SRDS FC na temporada 2026 de futebol amador em Porto Alegre.">
+  <meta property="og:description"
+    content="Ranking completo dos atletas do SRDS FC na temporada 2026 de futebol amador em Porto Alegre.">
   <meta property="og:image" content="https://www.srdsfc.com.br/img/logo/logo-srds2.png">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="SRDS FC">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SRDS FC — Tabela de Pontuação 2026">
-  <meta name="twitter:description" content="Ranking completo dos atletas do SRDS FC na temporada 2026 de futebol amador em Porto Alegre.">
+  <meta name="twitter:description"
+    content="Ranking completo dos atletas do SRDS FC na temporada 2026 de futebol amador em Porto Alegre.">
   <meta name="twitter:image" content="https://www.srdsfc.com.br/img/logo/logo-srds2.png">
   <script type="application/ld+json">
   {
@@ -31,73 +35,84 @@
     }
   }
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMS5H3L4YL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMS5H3L4YL');
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
+
 <body>
 
-<header class="site-header"></header>
+  <header class="site-header"></header>
 
-<main class="section fade-in">
-  <div class="section-header">
-    <h2 class="section-title">Tabela de <span>Pontuação</span></h2>
-    <span class="section-meta" id="matchesPlayed"></span>
-  </div>
-  <div class="gold-line"></div>
+  <main class="section fade-in">
+    <div class="section-header">
+      <h2 class="section-title">Tabela de <span>Pontuação</span></h2>
+      <span class="section-meta" id="matchesPlayed"></span>
+    </div>
+    <div class="gold-line"></div>
 
-  <div class="standings-table-wrap">
-    <table class="standings-table" id="standingsTable">
-      <thead>
-        <tr>
-          <th class="col-rank">#</th>
-          <th class="col-name">Atleta</th>
-          <th title="Partidas Jogadas">PJ</th>
-          <th title="Gols">G</th>
-          <th title="Assistências">A</th>
-          <th title="Participação em Gols (Gols + Assistências)">G+A</th>
-          <th title="Pontos">PTS</th>
-        </tr>
-      </thead>
-      <tbody id="standingsBody"></tbody>
-    </table>
-  </div>
+    <div class="standings-table-wrap">
+      <table class="standings-table" id="standingsTable">
+        <thead>
+          <tr>
+            <th class="col-rank">#</th>
+            <th class="col-name">Atleta</th>
+            <th title="Partidas Jogadas">PJ</th>
+            <th title="Gols">G</th>
+            <th title="Assistências">A</th>
+            <th title="Participação em Gols (Gols + Assistências)">G+A</th>
+            <th title="Pontos">PTS</th>
+          </tr>
+        </thead>
+        <tbody id="standingsBody"></tbody>
+      </table>
+    </div>
 
-  <p style="margin-top:14px; font-size:12px; color:var(--cinza); font-family:'Barlow Semi Condensed',sans-serif;">
-    * PTS: Vitória = 3 pts · Empate = 1 pt · Derrota = 0 pts &nbsp;|&nbsp; Clique no atleta para ver o perfil completo.
-  </p>
-</main>
+    <p style="margin-top:14px; font-size:12px; color:var(--cinza); font-family:'Barlow Semi Condensed',sans-serif;">
+      * PTS: Vitória = 3 pts · Empate = 1 pt · Derrota = 0 pts &nbsp;|&nbsp; Clique no atleta para ver o perfil
+      completo.
+    </p>
+  </main>
 
-<footer class="site-footer"></footer>
+  <footer class="site-footer"></footer>
 
-<script src="js/data.js"></script>
-<script src="js/components.js"></script>
-<script>
-  renderHeader('tabela.html');
-  renderFooter();
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    renderHeader('tabela.html');
+    renderFooter();
 
-  document.getElementById('matchesPlayed').textContent =
-    `${SRDS.matches.length} rodada${SRDS.matches.length !== 1 ? 's' : ''} disputada${SRDS.matches.length !== 1 ? 's' : ''}`;
+    document.getElementById('matchesPlayed').textContent =
+      `${SRDS.matches.length} rodada${SRDS.matches.length !== 1 ? 's' : ''} disputada${SRDS.matches.length !== 1 ? 's' : ''}`;
 
-  const standings = getStandings();
-  const tbody = document.getElementById('standingsBody');
+    const standings = getStandings();
+    const tbody = document.getElementById('standingsBody');
 
-  standings.forEach((p, i) => {
-    const rank = i + 1;
-    const rowClass = rank <= 3 ? ` row-top${rank}` : '';
-    const ga = p.stats.goals + p.stats.assists;
+    standings.forEach((p, i) => {
+      const rank = i + 1;
+      const rowClass = rank <= 3 ? ` row-top${rank}` : '';
+      const ga = p.stats.goals + p.stats.assists;
 
-    let rankCell;
-    if (rank <= 3) {
-      rankCell = `<td class="col-rank"><span class="rank-badge rank-${rank}">${rank}</span></td>`;
-    } else {
-      rankCell = `<td class="col-rank">${rank}</td>`;
-    }
+      let rankCell;
+      if (rank <= 3) {
+        rankCell = `<td class="col-rank"><span class="rank-badge rank-${rank}">${rank}</span></td>`;
+      } else {
+        rankCell = `<td class="col-rank">${rank}</td>`;
+      }
 
-    const tr = document.createElement('tr');
-    tr.className = rowClass;
-    const injuryTag = p.injury ? ` <span class="ranking-injury-tag">🚑</span>` : '';
-    tr.innerHTML = `
+      const tr = document.createElement('tr');
+      tr.className = rowClass;
+      const injuryTag = p.injury ? ` <span class="ranking-injury-tag">🚑</span>` : '';
+      tr.innerHTML = `
       ${rankCell}
       <td class="col-name">
         <div class="player-name-cell">
@@ -111,9 +126,10 @@
       <td>${ga}</td>
       <td class="col-points">${p.stats.points}</td>
     `;
-    tr.addEventListener('click', () => { window.location.href = `jogador.html?id=${p.id}`; });
-    tbody.appendChild(tr);
-  });
-</script>
+      tr.addEventListener('click', () => { window.location.href = `jogador.html?id=${p.id}`; });
+      tbody.appendChild(tr);
+    });
+  </script>
 </body>
+
 </html>
