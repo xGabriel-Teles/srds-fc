@@ -774,7 +774,10 @@ const SRDS = {
       position: "Ala",
       foot: null,
       age: null,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/everson-azul.png", 
+        uni2: "img/players/everson-vermelho.png"
+      },
       injury: null,
       stats: { matches: 3, goals: 2, assists: 0, points: 0 },
       awards: []
@@ -890,9 +893,29 @@ const SRDS = {
       position: "Goleiro",
       foot: "Direito",
       age: 15,
-      photo: { uni1: null, uni2: null },
+      photo: {
+        uni1: "img/players/miliquinha-azul.png", 
+        uni2: "img/players/miliquinha-vermelho.png"
+      },
       injury: null,
       stats: { matches: 2, goals: 0, assists: 0, points: 0 },
+      awards: []
+    },
+    {
+      id: "silvio",
+      name: "Silvio",
+      fullName: "Silvio Gerhard",
+      nickname: null,
+      number: { uni1: null, uni2: null },
+      position: "Goleiro",
+      foot: "Direito",
+      age: 41,
+      photo: {
+        uni1: "img/players/silvio-azul.png", 
+        uni2: "img/players/silvio-vermelho.png"
+      },
+      injury: null,
+      stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     }
   ],
