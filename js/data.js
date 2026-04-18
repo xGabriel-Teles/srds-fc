@@ -304,11 +304,11 @@ const SRDS = {
         { playerId: "adler", team: "azul" },
       ],
       assists: [
-        { playerId: "wesley", team: "azul" },
-        { playerId: "jean", team: "azul" },
-        { playerId: "chico", team: "azul" },
-        { playerId: "milica", team: "azul" },
-        { playerId: "rodrigo-p", team: "vermelho" }
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "jean", team: "vermelho" },
+        { playerId: "chico", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "azul" }
       ]
     },
   ],
