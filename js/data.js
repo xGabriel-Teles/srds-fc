@@ -1,28 +1,47 @@
 /**
  * SRDS FC — Dados da Temporada 2026
- * Para atualizar os dados, edite os arrays abaixo.
+ * ============================================================
+ * ESTRUTURA DE UMA PARTIDA (matches[]):
  *
- * NOVO EM v1.1:
- *  matches agora suporta dados completos de cada rodada:
- *    round      → número da rodada
- *    date       → data (DD/MM/AAAA)
- *    time       → horário (HH:MM) — null se não definido
- *    location   → local da partida — null se não definido
- *    result     → { azul: N, vermelho: N } — null se não realizada
- *    teamAzul   → array de IDs de jogadores do Time Azul
- *                 Para atletas avulsos: { guest: true, name: "Nome do Atleta" }
- *    teamVermelho → array de IDs de jogadores do Time Vermelho (mesmo formato)
- *    scorers    → array de { playerId, team: "azul"|"vermelho" }
- *                 Para gols de atleta avulso: { guestName: "Nome", team: "azul"|"vermelho" }
- *    assists    → array de { playerId, team: "azul"|"vermelho" }
- *                 Para assistências de atleta avulso: { guestName: "Nome", team: "azul"|"vermelho" }
- *    mvp        → ID do jogador MVP da rodada (string) — null se não definido
+ *   round      → número da rodada (ex: 1, 2, 3...)
+ *   date       → data no formato DD/MM/AAAA (ex: "07/02/2026")
+ *   time       → horário HH:MM (ex: "10:00") — null se não definido
  *
- *  CAMPO DE LESÃO nos jogadores:
- *    injury: null                                          → atleta sem lesão (padrão)
- *    injury: { name: "Entorse no tornozelo",
- *              returnDate: "15/05/2026" }                 → atleta lesionado
- *    Aparece com 🚑 no ranking e com card de alerta no perfil.
+ *   location   → local da partida. Pode ser:
+ *                  null              → sem local definido
+ *                  "Nome do Local"   → apenas o nome (string simples)
+ *                  {                 → objeto com nome + endereço:
+ *                    venue: "Soccer City",
+ *                    address: "Av. Ipiranga, 5311 - Porto Alegre, RS"
+ *                  }
+ *                O address aparece clicável e abre no Google Maps.
+ *
+ *   result     → { azul: N, vermelho: N } — null se não realizada
+ *   mvp        → ID do jogador MVP (ex: "marcelo") — null se não definido
+ *
+ *   teamAzul / teamVermelho → array com IDs dos jogadores:
+ *     - Jogador do elenco: "gabriel"  (usa o id do jogador)
+ *     - Atleta avulso:    { guest: true, name: "Nome do Avulso" }
+ *
+ *   scorers → gols da partida:
+ *     - Jogador do elenco: { playerId: "marcelo", team: "azul" }
+ *     - Atleta avulso:     { guestName: "Carlos", team: "vermelho" }
+ *     Se o jogador marcou 3 gols, adicione 3 entradas com o mesmo ID.
+ *
+ *   assists → assistências da partida (mesmo formato de scorers)
+ *
+ * ⚡ STATS AUTOMÁTICOS (v1.9) — campo stats{} REMOVIDO dos jogadores:
+ *   As funções getComputedStats(playerId) e getStandings() calculam
+ *   partidas, gols, assistências e pontos diretamente das partidas —
+ *   não é mais necessário editar os campos stats{} nos jogadores.
+ *   O campo stats{} foi removido dos jogadores para evitar confusão.
+ *   Não é necessário preencher gols/partidas/assistências por jogador —
+ *   tudo é calculado automaticamente das partidas registradas acima.
+ *
+ * CAMPO DE LESÃO nos jogadores:
+ *   injury: null                                     → sem lesão
+ *   injury: { name: "Entorse", returnDate: "15/05/2026" } → lesionado
+ *   Aparece com 🚑 no ranking e com banner no perfil.
  */
 
 const SRDS = {
@@ -49,7 +68,7 @@ const SRDS = {
       round: 1,
       date: "07/02/2026",
       time: "11:00",
-      location: "Soccer City",
+      location: { venue: "Soccer City", address: "R. Lauro Müller, 700 - Navegantes, Porto Alegre - RS" },
       result: { azul: 5, vermelho: 6 },
       mvp: "vinicius",
       teamAzul: ["miliquinha", "germano", "alemao", "iago", "adler", "vander", "krigor", {guest: true, name: "Daniel"}, "everson", "rodrigo-p"],
@@ -77,7 +96,7 @@ const SRDS = {
       round: 2,
       date: "21/02/2026",
       time: "09:30",
-      location: "HD Sports",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS" },
       result: { azul: 4, vermelho: 5 },
       mvp: "gabriel",
       teamAzul: ["vinicius", "milica","chico", "alexandre", "adler", "wesley", "gustavo", "filipe", "alef", "augusto"],
@@ -105,7 +124,7 @@ const SRDS = {
       round: 3,
       date: "07/03/2026",
       time: "10:00",
-      location: "MCM Porto Seco",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 14, vermelho: 3 },
       mvp: "giovane",
       teamAzul: ["edu", "milica","gabriel", "alexandre", "jean", "giovane", "vander", "rodrigo-costa", "rodrigo-p"],
@@ -144,7 +163,7 @@ const SRDS = {
       round: 4,
       date: "14/03/2026",
       time: "10:00",
-      location: "MCM Porto Seco",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 12, vermelho: 6 },
       mvp: "rodrigo-p",
       teamAzul: ["vinicius", "germano","alexandre", "iago","cabelo", "rafael-isco", "augusto", "valdir", "weslley", "rodrigo-p"],
@@ -187,7 +206,7 @@ const SRDS = {
       round: 5,
       date: "21/03/2026",
       time: "10:00",
-      location: "Complexo 4º Distrito",
+      location: { venue: "Complexo 4º Distrito", address: "R. Conde de Porto Alegre, 61 - Floresta, Porto Alegre - RS" },
       result: { azul: 7, vermelho: 3 },
       mvp: "marcelo",
       teamAzul: ["edu", "germano","erig", "biro","adler", "gabriel", "wesley", "alef", "marcelo", {guest: true, name: "Nine"}],
@@ -220,7 +239,7 @@ const SRDS = {
       round: 6,
       date: "11/04/2026",
       time: "10:00",
-      location: "MCM Porto Seco",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 7, vermelho: 11 },
       mvp: "alef",
       teamAzul: ["vinicius", "germano","alemao", "erig","alexandre", "iago", "rafael-isco", "rodrigo-costa", "marcelo", "augusto"],
@@ -251,10 +270,10 @@ const SRDS = {
         { playerId: "alef", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
-        { playerId: "milica", team: "vermelho" },,
         { playerId: "milica", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
-        { playerId: "biro", team: "vermelho" },,
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
         { playerId: "thiago", team: "vermelho" },
         { playerId: "wesley", team: "vermelho" },
@@ -265,8 +284,47 @@ const SRDS = {
         { playerId: "germano", team: "azul" },        
         { playerId: "vinicius", team: "azul" },
       ]
-    }
+    },
+    {
+      round: 7,
+      date: "18/04/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 2, vermelho: 4 },
+      mvp: "weslley",
+      teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago", "vander", "krigor", "adler", "rodrigo-p", "marcelo"],
+      teamVermelho: ["silvio", "milica","chico",{guest: true, name: "Rafael"},"wesley", "erig", {guest: true, name: "Jhon"}, "jean", "weslley", {guest: true, name: "Anderson"}],
+      scorers: [
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "adler", team: "vermelho" },
+      ],
+      assists: [
+        { playerId: "wesley", team: "azul" },
+        { playerId: "jean", team: "azul" },
+        { playerId: "rodrigo-p", team: "vermelho" }
+      ]
+    },
   ],
+
+  /**
+   * =============================================
+   *  PRÓXIMA PARTIDA — preencha após definir a data
+   *  nextMatch: null  →  nenhuma próxima partida agendada
+   *  nextMatch: { round, date, time, location }
+   * =============================================
+   */
+
+  nextMatch: null,
+  /*nextMatch: {
+    round: 7,
+    date: "02/05/2026",
+    time: "10:00",
+    location: { venue: "MCM Porto Seco", address: "Av. Sertório, 7777 - Porto Alegre, RS" }
+  },*/
 
   /**
    * =============================================
@@ -293,7 +351,6 @@ const SRDS = {
         uni2: "img/players/gabriel-vermelho.png"
       },
       injury: { name: "Septoplastia", returnDate: "10/05/2026" },
-      stats: { matches: 5, goals: 4, assists: 6, points: 12 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
       ]
@@ -312,7 +369,6 @@ const SRDS = {
         uni2: "img/players/marcelo-vermelho.png"
       },
       injury: null,
-      stats: { matches: 6, goals: 15, assists: 3, points: 9 },
       awards: [
         { year: 2025, title: "Artilheiro", icon: "⚽" },
         { year: 2025, title: "MVP da Temporada", icon: "🏆" }
@@ -332,7 +388,6 @@ const SRDS = {
         uni2: "img/players/alexandre-vermelho.png"
       },
       injury: null,
-      stats: { matches: 6, goals: 1, assists: 1, points: 9 },
       awards: []
     },
     {
@@ -349,7 +404,6 @@ const SRDS = {
         uni2: "img/players/biro-vermelho.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 1, assists: 1, points: 12 },
       awards: []
     },
     {
@@ -366,7 +420,6 @@ const SRDS = {
         uni2: "img/players/germano-vermelho.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 1, assists: 3, points: 9 },
       awards: [
         { year: 2025, title: "Melhor Zagueiro", icon: "🥇" }
       ]
@@ -385,7 +438,6 @@ const SRDS = {
         uni2: "img/players/edu-amarelo.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 0, assists: 0, points: 12 },
       awards: []
     },
     {
@@ -402,7 +454,6 @@ const SRDS = {
         uni2: "img/players/rodrigoc-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 2, assists: 0, points: 6 },
       awards: []
     },
     {
@@ -419,7 +470,6 @@ const SRDS = {
         uni2: "img/players/cabelo-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 0, assists: 0, points: 6 },
       awards: []
     },
     {
@@ -436,7 +486,6 @@ const SRDS = {
         uni2: "img/players/rafael-isco-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 0, assists: 2, points: 6 },
       awards: []
     },
     {
@@ -453,7 +502,6 @@ const SRDS = {
         uni2: "img/players/vinicius-amarelo.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 0, assists: 1, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Goleiro", icon: "🧤" }
       ]
@@ -472,7 +520,6 @@ const SRDS = {
         uni2: "img/players/wess-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 3, assists: 4, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Ponta", icon: "🥇" }
       ]
@@ -491,7 +538,6 @@ const SRDS = {
         uni2: "img/players/rodrigop-vermelho.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 13, assists: 7, points: 9 },
       awards: [
         { year: 2025, title: "Melhor Atacante", icon: "🥇" }
       ]
@@ -510,7 +556,6 @@ const SRDS = {
         uni2: "img/players/augusto-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 3, assists: 0, points: 3 },
       awards: []
     },
     {
@@ -527,7 +572,6 @@ const SRDS = {
         uni2: "img/players/baracy-vermelho.png"
       },
       injury: null,
-      stats: { matches: 1, goals: 0, assists: 0, points: 3 },
       awards: []
     },
     {
@@ -541,7 +585,6 @@ const SRDS = {
       age: null,
       photo: { uni1: null, uni2: null },
       injury: null,
-      stats: { matches: 1, goals: 1, assists: 1, points: 3 },
       awards: []
     },
     {
@@ -558,7 +601,6 @@ const SRDS = {
         uni2: "img/players/giovane-vermelho.png"
       },
       injury: null,
-      stats: { matches: 1, goals: 4, assists: 1, points: 3 },
       awards: []
     },
     {
@@ -575,7 +617,6 @@ const SRDS = {
         uni2: "img/players/jean-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 2, assists: 0, points: 3 },
       awards: []
     },
     {
@@ -592,7 +633,6 @@ const SRDS = {
         uni2: "img/players/milica-vermelho.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 8, assists: 4, points: 6 },
       awards: []
     },
     {
@@ -609,7 +649,6 @@ const SRDS = {
         uni2: "img/players/vander-vermelho.png"
       },
       injury: null,
-      stats: { matches: 5, goals: 2, assists: 0, points: 6 },
       awards: []
     },
     {
@@ -626,7 +665,6 @@ const SRDS = {
         uni2: "img/players/iago-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 5, assists: 2, points: 3 },
       awards: []
     },
     {
@@ -643,7 +681,6 @@ const SRDS = {
         uni2: "img/players/valdir-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 2, assists: 1, points: 3 },
       awards: []
     },
     {
@@ -659,7 +696,6 @@ const SRDS = {
         uni1: "img/players/adler-azul.png",
         uni2: "img/players/adler-vermelho.png" },
       injury: null,
-      stats: { matches: 6, goals: 0, assists: 1, points: 6 },
       awards: []
     },
     {
@@ -675,7 +711,6 @@ const SRDS = {
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
       injury: null,
-      stats: { matches: 4, goals: 5, assists: 5, points: 6 },
       awards: []
     },
     {
@@ -692,7 +727,6 @@ const SRDS = {
         uni2: "img/players/erig-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 0, assists: 2, points: 3 },
       awards: []
     },
     {
@@ -709,7 +743,6 @@ const SRDS = {
         uni2: "img/players/wesley-vermelho.png"
       },
       injury: null,
-      stats: { matches: 4, goals: 2, assists: 2, points: 6 },
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
       ]
@@ -728,7 +761,6 @@ const SRDS = {
         uni2: "img/players/edson-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 1, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -745,7 +777,6 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -762,7 +793,6 @@ const SRDS = {
         uni2: "img/players/chico-vermelho.png"
       },
       injury: null,
-      stats: { matches: 1, goals: 0, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -779,7 +809,6 @@ const SRDS = {
         uni2: "img/players/everson-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 2, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -796,7 +825,6 @@ const SRDS = {
         uni2: "img/players/filipe-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 2, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -813,7 +841,6 @@ const SRDS = {
         uni2: "img/players/gustavo-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 1, points: 0 },
       awards: []
     },
     {
@@ -830,7 +857,6 @@ const SRDS = {
         uni2: "img/players/ivan-vermelho.png"
       },
       injury: null,
-      stats: { matches: 1, goals: 0, assists: 0, points: 3 },
       awards: []
     },
     {
@@ -847,7 +873,6 @@ const SRDS = {
         uni2: "img/players/keke-vermelho.png"
       },
       injury: null,
-      stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -864,7 +889,6 @@ const SRDS = {
         uni2: "img/players/krigor-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 2, points: 0 },
       awards: []
     },
     {
@@ -881,7 +905,6 @@ const SRDS = {
         uni2: "img/players/thiago-vermelho.png"
       },
       injury: null,
-      stats: { matches: 3, goals: 0, assists: 1, points: 6 },
       awards: []
     },
     {
@@ -898,7 +921,6 @@ const SRDS = {
         uni2: "img/players/miliquinha-vermelho.png"
       },
       injury: null,
-      stats: { matches: 2, goals: 0, assists: 0, points: 0 },
       awards: []
     },
     {
@@ -915,7 +937,6 @@ const SRDS = {
         uni2: "img/players/silvio-vermelho.png"
       },
       injury: null,
-      stats: { matches: 0, goals: 0, assists: 0, points: 0 },
       awards: []
     }
   ],
@@ -970,29 +991,70 @@ const SRDS = {
 };
 
 /* ============================================================
-   FUNÇÕES UTILITÁRIAS — não altere abaixo desta linha
+   FUNÇÕES UTILITÁRIAS v1.9 — não altere abaixo desta linha
    ============================================================ */
 
-/** Frequência do atleta: partidas jogadas / total de rodadas da temporada */
-function getFrequency(player) {
-  const total = SRDS.matches.length;
-  return total > 0 ? player.stats.matches / total : 0;
+/**
+ * Calcula stats de um jogador diretamente das partidas registradas.
+ * Retorna { matches, goals, assists, points }
+ * Atletas avulsos (guest) não são contabilizados aqui.
+ */
+function getComputedStats(playerId) {
+  let matches = 0, goals = 0, assists = 0, points = 0;
+  SRDS.matches.forEach(m => {
+    if (!m.result) return; // partidas não realizadas não contam
+    // Verifica se o jogador estava na escalação (não conta avulsos)
+    const inAzul = (m.teamAzul || []).includes(playerId);
+    const inVerm = (m.teamVermelho || []).includes(playerId);
+    if (!inAzul && !inVerm) return;
+    matches++;
+    // Pontos conforme resultado
+    const azulWin  = m.result.azul > m.result.vermelho;
+    const vermWin  = m.result.vermelho > m.result.azul;
+    const empate   = m.result.azul === m.result.vermelho;
+    if (empate) { points += 1; }
+    else if (inAzul && azulWin)  { points += 3; }
+    else if (inVerm && vermWin)  { points += 3; }
+    // Gols
+    (m.scorers || []).forEach(ev => {
+      if (ev.playerId === playerId) goals++;
+    });
+    // Assistências
+    (m.assists || []).forEach(ev => {
+      if (ev.playerId === playerId) assists++;
+    });
+  });
+  return { matches, goals, assists, points };
 }
 
 /**
- * Tabela de pontuação.
- * Critérios de desempate (em ordem):
- *   1. Pontos
- *   2. % de frequência (quem jogou proporcionalmente mais)
- *   3. G+A total
- *   4. Gols
- *   5. Nome (alfabético)
+ * Conta quantas vezes o jogador foi MVP na temporada.
+ */
+function getMvpCount(playerId) {
+  return SRDS.matches.filter(m => m.mvp === playerId).length;
+}
+
+/** Frequência do atleta: partidas jogadas / total de rodadas disputadas */
+function getFrequency(player) {
+  const disputadas = SRDS.matches.filter(m => m.result !== null).length;
+  if (disputadas === 0) return 0;
+  const cs = getComputedStats(player.id);
+  return cs.matches / disputadas;
+}
+
+/**
+ * Tabela de pontuação com stats calculados das partidas.
+ * Critérios de desempate: pontos → frequência → G+A → gols → nome
  */
 function getStandings() {
-  return [...SRDS.players].sort((a, b) => {
+  return [...SRDS.players].map(p => {
+    const cs = getComputedStats(p.id);
+    return { ...p, stats: cs };
+  }).sort((a, b) => {
     if (b.stats.points !== a.stats.points) return b.stats.points - a.stats.points;
-    const freqA = getFrequency(a);
-    const freqB = getFrequency(b);
+    const disputadas = SRDS.matches.filter(m => m.result !== null).length;
+    const freqA = disputadas > 0 ? a.stats.matches / disputadas : 0;
+    const freqB = disputadas > 0 ? b.stats.matches / disputadas : 0;
     if (Math.abs(freqB - freqA) > 0.0001) return freqB - freqA;
     const gaA = a.stats.goals + a.stats.assists;
     const gaB = b.stats.goals + b.stats.assists;
@@ -1003,40 +1065,34 @@ function getStandings() {
 }
 
 /**
- * Ranking de gols.
- * Critérios de desempate:
- *   1. Total de gols
- *   2. Média de gols por partida (quem fez o mesmo número em menos jogos)
- *   3. Nome (alfabético)
+ * Ranking de gols com desempate por média por partida.
  */
 function getGoalsRanking() {
-  return [...SRDS.players].sort((a, b) => {
-    if (b.stats.goals !== a.stats.goals) return b.stats.goals - a.stats.goals;
-    const avgA = a.stats.matches > 0 ? a.stats.goals / a.stats.matches : 0;
-    const avgB = b.stats.matches > 0 ? b.stats.goals / b.stats.matches : 0;
-    if (Math.abs(avgB - avgA) > 0.0001) return avgB - avgA;
-    return a.name.localeCompare(b.name, 'pt-BR');
-  });
+  return [...SRDS.players].map(p => ({ ...p, stats: getComputedStats(p.id) }))
+    .sort((a, b) => {
+      if (b.stats.goals !== a.stats.goals) return b.stats.goals - a.stats.goals;
+      const avgA = a.stats.matches > 0 ? a.stats.goals / a.stats.matches : 0;
+      const avgB = b.stats.matches > 0 ? b.stats.goals / b.stats.matches : 0;
+      if (Math.abs(avgB - avgA) > 0.0001) return avgB - avgA;
+      return a.name.localeCompare(b.name, 'pt-BR');
+    });
 }
 
 /**
- * Ranking de assistências.
- * Critérios de desempate:
- *   1. Total de assistências
- *   2. Média de assistências por partida
- *   3. Nome (alfabético)
+ * Ranking de assistências com desempate por média por partida.
  */
 function getAssistsRanking() {
-  return [...SRDS.players].sort((a, b) => {
-    if (b.stats.assists !== a.stats.assists) return b.stats.assists - a.stats.assists;
-    const avgA = a.stats.matches > 0 ? a.stats.assists / a.stats.matches : 0;
-    const avgB = b.stats.matches > 0 ? b.stats.assists / b.stats.matches : 0;
-    if (Math.abs(avgB - avgA) > 0.0001) return avgB - avgA;
-    return a.name.localeCompare(b.name, 'pt-BR');
-  });
+  return [...SRDS.players].map(p => ({ ...p, stats: getComputedStats(p.id) }))
+    .sort((a, b) => {
+      if (b.stats.assists !== a.stats.assists) return b.stats.assists - a.stats.assists;
+      const avgA = a.stats.matches > 0 ? a.stats.assists / a.stats.matches : 0;
+      const avgB = b.stats.matches > 0 ? b.stats.assists / b.stats.matches : 0;
+      if (Math.abs(avgB - avgA) > 0.0001) return avgB - avgA;
+      return a.name.localeCompare(b.name, 'pt-BR');
+    });
 }
 
-/** Jogadores em ordem alfabética (navegação de perfil) */
+/** Jogadores em ordem alfabética */
 function getAlphabetical() {
   return [...SRDS.players].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 }
@@ -1046,7 +1102,7 @@ function getPlayerById(id) {
   return SRDS.players.find(p => p.id === id) || null;
 }
 
-/** Calcula rank de um jogador por categoria */
+/** Calcula rank de um jogador nas três categorias */
 function getPlayerRanks(player) {
   const standings = getStandings();
   const goals     = getGoalsRanking();
@@ -1054,70 +1110,43 @@ function getPlayerRanks(player) {
   const findRank  = (arr, p) => arr.findIndex(x => x.id === p.id) + 1;
   return {
     points:  findRank(standings, player),
-    goals:   findRank(goals,     player),
-    assists: findRank(assists,   player)
+    goals:   findRank(goals, player),
+    assists: findRank(assists, player)
   };
 }
 
-/** Calcula médias do jogador */
+/** Calcula médias por partida do jogador (baseado nas partidas reais) */
 function getPlayerAverages(player) {
-  const m = player.stats.matches;
+  const cs = getComputedStats(player.id);
+  const m  = cs.matches;
   if (m === 0) return { goals: '0.00', assists: '0.00', participation: '0.00' };
   return {
-    goals:         (player.stats.goals / m).toFixed(2),
-    assists:       (player.stats.assists / m).toFixed(2),
-    participation: ((player.stats.goals + player.stats.assists) / m).toFixed(2)
+    goals:         (cs.goals / m).toFixed(2),
+    assists:       (cs.assists / m).toFixed(2),
+    participation: ((cs.goals + cs.assists) / m).toFixed(2)
   };
 }
 
-/**
- * Ordem de posições para escalação (ajuste 4).
- * Goleiro primeiro, centroavante por último.
- */
-const POSITION_ORDER = {
-  'goleiro':      1,
-  'fixo':         2,
-  'ala':          3,
-  'meia':         4,
-  'ponta':        5,
-  'centroavante': 6
-};
-
+/** Ordem das posições na escalação */
+const POSITION_ORDER = { 'goleiro':1, 'fixo':2, 'ala':3, 'meia':4, 'ponta':5, 'centroavante':6 };
 function positionRank(pos) {
   if (!pos) return 99;
   return POSITION_ORDER[pos.toLowerCase()] ?? 7;
 }
 
-/**
- * Resolve um item de escalação e retorna dados completos do jogador.
- * Guests retornam sem foto, número ou posição.
- */
+/** Resolve entrada da escalação para objeto { id, name, photo, number, position, posRank, isGuest } */
 function resolveLineupEntry(entry, team) {
   if (typeof entry === 'string') {
     const p = getPlayerById(entry);
     if (!p) return null;
     const photo  = team === 'azul' ? p.photo?.uni1  : p.photo?.uni2;
     const number = team === 'azul' ? p.number?.uni1 : p.number?.uni2;
-    return {
-      id:       p.id,
-      name:     p.name,
-      photo:    photo  || null,
-      number:   number ?? null,
-      position: p.position || null,
-      posRank:  positionRank(p.position),
-      isGuest:  false
-    };
+    return { id: p.id, name: p.name, photo: photo||null, number: number??null,
+             position: p.position||null, posRank: positionRank(p.position), isGuest: false };
   }
   if (entry && entry.guest) {
-    return {
-      id:       null,
-      name:     entry.name,
-      photo:    null,
-      number:   null,
-      position: null,
-      posRank:  99,
-      isGuest:  true
-    };
+    return { id: null, name: entry.name, photo: null, number: null,
+             position: null, posRank: 99, isGuest: true };
   }
   return null;
 }
@@ -1128,4 +1157,3 @@ function resolveEventName(event) {
   const p = getPlayerById(event.playerId);
   return p ? p.name : '?';
 }
-

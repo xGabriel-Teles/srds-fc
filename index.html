@@ -170,13 +170,19 @@
     renderFooter();
     document.getElementById('heroCrest').innerHTML = getCrestSVGFull();
     document.getElementById('aboutText').textContent = SRDS.club.about;
-    const totalGoals = SRDS.players.reduce((s, p) => s + p.stats.goals, 0);
-    const activeCount = SRDS.players.filter(p => p.stats.matches > 0).length;
+    // Stats calculados automaticamente das partidas (sem depender do campo stats dos jogadores)
+    const totalGoals = SRDS.matches.reduce((sum, m) => sum + (m.scorers || []).filter(s => s.playerId).length, 0);
+    const activeCount = new Set(
+      SRDS.matches.flatMap(m => [
+        ...(m.teamAzul   || []).filter(e => typeof e === 'string'),
+        ...(m.teamVermelho|| []).filter(e => typeof e === 'string')
+      ])
+    ).size;
     document.getElementById('aboutStats').innerHTML = [
       { value: SRDS.players.length, label: 'Atletas cadastrados' },
-      { value: activeCount, label: 'Jogaram em 2026' },
-      { value: SRDS.matches.length, label: 'Rodadas em 2026' },
-      { value: totalGoals, label: 'Gols na temporada' },
+      { value: activeCount,          label: 'Jogaram em 2026' },
+      { value: SRDS.matches.filter(m => m.result !== null).length, label: 'Rodadas em 2026' },
+      { value: totalGoals,           label: 'Gols na temporada' },
     ].map(s => `<div class="stat-box"><div class="stat-box-value">${s.value}</div><div class="stat-box-label">${s.label}</div></div>`).join('');
     document.getElementById('navCardsGrid').innerHTML = [
       { href: 'tabela.html', icon: '🏆', title: 'Tabela', desc: 'Rankeamento completo dos atletas na temporada 2026, com pontos, gols, assistências e G+A.' },

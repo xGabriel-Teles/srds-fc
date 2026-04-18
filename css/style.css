@@ -2128,3 +2128,217 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   margin-top: 2px;
 }
 
+
+/* ============================================================
+   v1.8 — WRAPPER DE RANKING (jogador.html)
+   ============================================================ */
+.profile-ranks-wrapper {
+  background: var(--azul-medio);
+  border: 1px solid var(--azul-borda);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.profile-ranks-label {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+.profile-ranks-wrapper .profile-ranks { gap: 8px; }
+.profile-ranks-wrapper .rank-indicator {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(45,79,115,0.5);
+}
+
+/* ============================================================
+   v1.8 — LOCATION COM ENDEREÇO (partida.html)
+   ============================================================ */
+.partida-location-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
+  padding: 8px 14px !important;
+  line-height: 1.4;
+}
+.location-venue {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--branco);
+}
+.location-address {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--cinza);
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color var(--transition);
+  display: block;
+}
+a.location-address:hover { color: var(--ouro); text-decoration: underline; }
+.location-maps-icon { font-size: 10px; }
+
+/* ============================================================
+   v1.8 — PRÓXIMA PARTIDA (partidas.html)
+   ============================================================ */
+.partida-card-next {
+  background: rgba(201,159,64,0.06);
+  border: 1.5px dashed rgba(201,159,64,0.4) !important;
+  border-radius: var(--radius);
+  position: relative;
+}
+.partida-card-next-badge {
+  display: inline-block;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(201,159,64,0.18);
+  color: var(--ouro-claro);
+  border: 1px solid rgba(201,159,64,0.35);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   v1.8 — BOTÃO EXPORTAR (partida.html)
+   ============================================================ */
+#btnExportar:hover { opacity: 0.88; }
+#btnExportar:active { transform: scale(0.97); }
+
+/* ============================================================
+   v1.8 — INSTAGRAM / REDES SOCIAIS (index.html)
+   ============================================================ */
+.insta-cta {
+  display: flex; align-items: center; gap: 20px;
+  background: linear-gradient(135deg, rgba(131,58,180,0.12) 0%, rgba(253,29,29,0.08) 50%, rgba(252,176,69,0.1) 100%);
+  border: 1px solid rgba(201,159,64,0.25); border-radius: var(--radius);
+  padding: 20px 24px; margin-bottom: 28px;
+  transition: all var(--transition); text-decoration: none; position: relative; overflow: hidden;
+}
+.insta-cta:hover { border-color: rgba(201,159,64,0.5); transform: translateY(-2px); }
+.insta-cta-icon {
+  width: 64px; height: 64px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  border-radius: 18px; padding: 14px; color: #fff;
+}
+.insta-cta-icon svg { width: 100%; height: 100%; }
+.insta-cta-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.insta-cta-handle { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.06em; color: var(--branco); line-height: 1; }
+.insta-cta-label { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cinza); }
+.insta-cta-arrow { font-size: 22px; color: var(--ouro); flex-shrink: 0; transition: transform var(--transition); }
+.insta-cta:hover .insta-cta-arrow { transform: translateX(4px); }
+
+.social-kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px; }
+.social-kpi { background: var(--azul-medio); border: 1px solid var(--azul-borda); border-radius: var(--radius); padding: 16px 14px; text-align: center; transition: border-color var(--transition); }
+.social-kpi:hover { border-color: var(--ouro-escuro); }
+.social-kpi-value { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--ouro); line-height: 1; margin-bottom: 4px; }
+.social-kpi-label { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cinza); }
+
+.social-insights { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.social-insight { display: flex; align-items: flex-start; gap: 16px; background: var(--azul-medio); border: 1px solid var(--azul-borda); border-radius: var(--radius); padding: 18px 20px; transition: border-color var(--transition); }
+.social-insight:hover { border-color: var(--ouro-escuro); }
+.social-insight-emoji { font-size: 28px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.social-insight-body { display: flex; flex-direction: column; gap: 6px; }
+.social-insight-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.04em; color: var(--ouro-claro); line-height: 1.1; }
+.social-insight-body p { font-family: 'Barlow', sans-serif; font-size: 14px; color: rgba(240,244,248,0.72); line-height: 1.6; margin: 0; }
+.social-footer-note { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 11px; color: var(--cinza-escuro); margin-top: 4px; }
+
+/* ============================================================
+   v1.8 — NAV CARDS (index.html)
+   ============================================================ */
+.nav-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.nav-card { display: flex; flex-direction: column; gap: 10px; background: var(--azul-medio); border: 1px solid var(--azul-borda); border-radius: var(--radius); padding: 22px 20px; text-decoration: none; transition: all var(--transition); }
+.nav-card:hover { border-color: var(--ouro-escuro); background: rgba(30,53,80,0.95); transform: translateY(-3px); box-shadow: var(--sombra-ouro); }
+.nav-card-icon { font-size: 28px; line-height: 1; }
+.nav-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.06em; color: var(--ouro); line-height: 1; }
+.nav-card-desc { font-family: 'Barlow', sans-serif; font-size: 13px; color: var(--cinza); line-height: 1.6; flex: 1; }
+.nav-card-btn { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ouro-claro); margin-top: 4px; }
+.nav-card:hover .nav-card-btn { letter-spacing: 0.14em; }
+
+/* ============================================================
+   v1.8 — LESÃO (perfil do jogador)
+   ============================================================ */
+.ranking-injury-tag { font-size: 14px; margin-left: 6px; vertical-align: middle; }
+.injury-banner { display: flex; align-items: flex-start; gap: 14px; background: rgba(158,46,70,0.12); border: 1px solid rgba(158,46,70,0.35); border-left: 3px solid #b83a56; border-radius: var(--radius); padding: 14px 18px; margin-top: 4px; }
+.injury-banner-icon { font-size: 26px; line-height: 1; flex-shrink: 0; }
+.injury-banner-info { display: flex; flex-direction: column; gap: 3px; }
+.injury-banner-label { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e4738a; }
+.injury-banner-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.04em; color: var(--branco); line-height: 1.1; }
+.injury-banner-return { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 13px; color: var(--cinza); }
+.injury-banner-return strong { color: #e4738a; font-weight: 600; }
+
+/* ============================================================
+   v1.8 — APROVEITAMENTO & FREQUÊNCIA (jogador.html)
+   ============================================================ */
+.performance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 400px) { .performance-grid { grid-template-columns: 1fr; } }
+.perf-card { background: var(--azul-medio); border: 1px solid var(--azul-borda); border-radius: var(--radius); padding: 18px 16px; text-align: center; transition: border-color var(--transition); display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.perf-card.freq-green { background: rgba(16,60,30,0.55); border-color: rgba(30,120,55,0.45); }
+.perf-card.freq-green .perf-value { color: #5ecf82; }
+.perf-card.freq-yellow { background: rgba(80,65,10,0.45); border-color: rgba(180,150,20,0.35); }
+.perf-card.freq-yellow .perf-value { color: #d4b84a; }
+.perf-card.freq-red { background: rgba(80,18,30,0.5); border-color: rgba(158,46,70,0.35); }
+.perf-card.freq-red .perf-value { color: #e4738a; }
+.perf-icon { font-size: 22px; line-height: 1; margin-bottom: 4px; }
+.perf-value { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--ouro-claro); line-height: 1; }
+.perf-label { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cinza); }
+.perf-sub { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 12px; color: var(--cinza-escuro); margin-top: 2px; }
+
+
+/* ============================================================
+   v1.9 — LOCATION NOS CARDS DE PARTIDAS
+   ============================================================ */
+.partida-location-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.partida-location-venue {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--branco);
+}
+.partida-location-addr {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--branco);
+  text-decoration: none;
+  padding-left: 4px;
+  display: block;
+  transition: color var(--transition);
+  opacity: 0.75;
+}
+a.partida-location-addr:hover { color: var(--ouro); opacity: 1; text-decoration: underline; }
+
+/* ============================================================
+   v1.9 — MVP COUNT BADGE nos prêmios
+   ============================================================ */
+.award-card-mvp {
+  border-color: rgba(201,159,64,0.35);
+  background: rgba(201,159,64,0.06);
+}
+.mvp-count-badge {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  color: var(--azul);
+  background: var(--ouro);
+  padding: 1px 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+

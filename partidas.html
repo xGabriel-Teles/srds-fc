@@ -103,7 +103,19 @@
           ${m.time ? `<span class="partida-time">${m.time}</span>` : ''}
         </div>
       </div>
-      ${m.location ? `<div class="partida-location">📍 ${m.location}</div>` : ''}
+      ${m.location ? (() => {
+        const isObj   = typeof m.location === 'object' && m.location !== null;
+        const venue   = isObj ? m.location.venue   : m.location;
+        const address = isObj ? m.location.address : null;
+        const mapsUrl = address ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address) : null;
+        return `<div class="partida-location-card">
+          <span class="partida-location-venue">📍 ${venue}</span>
+          ${address ? (mapsUrl
+            ? `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="partida-location-addr" onclick="event.stopPropagation()">🗺 ${address}</a>`
+            : `<span class="partida-location-addr">🗺 ${address}</span>`)
+          : ''}
+        </div>`;
+      })() : ''}
       ${scoreLine}
       ${hasDetails ? `<div class="partida-link">Ver detalhes →</div>` : ''}
     `;
@@ -112,6 +124,29 @@
       }
       grid.appendChild(card);
     });
+
+    // ── Próxima partida ──
+    if (SRDS.nextMatch) {
+      const nx = SRDS.nextMatch;
+      const nxCard = document.createElement('div');
+      nxCard.className = 'partida-card partida-card-next';
+      const nxVenue = nx.location
+        ? (typeof nx.location === 'object' ? nx.location.venue : nx.location)
+        : null;
+      nxCard.innerHTML = `
+        <div class="partida-card-next-badge">Próxima partida</div>
+        <div class="partida-card-top" style="margin-top:6px;">
+          <div class="partida-round">Rodada ${nx.round}</div>
+          <div class="partida-date-info">
+            <span class="partida-date">${nx.date}</span>
+            ${nx.time ? `<span class="partida-time">${nx.time}</span>` : ''}
+          </div>
+        </div>
+        ${nxVenue ? `<div class="partida-location">📍 ${nxVenue}</div>` : ''}
+        <div class="partida-score-pending" style="color:var(--ouro-claro);font-style:normal;">A realizar</div>
+      `;
+      grid.appendChild(nxCard);
+    }
   </script>
 </body>
 

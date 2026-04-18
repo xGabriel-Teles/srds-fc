@@ -96,9 +96,10 @@
     renderFooter();
 
     // ── Get player from URL ──
-    const params = new URLSearchParams(window.location.search);
-    const playerId = params.get('id');
-    const player = getPlayerById(playerId);
+    const params   = new URLSearchParams(window.location.search);
+    const rawId    = params.get('id') || '';
+    const playerId = /^[a-z0-9\-]{1,60}$/.test(rawId) ? rawId : '';
+    const player   = getPlayerById(playerId);
 
     if (!player) {
       document.querySelector('.player-profile-page').innerHTML = `
@@ -229,7 +230,10 @@
               ${p.injury.returnDate ? `<div class="injury-banner-return">Previsão de retorno: <strong>${p.injury.returnDate}</strong></div>` : '<div class="injury-banner-return">Previsão de retorno: a definir</div>'}
             </div>
           </div>` : ''}
-        <div class="profile-ranks">${rankItems}</div>
+        <div class="profile-ranks-wrapper">
+          <div class="profile-ranks-label">📊 Posição nos rankings</div>
+          <div class="profile-ranks">${rankItems}</div>
+        </div>
       </div>
     `;
 
@@ -239,12 +243,14 @@
         container.classList.toggle('flipped');
       });
 
-      // ── Stats grid ──
+      // ── Stats automáticos baseados nas partidas registradas ──
+      const cs = getComputedStats(p.id);
+
       const stats = [
-        { value: p.stats.matches, label: 'Partidas Jogadas' },
-        { value: p.stats.goals, label: 'Gols' },
-        { value: p.stats.assists, label: 'Assistências' },
-        { value: p.stats.points, label: 'Pontos' },
+        { value: cs.matches,  label: 'Partidas Jogadas' },
+        { value: cs.goals,    label: 'Gols' },
+        { value: cs.assists,  label: 'Assistências' },
+        { value: cs.points,   label: 'Pontos' },
       ];
       document.getElementById('statsGrid').innerHTML = stats.map(s => `
       <div class="profile-stat-card">
@@ -253,51 +259,69 @@
       </div>
     `).join('');
 
-      // ── Averages ──
-      const averagesData = [
-        { value: avgs.goals, label: 'Gols/Partida' },
-        { value: avgs.assists, label: 'Assist./Partida' },
-        { value: avgs.participation, label: 'Participação/Partida' },
-      ];
-      document.getElementById('averagesGrid').innerHTML = averagesData.map(a => `
+      // ── Médias (baseadas nos stats automáticos) ──
+      const m_cs = cs.matches;
+      const avgGoals   = m_cs > 0 ? (cs.goals   / m_cs).toFixed(2) : '0.00';
+      const avgAssists = m_cs > 0 ? (cs.assists  / m_cs).toFixed(2) : '0.00';
+      const avgPartic  = m_cs > 0 ? ((cs.goals + cs.assists) / m_cs).toFixed(2) : '0.00';
+      document.getElementById('averagesGrid').innerHTML = [
+        { value: avgGoals,   label: 'Gols/Partida' },
+        { value: avgAssists, label: 'Assist./Partida' },
+        { value: avgPartic,  label: 'Participação/Partida' },
+      ].map(a => `
       <div class="avg-card">
         <div class="avg-value">${a.value}</div>
         <div class="avg-label">${a.label}</div>
       </div>
     `).join('');
 
-      // ── Aproveitamento e Frequência ──
-      const totalRodadas = SRDS.matches.length;
-      const maxPontos = p.stats.matches * 3;
-      const aprovPct = maxPontos > 0 ? Math.round((p.stats.points / maxPontos) * 100) : 0;
-      const freqPct = totalRodadas > 0 ? Math.round((p.stats.matches / totalRodadas) * 100) : 0;
+      // ── Aproveitamento e Frequência (automáticos) ──
+      const rodadasDisputadas = SRDS.matches.filter(m => m.result !== null).length;
+      const maxPontos = cs.matches * 3;
+      const aprovPct  = maxPontos > 0 ? Math.round((cs.points / maxPontos) * 100) : 0;
+      const freqPct   = rodadasDisputadas > 0 ? Math.round((cs.matches / rodadasDisputadas) * 100) : 0;
 
-      // Cor do card de frequência
       let freqClass = 'freq-red';
-      if (freqPct > 75) freqClass = 'freq-green';
-      else if (freqPct > 50) freqClass = 'freq-yellow';
+      if (freqPct >= 66) freqClass = 'freq-green';
+      else if (freqPct >= 41) freqClass = 'freq-yellow';
 
       document.getElementById('performanceGrid').innerHTML = `
       <div class="perf-card">
         <div class="perf-icon">🏅</div>
         <div class="perf-value">${aprovPct}%</div>
         <div class="perf-label">Aproveitamento</div>
-        <div class="perf-sub">${p.stats.points} pts em ${maxPontos} possíveis</div>
+        <div class="perf-sub">${cs.points} pts em ${maxPontos} possíveis</div>
       </div>
       <div class="perf-card ${freqClass}">
         <div class="perf-icon">📅</div>
         <div class="perf-value">${freqPct}%</div>
         <div class="perf-label">Frequência</div>
-        <div class="perf-sub">${p.stats.matches} de ${totalRodadas} rodadas</div>
+        <div class="perf-sub">${cs.matches} de ${rodadasDisputadas} rodadas</div>
       </div>
     `;
 
-      // ── Awards ──
-      const awardsEl = document.getElementById('awardsGrid');
-      if (p.awards.length === 0) {
+      // ── Prêmios + MVP count ──
+      const awardsEl  = document.getElementById('awardsGrid');
+      const mvpCount  = getMvpCount(p.id);
+      const allAwards = [...(p.awards || [])];
+
+      // Adiciona card de MVP da temporada se houver
+      let mvpAwardHtml = '';
+      if (mvpCount > 0) {
+        mvpAwardHtml = `
+        <div class="award-card award-card-mvp">
+          <div class="award-icon">🏆</div>
+          <div class="award-info">
+            <div class="award-title">MVP da Partida${mvpCount > 1 ? ' <span class="mvp-count-badge">' + mvpCount + 'x</span>' : ''}</div>
+            <div class="award-year">Temporada 2026</div>
+          </div>
+        </div>`;
+      }
+
+      if (allAwards.length === 0 && mvpCount === 0) {
         awardsEl.innerHTML = `<p class="no-awards">Nenhum prêmio individual registrado ainda.</p>`;
       } else {
-        awardsEl.innerHTML = p.awards.map(a => `
+        awardsEl.innerHTML = mvpAwardHtml + allAwards.map(a => `
         <div class="award-card">
           <div class="award-icon">${a.icon}</div>
           <div class="award-info">
