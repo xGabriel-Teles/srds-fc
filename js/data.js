@@ -294,7 +294,7 @@ const SRDS = {
       result: { azul: 2, vermelho: 4 },
       mvp: "weslley",
       teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago", "vander", "krigor", "adler", "rodrigo-p", "marcelo"],
-      teamVermelho: ["silvio", "milica","chico",{guest: true, name: "Rafael"},"wesley", "erig", {guest: true, name: "Jhon"}, "jean", "weslley", {guest: true, name: "Anderson"}],
+      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "jean", "weslley", {guest: true, name: "Anderson"}],
       scorers: [
         { playerId: "weslley", team: "azul" },
         { playerId: "weslley", team: "azul" },
