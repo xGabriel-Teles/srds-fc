@@ -21,7 +21,19 @@
  *
  *   teamAzul / teamVermelho → array com IDs dos jogadores:
  *     - Jogador do elenco: "gabriel"  (usa o id do jogador)
- *     - Atleta avulso:    { guest: true, name: "Nome do Avulso" }
+ *     - Atleta avulso:    { guest: true, name: "Nome", position: "Ala", number: 0 }
+ *
+ *       Exemplos de avulso completo:
+ *         { guest: true, name: "Anderson", position: "Fixo", number: 333 }
+ *         { guest: true, name: "Carlos",   position: "Ala",  number: 20  }
+ *         { guest: true, name: "Rafael",   position: "Ala",  number: 0   }
+ *
+ *       Números disponíveis para avulsos: 0, 20 ou 333
+ *                          position e number são opcionais para avulsos.
+ *                          Números disponíveis para avulsos: 0, 20, 333
+ *                          Posições válidas: Goleiro, Fixo, Ala, Meia, Ponta, Centroavante
+ *                          Avulsos entram na ordem de posição da escalação igual aos demais.
+ *                          Foto padrão: img/players/jogador-avulso.png (mesma para todos)
  *
  *   scorers → gols da partida:
  *     - Jogador do elenco: { playerId: "marcelo", team: "azul" }
@@ -71,8 +83,8 @@ const SRDS = {
       location: { venue: "Soccer City", address: "R. Lauro Müller, 700 - Navegantes, Porto Alegre - RS" },
       result: { azul: 5, vermelho: 6 },
       mvp: "vinicius",
-      teamAzul: ["miliquinha", "germano", "alemao", "iago", "adler", "vander", "krigor", {guest: true, name: "Daniel"}, "everson", "rodrigo-p"],
-      teamVermelho: ["vinicius", "cabelo", "biro", {guest: true, name: "Rafael Nascimento"}, {guest: true, name: "Diego"}, "gabriel", "rafael-isco", "marcelo", "augusto"],
+      teamAzul: ["miliquinha", "germano", "alemao", "iago", "adler", "vander", "krigor", {guest: true, name: "Daniel", position: "Meia", number: 0}, "everson", "rodrigo-p"],
+      teamVermelho: ["vinicius", "cabelo", "biro", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 20}, {guest: true, name: "Diego", position: "Meia", number: 333}, "gabriel", "rafael-isco", "marcelo", "augusto"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
@@ -129,7 +141,7 @@ const SRDS = {
       result: { azul: 14, vermelho: 3 },
       mvp: "giovane",
       teamAzul: ["edu", "milica","gabriel", "alexandre", "jean", "giovane", "vander", "rodrigo-costa", "rodrigo-p"],
-      teamVermelho: [{guest: true, name: "Rafael"}, "biro", "erig", "adler", "everson", "wesley", "krigor", "valdir", "augusto", "marcelo"],
+      teamVermelho: [{guest: true, name: "Rafael", position: "Goleiro", number: 20}, "biro", "erig", "adler", "everson", "wesley", "krigor", "valdir", "augusto", "marcelo"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
@@ -168,7 +180,7 @@ const SRDS = {
       result: { azul: 12, vermelho: 6 },
       mvp: "rodrigo-p",
       teamAzul: ["vinicius", "germano","alexandre", "iago","cabelo", "rafael-isco", "augusto", "valdir", "weslley", "rodrigo-p"],
-      teamVermelho: ["miliquinha", "alemao", "milica", "gustavo", "vander", "adler", {guest: true, name: "Leo"}, "gabriel", "alef", "marcelo"],
+      teamVermelho: ["miliquinha", "alemao", "milica", "gustavo", "vander", "adler", {guest: true, name: "Leo", position: "Meia", number: 20}, "gabriel", "alef", "marcelo"],
       scorers: [
         { playerId: "iago", team: "azul" },
         { playerId: "iago", team: "azul" },
@@ -210,8 +222,8 @@ const SRDS = {
       location: { venue: "Complexo 4º Distrito", address: "R. Conde de Porto Alegre, 61 - Floresta, Porto Alegre - RS" },
       result: { azul: 7, vermelho: 3 },
       mvp: "marcelo",
-      teamAzul: ["edu", "germano","erig", "biro","adler", "gabriel", "wesley", "alef", "marcelo", {guest: true, name: "Nine"}],
-      teamVermelho: ["vinicius", "milica", "thiago","cabelo", "alexandre", "jean", "valdir", "everson", "rodrigo-p",  {guest: true, name: "Adriel"}],
+      teamAzul: ["edu", "germano","erig", "biro","adler", "gabriel", "wesley", "alef", "marcelo", {guest: true, name: "Nine", position: "Ponta", number: 20}],
+      teamVermelho: ["vinicius", "milica", "thiago","cabelo", "alexandre", "jean", "valdir", "everson", "rodrigo-p",  { guest: true, name: "Adriel", position: "Meia", number: 0 }],
       scorers: [
         { playerId: "alef", team: "azul" },
         { playerId: "gabriel", team: "azul" },
@@ -294,21 +306,21 @@ const SRDS = {
       result: { azul: 2, vermelho: 4 },
       mvp: "weslley",
       teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago", "vander", "krigor", "adler", "rodrigo-p", "marcelo"],
-      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "jean", "weslley", {guest: true, name: "Anderson"}],
+      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "jean", "weslley", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
       scorers: [
-        { playerId: "weslley", team: "vermelho" },
-        { playerId: "weslley", team: "vermelho" },
-        { playerId: "weslley", team: "vermelho" },
-        { playerId: "erig", team: "vermelho" },
-        { playerId: "marcelo", team: "azul" },
-        { playerId: "adler", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "adler", team: "vermelho" },
       ],
       assists: [
-        { playerId: "wesley", team: "vermelho" },
-        { playerId: "jean", team: "vermelho" },
-        { playerId: "chico", team: "vermelho" },
-        { playerId: "milica", team: "vermelho" },
-        { playerId: "rodrigo-p", team: "azul" }
+        { playerId: "wesley", team: "azul" },
+        { playerId: "jean", team: "azul" },
+        { playerId: "chico", team: "azul" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "rodrigo-p", team: "vermelho" }
       ]
     },
   ],
@@ -931,7 +943,7 @@ const SRDS = {
       name: "Silvio",
       fullName: "Silvio Gerhard",
       nickname: null,
-      number: { uni1: null, uni2: null },
+      number: { uni1: 13, uni2: 13 },
       position: "Goleiro",
       foot: "Direito",
       age: 41,
@@ -1148,8 +1160,16 @@ function resolveLineupEntry(entry, team) {
              position: p.position||null, posRank: positionRank(p.position), isGuest: false };
   }
   if (entry && entry.guest) {
-    return { id: null, name: entry.name, photo: null, number: null,
-             position: null, posRank: 99, isGuest: true };
+    // Foto padrão para todos os atletas avulsos
+    const guestPhoto = team === 'azul'
+      ? 'img/players/jogador-avulso.png'
+      : 'img/players/jogador-avulso.png';
+    // Foto única se não houver versão por uniforme (fallback)
+    const photo = guestPhoto;
+    const pos   = entry.position || null;
+    const num   = entry.number   ?? null;
+    return { id: null, name: entry.name, photo, number: num,
+             position: pos, posRank: positionRank(pos), isGuest: true };
   }
   return null;
 }

@@ -103,25 +103,27 @@
       </nav>`;
 
       /* ── Meta info ── */
-      const metaItems = [];
-      if (m.date) metaItems.push(`<span class="partida-detail-meta-item">📅 ${m.date}</span>`);
-      if (m.time) metaItems.push(`<span class="partida-detail-meta-item">🕐 ${m.time}</span>`);
+      // Meta: pills de data e hora (mesma altura), local como bloco separado abaixo
+      const metaPills = [];
+      if (m.date) metaPills.push(`<span class="partida-detail-meta-item">📅 ${m.date}</span>`);
+      if (m.time) metaPills.push(`<span class="partida-detail-meta-item">🕐 ${m.time}</span>`);
+
+      let locBlockHtml = '';
       if (m.location) {
-        const isObj    = typeof m.location === 'object' && m.location !== null;
-        const venue    = isObj ? m.location.venue    : m.location;
-        const address  = isObj ? m.location.address  : null;
-        const mapsUrl  = address
+        const isObj   = typeof m.location === 'object' && m.location !== null;
+        const venue   = isObj ? m.location.venue   : m.location;
+        const address = isObj ? m.location.address : null;
+        const mapsUrl = address
           ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address)
           : null;
-        let locHtml = `<span class="partida-detail-meta-item partida-location-block">
-          <span class="location-venue">📍 ${venue}</span>`;
-        if (address) {
-          locHtml += mapsUrl
-            ? `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="location-address">${address} <span class="location-maps-icon">↗</span></a>`
-            : `<span class="location-address">${address}</span>`;
+        locBlockHtml = `<div class="partida-location-row">
+          <span class="partida-location-row-venue">📍 ${venue}</span>`;
+        if (address && mapsUrl) {
+          locBlockHtml += `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="partida-location-row-addr">${address} ↗</a>`;
+        } else if (address) {
+          locBlockHtml += `<span class="partida-location-row-addr">${address}</span>`;
         }
-        locHtml += `</span>`;
-        metaItems.push(locHtml);
+        locBlockHtml += `</div>`;
       }
 
       /* ── Placar (ajuste 5: ambos os nomes acima, vencedor realçado com efeito dourado) ── */
@@ -252,7 +254,8 @@
           <span class="section-meta">Temporada 2026</span>
         </div>
         <div class="gold-line"></div>
-        <div class="partida-detail-meta">${metaItems.join('')}</div>
+        <div class="partida-detail-meta">${metaPills.join('')}</div>
+        ${locBlockHtml}
       </div>
 
       <div style="margin:28px 0;">
@@ -347,27 +350,24 @@
     }
   </script>
 
-  <!-- ── Script de exportação de arte v1.9.3 ── -->
+  <!-- ── Script de exportação de arte v1.10 ── -->
   <script>
   function exportarArte() {
     if (!match) { alert('Nenhuma partida carregada.'); return; }
     const m = match;
 
-    // ── Feedback visual no botão ──
     const btn = document.getElementById('btnExportar');
     const resetBtn = () => { if (btn) { btn.innerHTML = '📤 Exportar arte'; btn.disabled = false; } };
     if (btn) { btn.textContent = '⏳ Gerando arte...'; btn.disabled = true; }
 
     // ── Helpers de dados ──
     const playerName = id => { const p = getPlayerById(id); return p ? p.name : id; };
-
     const locationFull = () => {
       if (!m.location) return '';
       if (typeof m.location === 'object')
         return m.location.venue + (m.location.address ? ' · ' + m.location.address : '');
       return m.location;
     };
-
     const buildPartic = (scorers, assists) => {
       const map = new Map();
       (scorers || []).forEach(ev => {
@@ -384,7 +384,6 @@
       });
       return [...map.values()];
     };
-
     const lineupNames = arr => {
       if (!arr || !arr.length) return [];
       return arr.map(e => {
@@ -395,12 +394,12 @@
     };
 
     const partAzul = buildPartic(
-      (m.scorers || []).filter(s => s.team === 'azul'),
-      (m.assists || []).filter(s => s.team === 'azul')
+      (m.scorers||[]).filter(s=>s.team==='azul'),
+      (m.assists||[]).filter(s=>s.team==='azul')
     );
     const partVerm = buildPartic(
-      (m.scorers || []).filter(s => s.team === 'vermelho'),
-      (m.assists || []).filter(s => s.team === 'vermelho')
+      (m.scorers||[]).filter(s=>s.team==='vermelho'),
+      (m.assists||[]).filter(s=>s.team==='vermelho')
     );
     const azulNames = lineupNames(m.teamAzul);
     const vermNames = lineupNames(m.teamVermelho);
@@ -409,8 +408,7 @@
     const mvpPhotoSrc = mvpPlayer ? (mvpPlayer.photo?.uni1 || mvpPlayer.photo?.uni2 || null) : null;
     const sponsorList = (SRDS.sponsors || []).filter(s => s.logo);
 
-    // ── Carrega imagem com new Image() simples (same-origin = sem CORS issue) ──
-    // NÃO usar crossOrigin='anonymous' para imagens locais — isso causa taint desnecessário.
+    // ── Carrega imagens (same-origin, sem crossOrigin) ──
     function loadImg(src) {
       return new Promise(resolve => {
         if (!src) { resolve(null); return; }
@@ -421,12 +419,10 @@
       });
     }
 
-    // Monta lista de imagens a carregar
     const toLoad = [{ key: 'logo', src: 'img/logo/logo-srds2.png' }];
     if (mvpPhotoSrc) toLoad.push({ key: 'mvp', src: mvpPhotoSrc });
     sponsorList.forEach((s, i) => toLoad.push({ key: 'sp_' + i, src: s.logo }));
 
-    // Carrega tudo em paralelo, aguarda todas (mesmo as que falharem)
     Promise.all(toLoad.map(({ key, src }) =>
       loadImg(src).then(img => ({ key, img }))
     )).then(results => {
@@ -435,7 +431,6 @@
       renderCanvas(cache);
     });
 
-    // ── Renderização completamente síncrona ──
     function renderCanvas(cache) {
       try {
         const W = 1080, H = 1440;
@@ -459,15 +454,32 @@
         };
         const rRect = (x, y, w, h, r) => {
           ctx.beginPath();
-          ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
-          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-          ctx.lineTo(x + w, y + h - r);
-          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-          ctx.lineTo(x + r, y + h);
-          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-          ctx.lineTo(x, y + r);
-          ctx.quadraticCurveTo(x, y, x + r, y);
-          ctx.closePath();
+          ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+          ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+          ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+          ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+        };
+
+        // Função para desenhar imagem quadrada com object-fit: cover
+        const drawImgCover = (img, x, y, w, h) => {
+          if (!img) return;
+          const imgRatio  = img.naturalWidth / img.naturalHeight;
+          const boxRatio  = w / h;
+          let sx, sy, sw, sh;
+          if (imgRatio > boxRatio) {
+            // imagem mais larga — corta lados
+            sh = img.naturalHeight;
+            sw = sh * boxRatio;
+            sx = (img.naturalWidth - sw) / 2;
+            sy = 0;
+          } else {
+            // imagem mais alta — corta topo/baixo
+            sw = img.naturalWidth;
+            sh = sw / boxRatio;
+            sx = 0;
+            sy = (img.naturalHeight - sh) / 2;
+          }
+          ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
         };
 
         // ── Fundo ──
@@ -478,20 +490,21 @@
         ctx.fillStyle = grad; ctx.fillRect(0, 0, W, 350);
         ctx.fillStyle = C.ouro; ctx.fillRect(0, 0, W, 5);
 
-        // ── Logos do clube nos dois cantos superiores ──
+        // ── Logos do clube nos dois cantos — 25% maiores (92px → ~115px) ──
+        const LOGO_SIZE = 92; // era 74
         const clubLogo = cache['logo'];
         if (clubLogo) {
-          ctx.drawImage(clubLogo, 20, 14, 74, 74);
-          ctx.drawImage(clubLogo, W - 94, 14, 74, 74);
+          ctx.drawImage(clubLogo, 16, 12, LOGO_SIZE, LOGO_SIZE);
+          ctx.drawImage(clubLogo, W - LOGO_SIZE - 16, 12, LOGO_SIZE, LOGO_SIZE);
         }
 
         // ── Cabeçalho ──
-        cTxt('SRDS FC', 68, 'bold 60px "Barlow Semi Condensed", sans-serif', C.ouro);
-        cTxt('Rodada ' + m.round + ' · Temporada 2026', 104, '500 25px "Barlow Semi Condensed", sans-serif', C.cinza);
-        sep(122, 0.35);
+        cTxt('SRDS FC', 72, 'bold 62px "Barlow Semi Condensed", sans-serif', C.ouro);
+        cTxt('Rodada ' + m.round + ' · Temporada 2026', 108, '500 26px "Barlow Semi Condensed", sans-serif', C.cinza);
+        sep(126, 0.35);
 
         // ── Info da partida ──
-        let infoY = 156;
+        let infoY = 160;
         if (m.date) {
           cTxt('📅 ' + m.date + (m.time ? '  ·  🕐 ' + m.time : ''),
             infoY, '500 24px "Barlow Semi Condensed", sans-serif', C.ouroCl);
@@ -514,85 +527,89 @@
 
           ctx.font = 'bold 26px "Barlow Semi Condensed", sans-serif';
           ctx.fillStyle = C.azulT; ctx.textAlign = 'center';
-          ctx.fillText('TIME AZUL',   270,      placY);
+          ctx.fillText('TIME AZUL',   270,    placY);
           ctx.fillStyle = C.vermT;
-          ctx.fillText('TIME VERM.', W - 270,   placY);
+          ctx.fillText('TIME VERM.', W-270,   placY);
 
           ctx.font = 'bold 128px "Barlow Semi Condensed", sans-serif';
           ctx.fillStyle = azulWin ? C.ouroCl : C.cinzaE; ctx.textAlign = 'center';
-          ctx.fillText(String(m.result.azul),       270,      placY + 118);
+          ctx.fillText(String(m.result.azul),       270,    placY+118);
           ctx.fillStyle = vermWin ? C.ouroCl : C.cinzaE;
-          ctx.fillText(String(m.result.vermelho), W - 270,    placY + 118);
-
+          ctx.fillText(String(m.result.vermelho), W-270,    placY+118);
           ctx.font = '300 54px "Barlow Semi Condensed", sans-serif';
           ctx.fillStyle = C.cinzaE;
-          ctx.fillText('×', W / 2, placY + 98);
-          if (empate) cTxt('Empate', placY + 136, '500 21px "Barlow Semi Condensed", sans-serif', C.cinza);
+          ctx.fillText('×', W/2, placY+98);
+          if (empate) cTxt('Empate', placY+136, '500 21px "Barlow Semi Condensed", sans-serif', C.cinza);
 
           afterPlacar = placY + 148;
 
-          // ── MVP com foto ──
+          // ── MVP: foto quadrada com object-fit cover ──
           if (mvpPlayer) {
-            const mvpBY = placY + 143;
-            const mvpBW = 500, mvpBH = 106, mvpBX = (W - mvpBW) / 2;
+            const mvpBY  = placY + 143;
+            const mvpBW  = 520, mvpBH = 110, mvpBX = (W - mvpBW) / 2;
 
+            // Container dourado
             ctx.fillStyle = 'rgba(201,159,64,0.12)';
             rRect(mvpBX, mvpBY, mvpBW, mvpBH, 12); ctx.fill();
             ctx.strokeStyle = 'rgba(201,159,64,0.45)'; ctx.lineWidth = 1.5;
             rRect(mvpBX, mvpBY, mvpBW, mvpBH, 12); ctx.stroke();
 
-            const mvpImg = cache['mvp'];
-            let tOffX = 0;
+            const mvpImg  = cache['mvp'];
+            const FOTO_SZ = 90; // quadrado
+            const FOTO_X  = mvpBX + 10;
+            const FOTO_Y  = mvpBY + (mvpBH - FOTO_SZ) / 2;
+            let   tOffX   = 0;
 
             if (mvpImg) {
-              const cx = mvpBX + 52, cy = mvpBY + 53, r = 40;
+              // clip quadrado com cantos arredondados
+              const r = 8;
               ctx.save();
-              ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
-              ctx.drawImage(mvpImg, cx - r, cy - r, r * 2, r * 2);
+              rRect(FOTO_X, FOTO_Y, FOTO_SZ, FOTO_SZ, r); ctx.clip();
+              drawImgCover(mvpImg, FOTO_X, FOTO_Y, FOTO_SZ, FOTO_SZ);
               ctx.restore();
-              ctx.strokeStyle = C.ouro; ctx.lineWidth = 2.5;
-              ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
-              tOffX = 96;
+              // borda dourada
+              ctx.strokeStyle = C.ouro; ctx.lineWidth = 2;
+              rRect(FOTO_X, FOTO_Y, FOTO_SZ, FOTO_SZ, r); ctx.stroke();
+              tOffX = FOTO_SZ + 14;
             }
 
+            // Troféu + nome
             const tX = mvpBX + tOffX + 14;
-            ctx.font = 'bold 44px "Barlow Semi Condensed", sans-serif';
+            ctx.font = 'bold 40px "Barlow Semi Condensed", sans-serif';
             ctx.fillStyle = C.ouro; ctx.textAlign = 'left';
-            ctx.fillText('🏆', tX, mvpBY + 62);
+            ctx.fillText('🏆', tX, mvpBY + 58);
 
-            ctx.font = 'bold 24px "Barlow Semi Condensed", sans-serif';
+            ctx.font = 'bold 22px "Barlow Semi Condensed", sans-serif';
             ctx.fillStyle = C.ouroCl;
-            ctx.fillText('MVP da Partida', tX + 54, mvpBY + 38);
+            ctx.fillText('MVP da Partida', tX + 50, mvpBY + 36);
 
             ctx.font = '600 30px "Barlow Semi Condensed", sans-serif';
             ctx.fillStyle = C.branco;
-            ctx.fillText(mvpPlayer.name, tX + 54, mvpBY + 76);
+            ctx.fillText(mvpPlayer.name, tX + 50, mvpBY + 74);
 
             afterPlacar = mvpBY + mvpBH + 20;
           }
         } else {
-          cTxt('Resultado não registrado', placY + 60, 'italic 28px "Barlow Semi Condensed", sans-serif', C.cinza);
+          cTxt('Resultado não registrado', placY+60, 'italic 28px "Barlow Semi Condensed", sans-serif', C.cinza);
         }
 
         sep(afterPlacar + 4, 0.22);
 
         // ── Escalações ──
-        const colAX = 58, colVX = W / 2 + 18, colW = W / 2 - 78;
+        const colAX = 58, colVX = W/2+18, colW = W/2-78;
         let escY = afterPlacar + 26;
 
         ctx.font = 'bold 22px "Barlow Semi Condensed", sans-serif';
         ctx.fillStyle = C.azulT; ctx.textAlign = 'left'; ctx.fillText('TIME AZUL', colAX, escY);
         ctx.fillStyle = C.vermT;                          ctx.fillText('TIME VERM.', colVX, escY);
         escY += 8;
-
         ctx.strokeStyle = 'rgba(126,179,232,0.4)'; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(colAX, escY); ctx.lineTo(colAX + colW, escY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(colAX,escY); ctx.lineTo(colAX+colW,escY); ctx.stroke();
         ctx.strokeStyle = 'rgba(228,115,138,0.4)';
-        ctx.beginPath(); ctx.moveTo(colVX, escY); ctx.lineTo(colVX + colW, escY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(colVX,escY); ctx.lineTo(colVX+colW,escY); ctx.stroke();
         escY += 24;
 
-        const lnH = 26;
-        const maxRows = Math.max(azulNames.length, vermNames.length);
+        const lnH = 26, maxRows = Math.max(azulNames.length, vermNames.length);
         ctx.font = '400 19px "Barlow Semi Condensed", sans-serif';
         for (let i = 0; i < maxRows; i++) {
           const y = escY + i * lnH;
@@ -608,49 +625,52 @@
         ctx.fillStyle = C.azulT; ctx.textAlign = 'left'; ctx.fillText('PARTICIPAÇÕES', colAX, pY);
         ctx.fillStyle = C.vermT;                          ctx.fillText('PARTICIPAÇÕES', colVX, pY);
         pY += 26;
-
         ctx.font = '400 19px "Barlow Semi Condensed", sans-serif';
         const maxP = Math.max(partAzul.length, partVerm.length, 1);
         for (let i = 0; i < maxP; i++) {
           const y = pY + i * 25;
           if (partAzul[i]) {
             ctx.fillStyle = C.branco; ctx.textAlign = 'left';
-            ctx.fillText(partAzul[i].name + '  ' + '⚽'.repeat(partAzul[i].g) + '🎯'.repeat(partAzul[i].a), colAX, y);
+            ctx.fillText(partAzul[i].name+'  '+'⚽'.repeat(partAzul[i].g)+'🎯'.repeat(partAzul[i].a), colAX, y);
           }
           if (partVerm[i]) {
             ctx.fillStyle = C.branco;
-            ctx.fillText(partVerm[i].name + '  ' + '⚽'.repeat(partVerm[i].g) + '🎯'.repeat(partVerm[i].a), colVX, y);
+            ctx.fillText(partVerm[i].name+'  '+'⚽'.repeat(partVerm[i].g)+'🎯'.repeat(partVerm[i].a), colVX, y);
           }
         }
         const partEnd = pY + maxP * 25;
 
         // ── Rodapé (fixo no fundo) ──
-        ctx.fillStyle = 'rgba(201,159,64,0.08)'; ctx.fillRect(0, H - 72, W, 72);
-        ctx.fillStyle = C.ouro;                  ctx.fillRect(0, H - 72, W, 2);
-        cTxt('@srds.fc  ·  srdsfc.com.br',        H - 36, 'bold 23px "Barlow Semi Condensed", sans-serif', C.ouro);
-        cTxt('Futebol amador · Porto Alegre, RS', H - 10, '400 17px "Barlow Semi Condensed", sans-serif', C.cinza);
+        ctx.fillStyle = 'rgba(201,159,64,0.08)'; ctx.fillRect(0, H-72, W, 72);
+        ctx.fillStyle = C.ouro;                  ctx.fillRect(0, H-72, W, 2);
+        cTxt('@srds.fc  ·  srdsfc.com.br',        H-36, 'bold 23px "Barlow Semi Condensed", sans-serif', C.ouro);
+        cTxt('Futebol amador · Porto Alegre, RS', H-10, '400 17px "Barlow Semi Condensed", sans-serif', C.cinza);
 
-        // ── Patrocinadores acima do rodapé ──
-        const sAreaY = Math.max(partEnd + 20, H - 195);
+        // ── Patrocinadores acima do rodapé (+20% — era logoH:50, logoW:84) ──
+        const LOGO_SP_H = 60, LOGO_SP_W = 100, LOGO_SP_GAP = 20;
+        const sAreaY = Math.max(partEnd + 20, H - 210);
         sep(sAreaY, 0.18);
-        ctx.font = '500 17px "Barlow Semi Condensed", sans-serif';
-        ctx.fillStyle = C.cinza; ctx.textAlign = 'center';
-        ctx.fillText('Apoio:', W / 2, sAreaY + 20);
+
+        // "Apoio:" maior e com cor mais clara
+        ctx.font = 'bold 20px "Barlow Semi Condensed", sans-serif';
+        ctx.fillStyle = C.branco; ctx.textAlign = 'center';
+        ctx.globalAlpha = 0.65;
+        ctx.fillText('Apoio:', W/2, sAreaY + 24);
+        ctx.globalAlpha = 1;
 
         if (sponsorList.length > 0) {
-          const logoH = 50, logoW = 84, gap = 18;
-          const totalSW = sponsorList.length * (logoW + gap) - gap;
+          const totalSW = sponsorList.length * (LOGO_SP_W + LOGO_SP_GAP) - LOGO_SP_GAP;
           const sStartX = (W - totalSW) / 2;
-          const sY = sAreaY + 30;
+          const sY = sAreaY + 32;
 
           sponsorList.forEach((s, i) => {
             const sImg = cache['sp_' + i];
             if (!sImg) return;
             const ratio = sImg.naturalWidth / sImg.naturalHeight || 1;
-            const dw = Math.min(logoW, logoH * ratio);
+            const dw = Math.min(LOGO_SP_W, LOGO_SP_H * ratio);
             const dh = dw / ratio;
-            const dx = sStartX + i * (logoW + gap) + (logoW - dw) / 2;
-            const dy = sY + (logoH - dh) / 2;
+            const dx = sStartX + i * (LOGO_SP_W + LOGO_SP_GAP) + (LOGO_SP_W - dw) / 2;
+            const dy = sY + (LOGO_SP_H - dh) / 2;
             ctx.drawImage(sImg, dx, dy, dw, dh);
           });
         }

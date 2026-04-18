@@ -282,8 +282,8 @@
       const freqPct   = rodadasDisputadas > 0 ? Math.round((cs.matches / rodadasDisputadas) * 100) : 0;
 
       let freqClass = 'freq-red';
-      if (freqPct >= 66) freqClass = 'freq-green';
-      else if (freqPct >= 41) freqClass = 'freq-yellow';
+      if (freqPct > 75) freqClass = 'freq-green';
+      else if (freqPct > 50) freqClass = 'freq-yellow';
 
       document.getElementById('performanceGrid').innerHTML = `
       <div class="perf-card">
