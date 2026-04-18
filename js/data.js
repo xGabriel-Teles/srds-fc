@@ -296,12 +296,12 @@ const SRDS = {
       teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago", "vander", "krigor", "adler", "rodrigo-p", "marcelo"],
       teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "jean", "weslley", {guest: true, name: "Anderson"}],
       scorers: [
-        { playerId: "weslley", team: "azul" },
-        { playerId: "weslley", team: "azul" },
-        { playerId: "weslley", team: "azul" },
-        { playerId: "erig", team: "azul" },
-        { playerId: "marcelo", team: "vermelho" },
-        { playerId: "adler", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "erig", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "adler", team: "azul" },
       ],
       assists: [
         { playerId: "wesley", team: "azul" },
