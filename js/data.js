@@ -307,6 +307,7 @@ const SRDS = {
         { playerId: "wesley", team: "azul" },
         { playerId: "jean", team: "azul" },
         { playerId: "chico", team: "azul" },
+        { playerId: "milica", team: "azul" },
         { playerId: "rodrigo-p", team: "vermelho" }
       ]
     },
