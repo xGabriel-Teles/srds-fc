@@ -308,19 +308,19 @@ const SRDS = {
       teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago", "vander", "krigor", "adler", "rodrigo-p", "marcelo"],
       teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "jean", "weslley", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
       scorers: [
-        { playerId: "weslley", team: "azul" },
-        { playerId: "weslley", team: "azul" },
-        { playerId: "weslley", team: "azul" },
-        { playerId: "erig", team: "azul" },
-        { playerId: "marcelo", team: "vermelho" },
-        { playerId: "adler", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "erig", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "adler", team: "azul" },
       ],
       assists: [
-        { playerId: "wesley", team: "azul" },
-        { playerId: "jean", team: "azul" },
-        { playerId: "chico", team: "azul" },
-        { playerId: "milica", team: "azul" },
-        { playerId: "rodrigo-p", team: "vermelho" }
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "jean", team: "vermelho" },
+        { playerId: "chico", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "azul" }
       ]
     },
   ],
