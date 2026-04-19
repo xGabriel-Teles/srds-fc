@@ -305,8 +305,8 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 2, vermelho: 4 },
       mvp: "weslley",
-      teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago", "vander", "krigor", "adler", "rodrigo-p", "marcelo"],
-      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "jean", "weslley", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
+      teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago",  "krigor", "adler", "rodrigo-p", "marcelo"],
+      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "vander", "jean", "weslley", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
       scorers: [
         { playerId: "weslley", team: "vermelho" },
         { playerId: "weslley", team: "vermelho" },
