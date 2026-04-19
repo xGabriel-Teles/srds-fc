@@ -66,6 +66,7 @@
       Classificação dos artilheiros da temporada 2026. Clique no atleta para ver o perfil completo.
     </p>
 
+    <div class="ranking-filter-bar" id="filterBar"></div>
     <div class="ranking-list" id="rankingList"></div>
 
   </main>
@@ -78,35 +79,82 @@
     renderHeader('gols.html');
     renderFooter();
 
-    const players = getGoalsRanking();
-    const maxGoals = players[0]?.stats.goals || 1;
+    var allPlayers = getGoalsRanking();
+    var list       = document.getElementById('rankingList');
+    var filterBar  = document.getElementById('filterBar');
+    var POSICOES   = ['Goleiro','Fixo','Ala','Meia','Ponta','Centroavante'];
+    var filtroAtivo = null;
 
-    const list = document.getElementById('rankingList');
+    var btnTodos = document.createElement('button');
+    btnTodos.className = 'filter-btn active';
+    btnTodos.textContent = 'Todos';
+    btnTodos.addEventListener('click', function() { aplicarFiltro(null); });
+    filterBar.appendChild(btnTodos);
 
-    players.forEach((p, i) => {
-      const rank = i + 1;
-      const pct = maxGoals > 0 ? (p.stats.goals / maxGoals) * 100 : 0;
-      const posClass = rank <= 3 ? ` top${rank}` : '';
-
-      const injuryTag = p.injury ? `<span class="ranking-injury-tag">🚑</span>` : '';
-      const item = document.createElement('div');
-      item.className = 'ranking-item';
-      item.innerHTML = `
-      <div class="ranking-pos${posClass}">${rank}</div>
-      <div class="ranking-bar-wrap">
-        <div class="ranking-name">${p.name}${injuryTag}
-          <span style="font-size:11px; color:var(--cinza); font-weight:400; margin-left:6px;">${p.position}</span>
-        </div>
-        <div class="ranking-bar-bg">
-          <div class="ranking-bar-fill" style="width:${pct}%"></div>
-        </div>
-      </div>
-      <div class="ranking-value">${p.stats.goals}</div>
-      <div class="ranking-position">${p.stats.goals === 1 ? 'gol' : 'gols'}</div>
-    `;
-      item.addEventListener('click', () => { window.location.href = `jogador.html?id=${p.id}`; });
-      list.appendChild(item);
+    POSICOES.forEach(function(pos) {
+      if (!allPlayers.some(function(p) { return p.position === pos; })) return;
+      var btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.textContent = pos;
+      btn.addEventListener('click', function() { aplicarFiltro(pos); });
+      filterBar.appendChild(btn);
     });
+
+    function aplicarFiltro(pos) {
+      filtroAtivo = pos;
+      filterBar.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.toggle('active', b.textContent === (pos || 'Todos'));
+      });
+      renderLista();
+    }
+
+    function renderLista() {
+      list.innerHTML = '';
+      var filtrados = allPlayers.map(function(p, i) {
+        return Object.assign({}, p, { globalRank: i + 1 });
+      }).filter(function(p) {
+        return !filtroAtivo || p.position === filtroAtivo;
+      });
+
+      var maxGols = filtrados.length > 0 ? filtrados[0].stats.goals : 1;
+      if (maxGols === 0) maxGols = 1;
+
+      filtrados.forEach(function(p) {
+        var rank   = p.globalRank;
+        var pct    = (p.stats.goals / maxGols) * 100;
+        var posCls = rank <= 3 ? ' top' + rank : '';
+        var injTag = p.injury ? '<span class="ranking-injury-tag">🚑</span>' : '';
+
+        var item = document.createElement('div');
+        item.className = 'ranking-item';
+        item.innerHTML =
+          '<div class="ranking-pos' + posCls + '">' + rank + '</div>' +
+          '<div class="ranking-bar-wrap">' +
+            '<div class="ranking-name">' + p.name + injTag +
+              '<span style="font-size:11px;color:var(--cinza);font-weight:400;margin-left:6px;">' + p.position + '</span>' +
+            '</div>' +
+            '<div class="ranking-bar-bg">' +
+              '<div class="ranking-bar-fill" style="width:' + pct + '%"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="ranking-value">' + p.stats.goals + '</div>' +
+          '<div class="ranking-position">' + (p.stats.goals === 1 ? 'gol' : 'gols') + '</div>';
+
+        item.addEventListener('click', function() {
+          window.location.href = 'jogador.html?id=' + p.id;
+        });
+        list.appendChild(item);
+      });
+
+      if (filtrados.length === 0) {
+        var msg = document.createElement('p');
+        msg.style.cssText = 'color:var(--cinza);font-family:Barlow Semi Condensed,sans-serif;padding:20px 0;';
+        msg.textContent = 'Nenhum atleta nessa posição.';
+        list.appendChild(msg);
+      }
+    }
+
+    renderLista();
   </script>
 </body>
 

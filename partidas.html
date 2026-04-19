@@ -111,8 +111,8 @@
         return `<div class="partida-location-card">
           <span class="partida-location-venue">📍 ${venue}</span>
           ${address ? (mapsUrl
-            ? `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="partida-location-addr" onclick="event.stopPropagation()">🗺 ${address}</a>`
-            : `<span class="partida-location-addr">🗺 ${address}</span>`)
+            ? `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="partida-location-addr" onclick="event.stopPropagation()">${address}</a>`
+            : `<span class="partida-location-addr">${address}</span>`)
           : ''}
         </div>`;
       })() : ''}

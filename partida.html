@@ -433,259 +433,82 @@
 
     function renderCanvas(cache) {
       try {
-        const W = 1080, H = 1440;
-        const canvas = document.createElement('canvas');
-        canvas.width = W; canvas.height = H;
-        const ctx = canvas.getContext('2d');
+        var W=1080,H=1440,canvas=document.createElement('canvas');
+        canvas.width=W;canvas.height=H;
+        var ctx=canvas.getContext('2d');
+        var C={azul:'#192a3e',ouro:'#c99f40',ouroCl:'#ead186',cinza:'#8a9ab0',cinzaE:'#556070',branco:'#f0f4f8',azulT:'#7eb3e8',vermT:'#e4738a'};
+        function cTxt(t,y,font,col){col=col||C.branco;ctx.font=font;ctx.fillStyle=col;ctx.textAlign='center';ctx.fillText(String(t),W/2,y);}
+        function sep(y,op){op=op||0.3;ctx.strokeStyle='rgba(201,159,64,'+op+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(60,y);ctx.lineTo(W-60,y);ctx.stroke();}
+        function rRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+        function drawImgCover(img,x,y,w,h){if(!img)return;var ir=img.naturalWidth/img.naturalHeight,br=w/h,sx,sy,sw,sh;if(ir>br){sh=img.naturalHeight;sw=sh*br;sx=(img.naturalWidth-sw)/2;sy=0;}else{sw=img.naturalWidth;sh=sw/br;sx=0;sy=(img.naturalHeight-sh)/2;}ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);}
 
-        const C = {
-          azul:   '#192a3e', ouro:   '#c99f40', ouroCl: '#ead186',
-          cinza:  '#8a9ab0', cinzaE: '#556070', branco: '#f0f4f8',
-          azulT:  '#7eb3e8', vermT:  '#e4738a'
-        };
+        ctx.fillStyle=C.azul;ctx.fillRect(0,0,W,H);
+        var grad=ctx.createLinearGradient(0,0,W,350);grad.addColorStop(0,'rgba(201,159,64,0.16)');grad.addColorStop(1,'rgba(201,159,64,0)');ctx.fillStyle=grad;ctx.fillRect(0,0,W,350);
+        ctx.fillStyle=C.ouro;ctx.fillRect(0,0,W,5);
 
-        const cTxt = (t, y, font, col = C.branco) => {
-          ctx.font = font; ctx.fillStyle = col; ctx.textAlign = 'center';
-          ctx.fillText(String(t), W / 2, y);
-        };
-        const sep = (y, op = 0.3) => {
-          ctx.strokeStyle = `rgba(201,159,64,${op})`; ctx.lineWidth = 1.5;
-          ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(W - 60, y); ctx.stroke();
-        };
-        const rRect = (x, y, w, h, r) => {
-          ctx.beginPath();
-          ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-          ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-          ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-          ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
-        };
+        var LOGO_SIZE=92,clubLogo=cache['logo'];
+        if(clubLogo){ctx.drawImage(clubLogo,16,12,LOGO_SIZE,LOGO_SIZE);ctx.drawImage(clubLogo,W-LOGO_SIZE-16,12,LOGO_SIZE,LOGO_SIZE);}
 
-        // Função para desenhar imagem quadrada com object-fit: cover
-        const drawImgCover = (img, x, y, w, h) => {
-          if (!img) return;
-          const imgRatio  = img.naturalWidth / img.naturalHeight;
-          const boxRatio  = w / h;
-          let sx, sy, sw, sh;
-          if (imgRatio > boxRatio) {
-            // imagem mais larga — corta lados
-            sh = img.naturalHeight;
-            sw = sh * boxRatio;
-            sx = (img.naturalWidth - sw) / 2;
-            sy = 0;
-          } else {
-            // imagem mais alta — corta topo/baixo
-            sw = img.naturalWidth;
-            sh = sw / boxRatio;
-            sx = 0;
-            sy = (img.naturalHeight - sh) / 2;
-          }
-          ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
-        };
+        cTxt('SRDS FC',72,'bold 62px "Barlow Semi Condensed", sans-serif',C.ouro);
+        cTxt('Rodada '+m.round+' · Temporada 2026',108,'500 26px "Barlow Semi Condensed", sans-serif',C.cinza);
+        sep(126,0.35);
 
-        // ── Fundo ──
-        ctx.fillStyle = C.azul; ctx.fillRect(0, 0, W, H);
-        const grad = ctx.createLinearGradient(0, 0, W, 350);
-        grad.addColorStop(0, 'rgba(201,159,64,0.16)');
-        grad.addColorStop(1, 'rgba(201,159,64,0)');
-        ctx.fillStyle = grad; ctx.fillRect(0, 0, W, 350);
-        ctx.fillStyle = C.ouro; ctx.fillRect(0, 0, W, 5);
+        var infoY=160;
+        if(m.date){cTxt('📅 '+m.date+(m.time?' · 🕐 '+m.time:''),infoY,'500 24px "Barlow Semi Condensed", sans-serif',C.ouroCl);infoY+=33;}
+        if(m.location){cTxt('📍 '+locationFull(),infoY,'400 20px "Barlow Semi Condensed", sans-serif',C.cinza);infoY+=30;}
+        sep(infoY+4,0.2);
 
-        // ── Logos do clube nos dois cantos — 25% maiores (92px → ~115px) ──
-        const LOGO_SIZE = 92; // era 74
-        const clubLogo = cache['logo'];
-        if (clubLogo) {
-          ctx.drawImage(clubLogo, 16, 12, LOGO_SIZE, LOGO_SIZE);
-          ctx.drawImage(clubLogo, W - LOGO_SIZE - 16, 12, LOGO_SIZE, LOGO_SIZE);
+        var placY=infoY+28,afterPlacar=placY+80;
+        if(m.result){
+          var azulWin=m.result.azul>m.result.vermelho,vermWin=m.result.vermelho>m.result.azul,empate=m.result.azul===m.result.vermelho;
+          ctx.font='bold 26px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.azulT;ctx.textAlign='center';ctx.fillText('TIME AZUL',270,placY);ctx.fillStyle=C.vermT;ctx.fillText('TIME VERM.',W-270,placY);
+          ctx.font='bold 128px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=azulWin?C.ouroCl:C.cinzaE;ctx.textAlign='center';ctx.fillText(String(m.result.azul),270,placY+118);ctx.fillStyle=vermWin?C.ouroCl:C.cinzaE;ctx.fillText(String(m.result.vermelho),W-270,placY+118);
+          ctx.font='300 54px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.cinzaE;ctx.fillText('×',W/2,placY+98);
+          if(empate)cTxt('Empate',placY+136,'500 21px "Barlow Semi Condensed", sans-serif',C.cinza);
+          afterPlacar=placY+148;
+        }else{cTxt('Resultado não registrado',placY+60,'italic 28px "Barlow Semi Condensed", sans-serif',C.cinza);}
+        sep(afterPlacar+4,0.22);
+
+        var colAX=58,colVX=W/2+18,colW=W/2-78,escY=afterPlacar+26;
+        ctx.font='bold 22px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.azulT;ctx.textAlign='left';ctx.fillText('TIME AZUL',colAX,escY);ctx.fillStyle=C.vermT;ctx.fillText('TIME VERM.',colVX,escY);escY+=8;
+        ctx.strokeStyle='rgba(126,179,232,0.4)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(colAX,escY);ctx.lineTo(colAX+colW,escY);ctx.stroke();
+        ctx.strokeStyle='rgba(228,115,138,0.4)';ctx.beginPath();ctx.moveTo(colVX,escY);ctx.lineTo(colVX+colW,escY);ctx.stroke();escY+=24;
+        var lnH=26,maxRows=Math.max(azulNames.length,vermNames.length);ctx.font='400 19px "Barlow Semi Condensed", sans-serif';
+        for(var i=0;i<maxRows;i++){var yy=escY+i*lnH;if(azulNames[i]){ctx.fillStyle=C.branco;ctx.textAlign='left';ctx.fillText(azulNames[i],colAX,yy);}if(vermNames[i]){ctx.fillStyle=C.branco;ctx.fillText(vermNames[i],colVX,yy);}}
+        var escEnd=escY+maxRows*lnH+8;sep(escEnd+2,0.2);
+
+        var pY=escEnd+22;ctx.font='bold 21px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.azulT;ctx.textAlign='left';ctx.fillText('PARTICIPAÇÕES',colAX,pY);ctx.fillStyle=C.vermT;ctx.fillText('PARTICIPAÇÕES',colVX,pY);pY+=26;
+        ctx.font='400 19px "Barlow Semi Condensed", sans-serif';
+        var maxP=Math.max(partAzul.length,partVerm.length,1);
+        for(var j=0;j<maxP;j++){var yp=pY+j*25;if(partAzul[j]){ctx.fillStyle=C.branco;ctx.textAlign='left';ctx.fillText(partAzul[j].name+'  '+'⚽'.repeat(partAzul[j].g)+'🎯'.repeat(partAzul[j].a),colAX,yp);}if(partVerm[j]){ctx.fillStyle=C.branco;ctx.fillText(partVerm[j].name+'  '+'⚽'.repeat(partVerm[j].g)+'🎯'.repeat(partVerm[j].a),colVX,yp);}}
+        var partEnd=pY+maxP*25;
+
+        // MVP — após participações, antes do Apoio
+        var afterMvp=partEnd;
+        if(mvpPlayer){
+          var mvpBY=partEnd+18,mvpBW=520,mvpBH=110,mvpBX=(W-mvpBW)/2;
+          sep(mvpBY-6,0.2);
+          ctx.fillStyle='rgba(201,159,64,0.12)';rRect(mvpBX,mvpBY,mvpBW,mvpBH,12);ctx.fill();
+          ctx.strokeStyle='rgba(201,159,64,0.45)';ctx.lineWidth=1.5;rRect(mvpBX,mvpBY,mvpBW,mvpBH,12);ctx.stroke();
+          var mvpImg=cache['mvp'],FOTO_SZ=90,FOTO_X=mvpBX+10,FOTO_Y=mvpBY+(mvpBH-FOTO_SZ)/2,tOffX=0;
+          if(mvpImg){var rr=8;ctx.save();rRect(FOTO_X,FOTO_Y,FOTO_SZ,FOTO_SZ,rr);ctx.clip();drawImgCover(mvpImg,FOTO_X,FOTO_Y,FOTO_SZ,FOTO_SZ);ctx.restore();ctx.strokeStyle=C.ouro;ctx.lineWidth=2;rRect(FOTO_X,FOTO_Y,FOTO_SZ,FOTO_SZ,rr);ctx.stroke();tOffX=FOTO_SZ+14;}
+          var tX=mvpBX+tOffX+14;
+          ctx.font='bold 40px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.ouro;ctx.textAlign='left';ctx.fillText('🏆',tX,mvpBY+58);
+          ctx.font='bold 22px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.ouroCl;ctx.fillText('MVP da Partida',tX+50,mvpBY+36);
+          ctx.font='600 30px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.branco;ctx.fillText(mvpPlayer.name,tX+50,mvpBY+74);
+          afterMvp=mvpBY+mvpBH+10;
         }
 
-        // ── Cabeçalho ──
-        cTxt('SRDS FC', 72, 'bold 62px "Barlow Semi Condensed", sans-serif', C.ouro);
-        cTxt('Rodada ' + m.round + ' · Temporada 2026', 108, '500 26px "Barlow Semi Condensed", sans-serif', C.cinza);
-        sep(126, 0.35);
+        ctx.fillStyle='rgba(201,159,64,0.08)';ctx.fillRect(0,H-72,W,72);ctx.fillStyle=C.ouro;ctx.fillRect(0,H-72,W,2);
+        cTxt('@srds.fc · srdsfc.com.br',H-36,'bold 23px "Barlow Semi Condensed", sans-serif',C.ouro);
+        cTxt('Futebol amador · Porto Alegre, RS',H-10,'400 17px "Barlow Semi Condensed", sans-serif',C.cinza);
 
-        // ── Info da partida ──
-        let infoY = 160;
-        if (m.date) {
-          cTxt('📅 ' + m.date + (m.time ? '  ·  🕐 ' + m.time : ''),
-            infoY, '500 24px "Barlow Semi Condensed", sans-serif', C.ouroCl);
-          infoY += 33;
-        }
-        if (m.location) {
-          cTxt('📍 ' + locationFull(), infoY, '400 20px "Barlow Semi Condensed", sans-serif', C.cinza);
-          infoY += 30;
-        }
-        sep(infoY + 4, 0.2);
+        var LOGO_SP_H=60,LOGO_SP_W=100,LOGO_SP_GAP=20,sAreaY=Math.max(afterMvp+16,H-210);
+        sep(sAreaY,0.18);ctx.font='bold 20px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.branco;ctx.textAlign='center';ctx.globalAlpha=0.65;ctx.fillText('Apoio:',W/2,sAreaY+24);ctx.globalAlpha=1;
+        if(sponsorList.length>0){var totalSW=sponsorList.length*(LOGO_SP_W+LOGO_SP_GAP)-LOGO_SP_GAP,sStartX=(W-totalSW)/2,sY=sAreaY+32;sponsorList.forEach(function(s,ii){var sImg=cache['sp_'+ii];if(!sImg)return;var ratio=sImg.naturalWidth/sImg.naturalHeight||1,dw=Math.min(LOGO_SP_W,LOGO_SP_H*ratio),dh=dw/ratio,dx=sStartX+ii*(LOGO_SP_W+LOGO_SP_GAP)+(LOGO_SP_W-dw)/2,dy=sY+(LOGO_SP_H-dh)/2;ctx.drawImage(sImg,dx,dy,dw,dh);});}
 
-        // ── Placar ──
-        const placY = infoY + 28;
-        let afterPlacar = placY + 80;
-
-        if (m.result) {
-          const azulWin = m.result.azul > m.result.vermelho;
-          const vermWin = m.result.vermelho > m.result.azul;
-          const empate  = m.result.azul === m.result.vermelho;
-
-          ctx.font = 'bold 26px "Barlow Semi Condensed", sans-serif';
-          ctx.fillStyle = C.azulT; ctx.textAlign = 'center';
-          ctx.fillText('TIME AZUL',   270,    placY);
-          ctx.fillStyle = C.vermT;
-          ctx.fillText('TIME VERM.', W-270,   placY);
-
-          ctx.font = 'bold 128px "Barlow Semi Condensed", sans-serif';
-          ctx.fillStyle = azulWin ? C.ouroCl : C.cinzaE; ctx.textAlign = 'center';
-          ctx.fillText(String(m.result.azul),       270,    placY+118);
-          ctx.fillStyle = vermWin ? C.ouroCl : C.cinzaE;
-          ctx.fillText(String(m.result.vermelho), W-270,    placY+118);
-          ctx.font = '300 54px "Barlow Semi Condensed", sans-serif';
-          ctx.fillStyle = C.cinzaE;
-          ctx.fillText('×', W/2, placY+98);
-          if (empate) cTxt('Empate', placY+136, '500 21px "Barlow Semi Condensed", sans-serif', C.cinza);
-
-          afterPlacar = placY + 148;
-
-          // ── MVP: foto quadrada com object-fit cover ──
-          if (mvpPlayer) {
-            const mvpBY  = placY + 143;
-            const mvpBW  = 520, mvpBH = 110, mvpBX = (W - mvpBW) / 2;
-
-            // Container dourado
-            ctx.fillStyle = 'rgba(201,159,64,0.12)';
-            rRect(mvpBX, mvpBY, mvpBW, mvpBH, 12); ctx.fill();
-            ctx.strokeStyle = 'rgba(201,159,64,0.45)'; ctx.lineWidth = 1.5;
-            rRect(mvpBX, mvpBY, mvpBW, mvpBH, 12); ctx.stroke();
-
-            const mvpImg  = cache['mvp'];
-            const FOTO_SZ = 90; // quadrado
-            const FOTO_X  = mvpBX + 10;
-            const FOTO_Y  = mvpBY + (mvpBH - FOTO_SZ) / 2;
-            let   tOffX   = 0;
-
-            if (mvpImg) {
-              // clip quadrado com cantos arredondados
-              const r = 8;
-              ctx.save();
-              rRect(FOTO_X, FOTO_Y, FOTO_SZ, FOTO_SZ, r); ctx.clip();
-              drawImgCover(mvpImg, FOTO_X, FOTO_Y, FOTO_SZ, FOTO_SZ);
-              ctx.restore();
-              // borda dourada
-              ctx.strokeStyle = C.ouro; ctx.lineWidth = 2;
-              rRect(FOTO_X, FOTO_Y, FOTO_SZ, FOTO_SZ, r); ctx.stroke();
-              tOffX = FOTO_SZ + 14;
-            }
-
-            // Troféu + nome
-            const tX = mvpBX + tOffX + 14;
-            ctx.font = 'bold 40px "Barlow Semi Condensed", sans-serif';
-            ctx.fillStyle = C.ouro; ctx.textAlign = 'left';
-            ctx.fillText('🏆', tX, mvpBY + 58);
-
-            ctx.font = 'bold 22px "Barlow Semi Condensed", sans-serif';
-            ctx.fillStyle = C.ouroCl;
-            ctx.fillText('MVP da Partida', tX + 50, mvpBY + 36);
-
-            ctx.font = '600 30px "Barlow Semi Condensed", sans-serif';
-            ctx.fillStyle = C.branco;
-            ctx.fillText(mvpPlayer.name, tX + 50, mvpBY + 74);
-
-            afterPlacar = mvpBY + mvpBH + 20;
-          }
-        } else {
-          cTxt('Resultado não registrado', placY+60, 'italic 28px "Barlow Semi Condensed", sans-serif', C.cinza);
-        }
-
-        sep(afterPlacar + 4, 0.22);
-
-        // ── Escalações ──
-        const colAX = 58, colVX = W/2+18, colW = W/2-78;
-        let escY = afterPlacar + 26;
-
-        ctx.font = 'bold 22px "Barlow Semi Condensed", sans-serif';
-        ctx.fillStyle = C.azulT; ctx.textAlign = 'left'; ctx.fillText('TIME AZUL', colAX, escY);
-        ctx.fillStyle = C.vermT;                          ctx.fillText('TIME VERM.', colVX, escY);
-        escY += 8;
-        ctx.strokeStyle = 'rgba(126,179,232,0.4)'; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(colAX,escY); ctx.lineTo(colAX+colW,escY); ctx.stroke();
-        ctx.strokeStyle = 'rgba(228,115,138,0.4)';
-        ctx.beginPath(); ctx.moveTo(colVX,escY); ctx.lineTo(colVX+colW,escY); ctx.stroke();
-        escY += 24;
-
-        const lnH = 26, maxRows = Math.max(azulNames.length, vermNames.length);
-        ctx.font = '400 19px "Barlow Semi Condensed", sans-serif';
-        for (let i = 0; i < maxRows; i++) {
-          const y = escY + i * lnH;
-          if (azulNames[i]) { ctx.fillStyle = C.branco; ctx.textAlign = 'left'; ctx.fillText(azulNames[i], colAX, y); }
-          if (vermNames[i]) { ctx.fillStyle = C.branco;                          ctx.fillText(vermNames[i], colVX, y); }
-        }
-        const escEnd = escY + maxRows * lnH + 8;
-        sep(escEnd + 2, 0.2);
-
-        // ── Participações ──
-        let pY = escEnd + 22;
-        ctx.font = 'bold 21px "Barlow Semi Condensed", sans-serif';
-        ctx.fillStyle = C.azulT; ctx.textAlign = 'left'; ctx.fillText('PARTICIPAÇÕES', colAX, pY);
-        ctx.fillStyle = C.vermT;                          ctx.fillText('PARTICIPAÇÕES', colVX, pY);
-        pY += 26;
-        ctx.font = '400 19px "Barlow Semi Condensed", sans-serif';
-        const maxP = Math.max(partAzul.length, partVerm.length, 1);
-        for (let i = 0; i < maxP; i++) {
-          const y = pY + i * 25;
-          if (partAzul[i]) {
-            ctx.fillStyle = C.branco; ctx.textAlign = 'left';
-            ctx.fillText(partAzul[i].name+'  '+'⚽'.repeat(partAzul[i].g)+'🎯'.repeat(partAzul[i].a), colAX, y);
-          }
-          if (partVerm[i]) {
-            ctx.fillStyle = C.branco;
-            ctx.fillText(partVerm[i].name+'  '+'⚽'.repeat(partVerm[i].g)+'🎯'.repeat(partVerm[i].a), colVX, y);
-          }
-        }
-        const partEnd = pY + maxP * 25;
-
-        // ── Rodapé (fixo no fundo) ──
-        ctx.fillStyle = 'rgba(201,159,64,0.08)'; ctx.fillRect(0, H-72, W, 72);
-        ctx.fillStyle = C.ouro;                  ctx.fillRect(0, H-72, W, 2);
-        cTxt('@srds.fc  ·  srdsfc.com.br',        H-36, 'bold 23px "Barlow Semi Condensed", sans-serif', C.ouro);
-        cTxt('Futebol amador · Porto Alegre, RS', H-10, '400 17px "Barlow Semi Condensed", sans-serif', C.cinza);
-
-        // ── Patrocinadores acima do rodapé (+20% — era logoH:50, logoW:84) ──
-        const LOGO_SP_H = 60, LOGO_SP_W = 100, LOGO_SP_GAP = 20;
-        const sAreaY = Math.max(partEnd + 20, H - 210);
-        sep(sAreaY, 0.18);
-
-        // "Apoio:" maior e com cor mais clara
-        ctx.font = 'bold 20px "Barlow Semi Condensed", sans-serif';
-        ctx.fillStyle = C.branco; ctx.textAlign = 'center';
-        ctx.globalAlpha = 0.65;
-        ctx.fillText('Apoio:', W/2, sAreaY + 24);
-        ctx.globalAlpha = 1;
-
-        if (sponsorList.length > 0) {
-          const totalSW = sponsorList.length * (LOGO_SP_W + LOGO_SP_GAP) - LOGO_SP_GAP;
-          const sStartX = (W - totalSW) / 2;
-          const sY = sAreaY + 32;
-
-          sponsorList.forEach((s, i) => {
-            const sImg = cache['sp_' + i];
-            if (!sImg) return;
-            const ratio = sImg.naturalWidth / sImg.naturalHeight || 1;
-            const dw = Math.min(LOGO_SP_W, LOGO_SP_H * ratio);
-            const dh = dw / ratio;
-            const dx = sStartX + i * (LOGO_SP_W + LOGO_SP_GAP) + (LOGO_SP_W - dw) / 2;
-            const dy = sY + (LOGO_SP_H - dh) / 2;
-            ctx.drawImage(sImg, dx, dy, dw, dh);
-          });
-        }
-
-        // ── Download ──
-        resetBtn();
-        const link = document.createElement('a');
-        link.download = 'SRDS_FC_Rodada' + m.round + '.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-
-      } catch (err) {
-        resetBtn();
-        alert('Erro ao gerar a arte: ' + err.message);
-      }
+        resetBtn();var link=document.createElement('a');link.download='SRDS_FC_Rodada'+m.round+'.png';link.href=canvas.toDataURL('image/png');link.click();
+      }catch(err){resetBtn();alert('Erro ao gerar a arte: '+err.message);}
     }
   }
   </script>

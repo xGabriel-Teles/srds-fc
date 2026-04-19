@@ -61,6 +61,7 @@
     </div>
     <div class="gold-line"></div>
 
+    <div class="ranking-filter-bar" id="filterBar"></div>
     <div class="standings-table-wrap">
       <table class="standings-table" id="standingsTable">
         <thead>
@@ -92,44 +93,93 @@
     renderHeader('tabela.html');
     renderFooter();
 
+    const disputadas = SRDS.matches.filter(m => m.result !== null).length;
     document.getElementById('matchesPlayed').textContent =
-      `${SRDS.matches.length} rodada${SRDS.matches.length !== 1 ? 's' : ''} disputada${SRDS.matches.length !== 1 ? 's' : ''}`;
+      disputadas + ' rodada' + (disputadas !== 1 ? 's' : '') + ' disputada' + (disputadas !== 1 ? 's' : '');
 
-    const standings = getStandings();
-    const tbody = document.getElementById('standingsBody');
+    const allStandings = getStandings();
+    const tbody        = document.getElementById('standingsBody');
+    const filterBar    = document.getElementById('filterBar');
 
-    standings.forEach((p, i) => {
-      const rank = i + 1;
-      const rowClass = rank <= 3 ? ` row-top${rank}` : '';
-      const ga = p.stats.goals + p.stats.assists;
+    const POSICOES = ['Goleiro','Fixo','Ala','Meia','Ponta','Centroavante'];
+    let   filtroAtivo = null;
 
-      let rankCell;
-      if (rank <= 3) {
-        rankCell = `<td class="col-rank"><span class="rank-badge rank-${rank}">${rank}</span></td>`;
-      } else {
-        rankCell = `<td class="col-rank">${rank}</td>`;
-      }
+    // ── Botão "Todos" ──
+    const btnTodos = document.createElement('button');
+    btnTodos.className   = 'filter-btn active';
+    btnTodos.textContent = 'Todos';
+    btnTodos.addEventListener('click', function() { aplicarFiltro(null); });
+    filterBar.appendChild(btnTodos);
 
-      const tr = document.createElement('tr');
-      tr.className = rowClass;
-      const injuryTag = p.injury ? ` <span class="ranking-injury-tag">🚑</span>` : '';
-      tr.innerHTML = `
-      ${rankCell}
-      <td class="col-name">
-        <div class="player-name-cell">
-          ${p.name}${injuryTag}
-          <span class="player-pos-pill">${p.position}</span>
-        </div>
-      </td>
-      <td>${p.stats.matches}</td>
-      <td>${p.stats.goals}</td>
-      <td>${p.stats.assists}</td>
-      <td>${ga}</td>
-      <td class="col-points">${p.stats.points}</td>
-    `;
-      tr.addEventListener('click', () => { window.location.href = `jogador.html?id=${p.id}`; });
-      tbody.appendChild(tr);
+    // ── Botões de posição (só cria se houver atletas naquela posição) ──
+    POSICOES.forEach(function(pos) {
+      if (!allStandings.some(function(p) { return p.position === pos; })) return;
+      var btn = document.createElement('button');
+      btn.className   = 'filter-btn';
+      btn.textContent = pos;
+      btn.addEventListener('click', function() { aplicarFiltro(pos); });
+      filterBar.appendChild(btn);
     });
+
+    function aplicarFiltro(pos) {
+      filtroAtivo = pos;
+      filterBar.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.toggle('active', b.textContent === (pos || 'Todos'));
+      });
+      renderizarTabela();
+    }
+
+    function renderizarTabela() {
+      tbody.innerHTML = '';
+
+      // Mantém rank global real, filtra por posição se necessário
+      var filtrados = allStandings.map(function(p, i) {
+        return Object.assign({}, p, { globalRank: i + 1 });
+      }).filter(function(p) {
+        return !filtroAtivo || p.position === filtroAtivo;
+      });
+
+      filtrados.forEach(function(p) {
+        var rank    = p.globalRank;
+        var ga      = p.stats.goals + p.stats.assists;
+        var rowCls  = rank <= 3 ? ' row-top' + rank : '';
+        var rankCell = rank <= 3
+          ? '<td class="col-rank"><span class="rank-badge rank-' + rank + '">' + rank + '</span></td>'
+          : '<td class="col-rank">' + rank + '</td>';
+        var injuryTag = p.injury ? ' <span class="ranking-injury-tag">🚑</span>' : '';
+
+        var tr = document.createElement('tr');
+        tr.className = rowCls;
+        tr.innerHTML =
+          rankCell +
+          '<td class="col-name"><div class="player-name-cell">' +
+            p.name + injuryTag +
+            '<span class="player-pos-pill">' + p.position + '</span>' +
+          '</div></td>' +
+          '<td>' + p.stats.matches  + '</td>' +
+          '<td>' + p.stats.goals    + '</td>' +
+          '<td>' + p.stats.assists  + '</td>' +
+          '<td>' + ga               + '</td>' +
+          '<td class="col-points">' + p.stats.points + '</td>';
+
+        tr.addEventListener('click', function() {
+          window.location.href = 'jogador.html?id=' + p.id;
+        });
+        tbody.appendChild(tr);
+      });
+
+      if (filtrados.length === 0) {
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        td.colSpan = 7;
+        td.style.cssText = 'text-align:center;color:var(--cinza);padding:20px;font-family:Barlow Semi Condensed,sans-serif;';
+        td.textContent = 'Nenhum atleta nessa posição.';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      }
+    }
+
+    renderizarTabela();
   </script>
 </body>
 
