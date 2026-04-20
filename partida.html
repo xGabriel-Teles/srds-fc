@@ -443,7 +443,7 @@
         function drawImgCover(img,x,y,w,h){if(!img)return;var ir=img.naturalWidth/img.naturalHeight,br=w/h,sx,sy,sw,sh;if(ir>br){sh=img.naturalHeight;sw=sh*br;sx=(img.naturalWidth-sw)/2;sy=0;}else{sw=img.naturalWidth;sh=sw/br;sx=0;sy=(img.naturalHeight-sh)/2;}ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);}
 
         ctx.fillStyle=C.azul;ctx.fillRect(0,0,W,H);
-        var grad=ctx.createLinearGradient(0,0,W,350);grad.addColorStop(0,'rgba(201,159,64,0.16)');grad.addColorStop(1,'rgba(201,159,64,0)');ctx.fillStyle=grad;ctx.fillRect(0,0,W,350);
+        var gradH=ctx.createLinearGradient(0,0,W,0);gradH.addColorStop(0,'rgba(201,159,64,0.22)');gradH.addColorStop(0.5,'rgba(201,159,64,0.08)');gradH.addColorStop(1,'rgba(201,159,64,0.22)');ctx.fillStyle=gradH;ctx.fillRect(0,0,W,400);var gradV=ctx.createLinearGradient(0,0,0,400);gradV.addColorStop(0,'rgba(201,159,64,0.20)');gradV.addColorStop(0.6,'rgba(201,159,64,0.04)');gradV.addColorStop(1,'rgba(201,159,64,0)');ctx.fillStyle=gradV;ctx.fillRect(0,0,W,400);
         ctx.fillStyle=C.ouro;ctx.fillRect(0,0,W,5);
 
         var LOGO_SIZE=92,clubLogo=cache['logo'];
@@ -483,11 +483,11 @@
         for(var j=0;j<maxP;j++){var yp=pY+j*25;if(partAzul[j]){ctx.fillStyle=C.branco;ctx.textAlign='left';ctx.fillText(partAzul[j].name+'  '+'⚽'.repeat(partAzul[j].g)+'🎯'.repeat(partAzul[j].a),colAX,yp);}if(partVerm[j]){ctx.fillStyle=C.branco;ctx.fillText(partVerm[j].name+'  '+'⚽'.repeat(partVerm[j].g)+'🎯'.repeat(partVerm[j].a),colVX,yp);}}
         var partEnd=pY+maxP*25;
 
-        // MVP — após participações, antes do Apoio
+        // MVP — centralizado entre participações e seção Apoio
         var afterMvp=partEnd;
         if(mvpPlayer){
-          var mvpBY=partEnd+18,mvpBW=520,mvpBH=110,mvpBX=(W-mvpBW)/2;
-          sep(mvpBY-6,0.2);
+          var mvpBY=partEnd+36,mvpBW=520,mvpBH=110,mvpBX=(W-mvpBW)/2;
+          sep(mvpBY-18,0.18);
           ctx.fillStyle='rgba(201,159,64,0.12)';rRect(mvpBX,mvpBY,mvpBW,mvpBH,12);ctx.fill();
           ctx.strokeStyle='rgba(201,159,64,0.45)';ctx.lineWidth=1.5;rRect(mvpBX,mvpBY,mvpBW,mvpBH,12);ctx.stroke();
           var mvpImg=cache['mvp'],FOTO_SZ=90,FOTO_X=mvpBX+10,FOTO_Y=mvpBY+(mvpBH-FOTO_SZ)/2,tOffX=0;
@@ -496,14 +496,14 @@
           ctx.font='bold 40px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.ouro;ctx.textAlign='left';ctx.fillText('🏆',tX,mvpBY+58);
           ctx.font='bold 22px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.ouroCl;ctx.fillText('MVP da Partida',tX+50,mvpBY+36);
           ctx.font='600 30px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.branco;ctx.fillText(mvpPlayer.name,tX+50,mvpBY+74);
-          afterMvp=mvpBY+mvpBH+10;
+          afterMvp=mvpBY+mvpBH+28;
         }
 
         ctx.fillStyle='rgba(201,159,64,0.08)';ctx.fillRect(0,H-72,W,72);ctx.fillStyle=C.ouro;ctx.fillRect(0,H-72,W,2);
         cTxt('@srds.fc · srdsfc.com.br',H-36,'bold 23px "Barlow Semi Condensed", sans-serif',C.ouro);
         cTxt('Futebol amador · Porto Alegre, RS',H-10,'400 17px "Barlow Semi Condensed", sans-serif',C.cinza);
 
-        var LOGO_SP_H=60,LOGO_SP_W=100,LOGO_SP_GAP=20,sAreaY=Math.max(afterMvp+16,H-210);
+        var LOGO_SP_H=66,LOGO_SP_W=110,LOGO_SP_GAP=20,sAreaY=Math.max(afterMvp+16,H-210);
         sep(sAreaY,0.18);ctx.font='bold 20px "Barlow Semi Condensed", sans-serif';ctx.fillStyle=C.branco;ctx.textAlign='center';ctx.globalAlpha=0.65;ctx.fillText('Apoio:',W/2,sAreaY+24);ctx.globalAlpha=1;
         if(sponsorList.length>0){var totalSW=sponsorList.length*(LOGO_SP_W+LOGO_SP_GAP)-LOGO_SP_GAP,sStartX=(W-totalSW)/2,sY=sAreaY+32;sponsorList.forEach(function(s,ii){var sImg=cache['sp_'+ii];if(!sImg)return;var ratio=sImg.naturalWidth/sImg.naturalHeight||1,dw=Math.min(LOGO_SP_W,LOGO_SP_H*ratio),dh=dw/ratio,dx=sStartX+ii*(LOGO_SP_W+LOGO_SP_GAP)+(LOGO_SP_W-dw)/2,dy=sY+(LOGO_SP_H-dh)/2;ctx.drawImage(sImg,dx,dy,dw,dh);});}
 

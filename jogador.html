@@ -159,8 +159,46 @@
         tags += `<span class="profile-tag tag-number">${numDisplay}</span>`;
       }
       if (p.foot) tags += `<span class="profile-tag tag-foot">Pé ${p.foot}</span>`;
-      if (p.age) tags += `<span class="profile-tag tag-foot">${p.age} anos</span>`;
+      // Idade calculada automaticamente via birthDate (v1.11)
+      var idadeCalc = calcularIdade(p.birthDate);
+      var ehAniversario = isAniversarioHoje(p.birthDate);
+      if (idadeCalc !== null) {
+        var idadeTag = ehAniversario
+          ? '<span class="profile-tag tag-birthday">' + idadeCalc + ' anos 🎂</span>'
+          : '<span class="profile-tag tag-foot">' + idadeCalc + ' anos</span>';
+        tags += idadeTag;
+      }
       if (p.nickname && p.nickname !== p.name) tags += `<span class="profile-tag tag-foot">"${p.nickname}"</span>`;
+
+      // Banner de aniversário — aparece no topo do perfil se for o aniversário do jogador
+      var birthdayBannerHtml = '';
+      if (ehAniversario) {
+        // Se o jogador tem nickname definido, personaliza a saudação; caso contrário, deixa genérico
+        var temNickname = p.nickname && p.nickname !== null && p.nickname !== p.name;
+        var nomeExibido = temNickname ? p.nickname : null;
+        birthdayBannerHtml =
+          '<div class="birthday-banner-outer">' +
+            '<div class="birthday-banner">' +
+              '<div class="birthday-banner-confetti" aria-hidden="true">' +
+                '<span>🎉</span><span>⭐</span><span>🎊</span><span>✨</span><span>🎈</span><span>⭐</span><span>🎉</span>' +
+              '</div>' +
+              '<div class="birthday-banner-content">' +
+                '<div class="birthday-banner-emoji">🎂</div>' +
+                '<div class="birthday-banner-text">' +
+                  '<div class="birthday-banner-title">' +
+                  (nomeExibido ? 'Feliz Aniversário, ' + nomeExibido + '!' : 'Feliz Aniversário!') +
+                '</div>' +
+                  '<div class="birthday-banner-sub">O SRDS FC celebra com você! 🥳 &nbsp;·&nbsp; srdsfc.com.br</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      }
+
+      // Adiciona classe de aniversário à página para estilo especial
+      if (ehAniversario) {
+        document.querySelector('.player-profile-page').classList.add('birthday-mode');
+      }
 
       // Rank indicators
       const rankItems = [
@@ -174,6 +212,14 @@
         <span>${r.label}</span>
       </div>
     `).join('');
+
+      // Renderiza o banner de aniversário ACIMA do grid de perfil (fora do profile-hero)
+      var heroEl = document.getElementById('profileHero');
+      if (birthdayBannerHtml) {
+        var bannerWrap = document.createElement('div');
+        bannerWrap.innerHTML = birthdayBannerHtml;
+        heroEl.parentNode.insertBefore(bannerWrap, heroEl);
+      }
 
       document.getElementById('profileHero').innerHTML = `
       <!-- Flip card -->

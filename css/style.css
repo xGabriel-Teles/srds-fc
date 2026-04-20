@@ -2406,3 +2406,164 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
   border-color: var(--ouro);
   font-weight: 800;
 }
+
+/* ============================================================
+   v1.11 — ANIVERSÁRIO DO ATLETA (jogador.html)
+   ============================================================ */
+
+/* ── Tag de aniversário na linha de info do perfil ── */
+.profile-tag.tag-birthday {
+  background: linear-gradient(135deg, rgba(201,159,64,0.35), rgba(234,209,134,0.2));
+  border-color: rgba(201,159,64,0.8);
+  color: var(--ouro-claro);
+  font-weight: 700;
+  animation: birthday-tag-pulse 2s ease-in-out infinite;
+}
+@keyframes birthday-tag-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,159,64,0); }
+  50%       { box-shadow: 0 0 0 6px rgba(201,159,64,0.25); }
+}
+
+/* ── Página inteira em modo aniversário ── */
+.birthday-mode {
+  background: linear-gradient(180deg,
+    rgba(30, 22, 6, 0.95) 0%,
+    #192a3e 20%,
+    #192a3e 100%);
+}
+/* Halo dourado no topo da página */
+.birthday-mode::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 35% at 50% 0%, rgba(201,159,64,0.22) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Banner de aniversário — fora do grid, largura total ── */
+.birthday-banner-outer {
+  margin-bottom: 28px;
+}
+.birthday-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 2px solid rgba(201,159,64,0.7);
+  background: linear-gradient(135deg,
+    rgba(201,159,64,0.22) 0%,
+    rgba(234,209,134,0.08) 40%,
+    rgba(201,159,64,0.18) 100%);
+  padding: 0;
+  animation: birthday-glow 2.5s ease-in-out infinite;
+}
+@keyframes birthday-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201,159,64,0),
+                0 6px 28px rgba(201,159,64,0.12);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(201,159,64,0.22),
+                0 8px 40px rgba(201,159,64,0.30);
+  }
+}
+
+/* Faixa de confetes no topo do banner */
+.birthday-banner-confetti {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 20px;
+  background: rgba(201,159,64,0.12);
+  border-bottom: 1px solid rgba(201,159,64,0.2);
+  font-size: 16px;
+  letter-spacing: 0.3em;
+  animation: confetti-float 3.5s ease-in-out infinite;
+}
+@keyframes confetti-float {
+  0%, 100% { opacity: 0.65; transform: translateY(0); }
+  50%       { opacity: 1;    transform: translateY(-2px); }
+}
+
+/* Corpo do banner: emoji grande + textos centralizados */
+.birthday-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 28px 22px;
+}
+.birthday-banner-emoji {
+  font-size: 56px;
+  line-height: 1;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 12px rgba(201,159,64,0.6));
+  animation: birthday-cake-bounce 1.4s ease-in-out infinite;
+}
+@keyframes birthday-cake-bounce {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50%       { transform: scale(1.1) rotate(3deg); }
+}
+.birthday-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.birthday-banner-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--ouro-claro);
+  line-height: 1;
+  text-shadow:
+    0 0 12px rgba(201,159,64,0.7),
+    0 0 30px rgba(201,159,64,0.35);
+}
+.birthday-banner-sub {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+
+/* ── Halo dourado intenso ao redor do nome do jogador ── */
+.birthday-mode .profile-name {
+  text-shadow:
+    0 0 15px rgba(201,159,64,0.8),
+    0 0 35px rgba(201,159,64,0.45),
+    0 0 60px rgba(201,159,64,0.2);
+  color: var(--ouro-claro);
+}
+.birthday-mode .profile-fullname {
+  color: rgba(234,209,134,0.75);
+}
+
+/* ── Halo dourado intenso ao redor do flip card ── */
+.birthday-mode .flip-card-container {
+  filter: drop-shadow(0 0 14px rgba(201,159,64,0.55))
+          drop-shadow(0 0 30px rgba(201,159,64,0.28));
+}
+.birthday-mode .flip-card-front .flip-card-inner,
+.birthday-mode .flip-card-back .flip-card-inner {
+  border: 2px solid rgba(201,159,64,0.65);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ── Brilho na barra do nome dentro do card ── */
+.birthday-mode .flip-card-name-bar {
+  background: linear-gradient(90deg,
+    rgba(201,159,64,0.3) 0%,
+    rgba(25,42,62,0.95) 60%);
+}
+
+/* Responsivo mobile */
+@media (max-width: 600px) {
+  .birthday-banner-title  { font-size: 26px; }
+  .birthday-banner-emoji  { font-size: 42px; }
+  .birthday-banner-content { padding: 16px 16px 18px; gap: 14px; }
+}
+
