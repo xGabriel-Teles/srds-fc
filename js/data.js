@@ -90,7 +90,7 @@ const SRDS = {
       location: { venue: "Soccer City", address: "R. Lauro Müller, 700 - Navegantes, Porto Alegre - RS" },
       result: { azul: 5, vermelho: 6 },
       mvp: "vinicius",
-      teamAzul: ["miliquinha", "germano", "alemao", "iago", "filipe", "adler", "vander", "krigor", {guest: true, name: "Daniel", position: "Meia", number: 0}, "everson", "rodrigo-p"],
+      teamAzul: ["miliquinha", "germano", "alemao", "filipe", "iago", "adler", "vander", "krigor", {guest: true, name: "Daniel", position: "Meia", number: 0}, "everson", "rodrigo-p"],
       teamVermelho: ["vinicius", "cabelo", "alexandre", "biro", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 20}, {guest: true, name: "Diego", position: "Meia", number: 333}, "gabriel", "rafael-isco", "marcelo", "augusto"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
@@ -367,7 +367,7 @@ const SRDS = {
       number: { uni1: 97, uni2: 97 },
       position: "Ala",
       foot: "Direito",
-      birthDate: "28/05/1997",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
+      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
       photo: {
         uni1: "img/players/gabriel-azul.png", 
         uni2: "img/players/gabriel-vermelho.png"
