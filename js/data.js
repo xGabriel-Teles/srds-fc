@@ -367,7 +367,7 @@ const SRDS = {
       number: { uni1: 97, uni2: 97 },
       position: "Ala",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
+      birthDate: "28/05/1997",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
       photo: {
         uni1: "img/players/gabriel-azul.png", 
         uni2: "img/players/gabriel-vermelho.png"
@@ -385,7 +385,7 @@ const SRDS = {
       number: { uni1: 9, uni2: 9 },
       position: "Centroavante",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
+      birthDate: "15/05/1990",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
       photo: {
         uni1: "img/players/marcelo-azul.png", 
         uni2: "img/players/marcelo-vermelho.png"
@@ -420,7 +420,7 @@ const SRDS = {
       number: { uni1: 6, uni2: 6 },
       position: "Ala",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1992, idade atual: 34 anos)
+      birthDate: "24/07/1991",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1992, idade atual: 34 anos)
       photo: {
         uni1: "img/players/biro-azul.png", 
         uni2: "img/players/biro-vermelho.png"
@@ -454,7 +454,7 @@ const SRDS = {
       number: { uni1: 1, uni2: 1 },
       position: "Goleiro",
       foot: null,
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: "05/03/1991",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/edu-azul.png", 
         uni2: "img/players/edu-amarelo.png"
@@ -517,8 +517,8 @@ const SRDS = {
       nickname: null,
       number: { uni1: 12, uni2: 12 },
       position: "Goleiro",
-      foot: null,
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      foot: "Direito",
+      birthDate: "24/04/1995",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/vinicius-azul.png", 
         uni2: "img/players/vinicius-amarelo.png"
@@ -535,8 +535,8 @@ const SRDS = {
       nickname: "Wess",
       number: { uni1: 12, uni2: 12},
       position: "Ponta",
-      foot: null,
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      foot: "Direito",
+      birthDate: "21/09/1999",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/wess-azul.png", 
         uni2: "img/players/wess-vermelho.png"
@@ -554,7 +554,7 @@ const SRDS = {
       number: { uni1: 11, uni2: 11 },
       position: "Centroavante",
       foot: "Esquerdo",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1987, idade atual: 39 anos)
+      birthDate: "18/08/1986",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1987, idade atual: 39 anos)
       photo: {
         uni1: "img/players/rodrigop-azul.png", 
         uni2: "img/players/rodrigop-vermelho.png"
@@ -572,7 +572,7 @@ const SRDS = {
       number: { uni1: 21, uni2: 21 },
       position: "Centroavante",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1995, idade atual: 31 anos)
+      birthDate: "04/12/1994",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1995, idade atual: 31 anos)
       photo: {
         uni1: "img/players/augusto-azul.png", 
         uni2: "img/players/augusto-vermelho.png"
@@ -617,7 +617,7 @@ const SRDS = {
       number: { uni1: 77, uni2: 77 },
       position: "Meia",
       foot: "Direto",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1995, idade atual: 31 anos)
+      birthDate: "25/02/1995",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1995, idade atual: 31 anos)
       photo: {
         uni1: "img/players/giovane-azul.png", 
         uni2: "img/players/giovane-vermelho.png"
@@ -633,7 +633,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 8 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: "02/12/1992",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/jean-azul.png", 
         uni2: "img/players/jean-vermelho.png"
@@ -649,7 +649,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 8 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1996, idade atual: 30 anos)
+      birthDate: "08/07/1995",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1996, idade atual: 30 anos)
       photo: {
         uni1: "img/players/milica-azul.png", 
         uni2: "img/players/milica-vermelho.png"
@@ -713,7 +713,7 @@ const SRDS = {
       number: { uni1: 7, uni2: 30 },
       position: "Ala",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
+      birthDate: "30/10/1998",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
       photo: { 
         uni1: "img/players/adler-azul.png",
         uni2: "img/players/adler-vermelho.png" },
@@ -728,7 +728,7 @@ const SRDS = {
       number: { uni1: 9, uni2: 10 },
       position: "Ponta",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1994, idade atual: 32 anos)
+      birthDate: "24/12/1993",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1994, idade atual: 32 anos)
       photo: { 
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
@@ -743,7 +743,7 @@ const SRDS = {
       number: { uni1: 4, uni2: 4 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2001, idade atual: 25 anos)
+      birthDate: "14/03/2001",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2001, idade atual: 25 anos)
       photo: {
         uni1: "img/players/erig-azul.png", 
         uni2: "img/players/erig-vermelho.png"
@@ -759,7 +759,7 @@ const SRDS = {
       number: { uni1: 6, uni2: 6 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
+      birthDate: "22/05/1997",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1998, idade atual: 28 anos)
       photo: {
         uni1: "img/players/wesley-azul.png", 
         uni2: "img/players/wesley-vermelho.png"
@@ -793,7 +793,7 @@ const SRDS = {
       number: { uni1: null, uni2: null },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
+      birthDate: "29/12/1990",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
       photo: {
         uni1: "img/players/juliano-azul.png", 
         uni2: "img/players/juliano-vermelho.png"
@@ -824,8 +824,8 @@ const SRDS = {
       nickname: null,
       number: { uni1: 5, uni2: 5 },
       position: "Ala",
-      foot: null,
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      foot: "Direito",
+      birthDate: "14/02/1998",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/everson-azul.png", 
         uni2: "img/players/everson-vermelho.png"
@@ -857,7 +857,7 @@ const SRDS = {
       number: { uni1: 14, uni2: 17 },
       position: "Meia",
       foot: "Ambos",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2004, idade atual: 22 anos)
+      birthDate: "06/12/2003",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2004, idade atual: 22 anos)
       photo: {
         uni1: "img/players/gustavo-azul.png", 
         uni2: "img/players/gustavo-vermelho.png"
@@ -873,7 +873,7 @@ const SRDS = {
       number: { uni1: 69, uni2: 69 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: "21/09/1993",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/ivan-azul.png", 
         uni2: "img/players/ivan-vermelho.png"
@@ -905,7 +905,7 @@ const SRDS = {
       number: { uni1: 10, uni2: 10 },
       position: "Meia",
       foot: "Esquerdo",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2001, idade atual: 25 anos)
+      birthDate: "17/11/2000",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2001, idade atual: 25 anos)
       photo: {
         uni1: "img/players/krigor-azul.png", 
         uni2: "img/players/krigor-vermelho.png"
@@ -921,7 +921,7 @@ const SRDS = {
       number: { uni1: 90, uni2: 90 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
+      birthDate: "01/06/90",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
       photo: {
         uni1: "img/players/thiago-azul.png", 
         uni2: "img/players/thiago-vermelho.png"
@@ -937,7 +937,7 @@ const SRDS = {
       number: { uni1: 1, uni2: 1 },
       position: "Goleiro",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2011, idade atual: 15 anos)
+      birthDate: "17/05/2010",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2011, idade atual: 15 anos)
       photo: {
         uni1: "img/players/miliquinha-azul.png", 
         uni2: "img/players/miliquinha-vermelho.png"
@@ -953,7 +953,7 @@ const SRDS = {
       number: { uni1: 13, uni2: 13 },
       position: "Goleiro",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      birthDate: "24/11/1984",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
       photo: {
         uni1: "img/players/silvio-azul.png", 
         uni2: "img/players/silvio-vermelho.png"
