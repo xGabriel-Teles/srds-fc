@@ -404,7 +404,7 @@ const SRDS = {
       number: { uni1: 2, uni2: 13 },
       position: "Ala",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1968, idade atual: 58 anos)
+      birthDate: "10/05/1967",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1968, idade atual: 58 anos)
       photo: {
         uni1: "img/players/alexandre-azul.png", 
         uni2: "img/players/alexandre-vermelho.png"
@@ -453,7 +453,7 @@ const SRDS = {
       nickname: "Edu",
       number: { uni1: 1, uni2: 1 },
       position: "Goleiro",
-      foot: null,
+      foot: "Ambos",
       birthDate: "05/03/1991",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/edu-azul.png", 
@@ -469,7 +469,7 @@ const SRDS = {
       nickname: "Rodrigo C.",
       number: { uni1: 8, uni2: 8 },
       position: "Ponta",
-      foot: null,
+      foot: "Direito",
       birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/rodrigoc-azul.png", 
@@ -485,7 +485,7 @@ const SRDS = {
       nickname: "Cabelo",
       number: { uni1: 2, uni2: 2 },
       position: "Fixo",
-      foot: null,
+      foot: "Direito",
       birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/cabelo-azul.png", 
@@ -681,7 +681,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 10 },
       position: "Ala",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1995, idade atual: 31 anos)
+      birthDate: "21/03/1995",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1995, idade atual: 31 anos)
       photo: {
         uni1: "img/players/iago-azul.png", 
         uni2: "img/players/iago-vermelho.png"
@@ -696,7 +696,7 @@ const SRDS = {
       nickname: null,
       number: { uni1: 11, uni2: 11 },
       position: "Meia",
-      foot: null,
+      foot: "Direito",
       birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/valdir-azul.png", 
@@ -841,7 +841,7 @@ const SRDS = {
       number: { uni1: 11, uni2: 11 },
       position: "Ponta",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1996, idade atual: 30 anos)
+      birthDate: "18/11/1995",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1996, idade atual: 30 anos)
       photo: {
         uni1: "img/players/filipe-azul.png", 
         uni2: "img/players/filipe-vermelho.png"
@@ -888,7 +888,7 @@ const SRDS = {
       nickname: "Tio Keke",
       number: { uni1: 5, uni2: 5 },
       position: "Ala",
-      foot: null,
+      foot: "Direito",
       birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/keke-azul.png", 
