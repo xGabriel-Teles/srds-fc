@@ -502,7 +502,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 8 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2003, idade atual: 23 anos)
+      birthDate: "23/08/2002",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 2003, idade atual: 23 anos)
       photo: {
         uni1: "img/players/rafael-isco-azul.png", 
         uni2: "img/players/rafael-isco-vermelho.png"
@@ -777,7 +777,7 @@ const SRDS = {
       number: { uni1: 7, uni2: 7 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1984, idade atual: 42 anos)
+      birthDate: "27/02/1984",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1984, idade atual: 42 anos)
       photo: {
         uni1: "img/players/edson-azul.png", 
         uni2: "img/players/edson-vermelho.png"
@@ -790,7 +790,7 @@ const SRDS = {
       name: "Juliano",
       fullName: "Juliano Dias Teles",
       nickname: null,
-      number: { uni1: null, uni2: null },
+      number: { uni1: 3, uni2: 3 },
       position: "Meia",
       foot: "Direito",
       birthDate: "29/12/1990",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
