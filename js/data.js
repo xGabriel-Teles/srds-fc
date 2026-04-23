@@ -470,7 +470,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 8 },
       position: "Ponta",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: "24/09/1996",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/rodrigoc-azul.png", 
         uni2: "img/players/rodrigoc-vermelho.png"
@@ -588,7 +588,7 @@ const SRDS = {
       number: { uni1: 28, uni2: 28 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1993, idade atual: 33 anos)
+      birthDate: "28/06/1993",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1993, idade atual: 33 anos)
       photo: {
         uni1: "img/players/baracy-azul.png", 
         uni2: "img/players/baracy-vermelho.png"
@@ -697,7 +697,7 @@ const SRDS = {
       number: { uni1: 11, uni2: 11 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: "11/02/1987",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/valdir-azul.png", 
         uni2: "img/players/valdir-vermelho.png"
