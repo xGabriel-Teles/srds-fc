@@ -436,7 +436,7 @@ const SRDS = {
       number: { uni1: 4, uni2: 4 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1976, idade atual: 50 anos)
+      birthDate: "08/02/1976",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1976, idade atual: 50 anos)
       photo: {
         uni1: "img/players/germano-azul.png", 
         uni2: "img/players/germano-vermelho.png"
@@ -486,7 +486,7 @@ const SRDS = {
       number: { uni1: 2, uni2: 2 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: "16/11/1996",        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/cabelo-azul.png", 
         uni2: "img/players/cabelo-vermelho.png"
@@ -665,7 +665,7 @@ const SRDS = {
       number: { uni1: 90, uni2: 90 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
+      birthDate: "19/05/1990",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
       photo: {
         uni1: "img/players/vander-azul.png", 
         uni2: "img/players/vander-vermelho.png"
@@ -809,7 +809,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 8 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1981, idade atual: 45 anos)
+      birthDate: "13/01/1981",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1981, idade atual: 45 anos)
       photo: {
         uni1: "img/players/chico-azul.png", 
         uni2: "img/players/chico-vermelho.png"
@@ -868,7 +868,7 @@ const SRDS = {
     {
       id: "ivan",
       name: "Ivan Jr",
-      fullName: "Ivan Jr.",
+      fullName: "Ivan Luis Lopes Trindade Junior.",
       nickname: null,
       number: { uni1: 69, uni2: 69 },
       position: "Fixo",
