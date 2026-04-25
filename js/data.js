@@ -868,7 +868,7 @@ const SRDS = {
     {
       id: "ivan",
       name: "Ivan Jr",
-      fullName: "Ivan Luis Lopes Trindade Junior.",
+      fullName: "Ivan Jr.",
       nickname: null,
       number: { uni1: 69, uni2: 69 },
       position: "Fixo",
@@ -966,48 +966,84 @@ const SRDS = {
   /**
    * Patrocinadores — adicione logo (PNG), nome, descrição e link de rede social
    */
+  /*
+   * =============================================
+   *  PATROCINADORES
+   *  tier: "master" | "ouro" | "prata"
+   *  link: URL principal (Instagram, site, etc.)
+   *  instagram: URL do perfil Instagram (ícone no card master)
+   *  facebook: URL do perfil Facebook (ícone no card master, deixar null se não houver)
+   *  whatsapp: número para WhatsApp no formato "5551999999999" (ícone no card master, deixar null se não houver)
+   *  bannerImg: imagem banner do patrocinador master (800x180px) — null para os demais
+   *  description: texto curto exibido no card
+   *  descriptionLong: texto completo para o modal (futuro)
+   *  photos: array de imagens para o modal (futuro)
+   * =============================================
+   */
   sponsors: [
     {
       id: "monello",
       name: "Monello",
+      tier: "master",
       description: "O que define família é o amor. #Monellovers",
+      descriptionLong: null,
       logo: "img/sponsors/monello.png",
-      link: "https://www.instagram.com/monello_oficial/"
+      bannerImg: "img/sponsors/monello-banner.png",  // imagem 800x180px para o card master
+      link: "https://www.instagram.com/monello_oficial/",
+      instagram: "https://www.instagram.com/monello_oficial/",
+      facebook: "https://www.facebook.com/MonelloOficial/",             // preencha com a URL do Facebook se houver
+      // whatsapp: "5551999999999",  // descomente e preencha para exibir ícone do WhatsApp
+      photos: []
     },
     {
       id: "wc-store",
       name: "WC Store",
+      tier: "ouro",
       description: null,
+      descriptionLong: null,
       logo: "img/sponsors/wc-store.png",
-      link: "https://www.instagram.com/wc_store10/"
-    },
-    {
-      id: "dana",
-      name: "Dana Containers",
-      description: "Transformando espaços em experiências únicas, um container de cada vez. 🚀 #ArquiteturaContêiner",
-      logo: "img/sponsors/dana1.PNG",
-      link: "https://www.instagram.com/containers_dana/"
+      link: "https://www.instagram.com/wc_store10/",
+      photos: []
     },
     {
       id: "wess-tattoo",
       name: "Wess Tattoo",
+      tier: "ouro",
       description: null,
+      descriptionLong: null,
       logo: "img/sponsors/wess-tattoo.png",
-      link: "https://www.instagram.com/wess_tattoo/"
+      link: "https://www.instagram.com/wess_tattoo/",
+      photos: []
     },
     {
       id: "sulutta",
       name: "Sulutta Doces & Delicias",
+      tier: "prata",
       description: "Alegrando os momentos doces da vida!",
+      descriptionLong: null,
       logo: "img/sponsors/sulutta.png",
-      link: "https://www.facebook.com/sulutadelicias/"
+      link: "https://www.facebook.com/sulutadelicias/",
+      photos: []
+    },
+    {
+      id: "dana",
+      name: "Dana Containers",
+      tier: "prata",
+      description: "Transformando espaços em experiências únicas, um container de cada vez.",
+      descriptionLong: null,
+      logo: "img/sponsors/dana1.PNG",
+      link: "https://www.instagram.com/containers_dana/",
+      photos: []
     },
     {
       id: "alinox",
       name: "Alinox",
+      tier: "prata",
       description: null,
+      descriptionLong: null,
       logo: "img/sponsors/alinox.png",
-      link: null
+      link: null,
+      photos: []
     }
   ]
 };

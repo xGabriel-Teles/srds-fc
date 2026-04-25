@@ -162,6 +162,17 @@
     <div class="gold-line"></div>
     <div class="nav-cards-grid" id="navCardsGrid"></div>
   </section>
+  <!-- ── Seção: Carrossel de Patrocinadores ── -->
+  <section class="section fade-in-delay2" style="overflow:hidden; padding-bottom:48px;">
+    <div class="section-header">
+      <h2 class="section-title">Nossos <span>Patrocinadores</span></h2>
+    </div>
+    <div class="gold-line"></div>
+    <div class="sponsors-carousel-track-wrap">
+      <div class="sponsors-carousel-track" id="sponsorsCarouselTrack"></div>
+    </div>
+  </section>
+
   <footer class="site-footer"></footer>
   <script src="js/data.js"></script>
   <script src="js/components.js"></script>
@@ -191,6 +202,24 @@
       { href: 'partidas.html', icon: '📅', title: 'Partidas', desc: 'Histórico de todas as rodadas da temporada, com escalações, resultado e destaques de cada jogo.' },
       { href: 'patrocinadores.html', icon: '🤝', title: 'Patrocinadores', desc: 'As marcas e parceiros que apoiam o SRDS FC e tornam cada rodada possível.' },
     ].map(c => `<a href="${c.href}" class="nav-card"><div class="nav-card-icon">${c.icon}</div><div class="nav-card-title">${c.title}</div><div class="nav-card-desc">${c.desc}</div><div class="nav-card-btn">Ver mais →</div></a>`).join('');
+    // ── Carrossel de patrocinadores ──
+    (function() {
+      var track = document.getElementById('sponsorsCarouselTrack');
+      if (!track || !SRDS.sponsors || !SRDS.sponsors.length) return;
+      // Duplica os itens para loop contínuo
+      var logos = SRDS.sponsors.filter(function(s) { return s.logo; });
+      var allLogos = logos.concat(logos).concat(logos); // triplicado para loop suave
+      allLogos.forEach(function(s) {
+        var div = document.createElement('div');
+        div.className = 'carousel-item';
+        var img = document.createElement('img');
+        img.src = s.logo;
+        img.alt = s.name;
+        img.loading = 'lazy';
+        div.appendChild(img);
+        track.appendChild(div);
+      });
+    })();
   </script>
 </body>
 
