@@ -85,6 +85,47 @@
       <div class="awards-grid" id="awardsGrid"></div>
     </section>
 
+    <!-- ── Gráficos de Evolução ── -->
+    <section class="charts-section">
+      <h3 class="awards-title">Evolução na <span>Temporada</span></h3>
+
+      <div class="charts-grid">
+
+        <!-- Gráfico A: Por Rodada -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-card-header-left">
+              <div class="chart-card-title">Por Rodada</div>
+              <div class="chart-card-desc">Desempenho em cada partida individualmente</div>
+            </div>
+            <div class="chart-toggles" id="togglesPorRodada"></div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chartPorRodada"></canvas>
+          </div>
+          <div class="chart-legend-full" id="legendPorRodada"></div>
+          <p class="chart-note">Quando o atleta não comparece à rodada, os indicadores (pontos, gols e assistências) serão exibidos como zero.</p>
+        </div>
+
+        <!-- Gráfico B: Acumulado -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-card-header-left">
+              <div class="chart-card-title">Acumulado</div>
+              <div class="chart-card-desc">Crescimento total ao longo da temporada</div>
+            </div>
+            <div class="chart-toggles" id="togglesAcumulado"></div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chartAcumulado"></canvas>
+          </div>
+          <div class="chart-legend-full" id="legendAcumulado"></div>
+          <p class="chart-note">Valores somados até cada rodada, independente de participação.</p>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer"></footer>
@@ -377,8 +418,238 @@
         </div>
       `).join('');
       }
+      // ── Gráficos de evolução ──────────────────────────────────────
+      renderCharts(p.id);
+    }
+
+    // ─────────────────────────────────────────────────────────────────
+    // GRÁFICOS DE EVOLUÇÃO v1.16.1 — Canvas nativo, zero dependências
+    // ─────────────────────────────────────────────────────────────────
+    function renderCharts(playerId) {
+      const data = getPlayerChartData(playerId);
+
+      const sec = document.querySelector('.charts-section');
+      if (!data.length) { if (sec) sec.style.display = 'none'; return; }
+
+      // Cores e labels das três séries
+      const SERIES_DEF = [
+        { key: 'pontos',   label: 'Pontos',       cor: '#c99f40', area: 'rgba(201,159,64,0.15)'  },
+        { key: 'gols',     label: 'Gols',          cor: '#7eb3e8', area: 'rgba(126,179,232,0.12)' },
+        { key: 'assists',  label: 'Assistências',  cor: '#e4738a', area: 'rgba(228,115,138,0.12)' },
+      ];
+
+      // Estado de visibilidade de cada série (true = visível)
+      const visA = { pontos: true, gols: true, assists: true };
+      const visB = { pontos: true, gols: true, assists: true };
+
+      // ── Cria os toggles de série ────────────────────────────────
+      function buildToggles(containerId, vis, onToggle) {
+        const wrap = document.getElementById(containerId);
+        if (!wrap) return;
+        SERIES_DEF.forEach(s => {
+          const btn = document.createElement('button');
+          btn.className = 'chart-toggle-btn active';
+          btn.style.borderColor = s.cor;
+          btn.style.color       = s.cor;
+          btn.innerHTML =
+            '<span class="chart-toggle-dot" style="background:' + s.cor + '"></span>' +
+            s.label;
+          btn.dataset.key = s.key;
+          btn.addEventListener('click', function() {
+            vis[s.key] = !vis[s.key];
+            btn.classList.toggle('active',   vis[s.key]);
+            btn.classList.toggle('inactive', !vis[s.key]);
+            onToggle();
+          });
+          wrap.appendChild(btn);
+        });
+      }
+
+      // ── Função principal de desenho ─────────────────────────────
+      function drawChart(canvasId, legendId, seriesValues, vis, showZeroWhenAbsent) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        const dpr  = window.devicePixelRatio || 1;
+        const W    = canvas.parentElement.clientWidth  || 560;
+        const H    = canvas.parentElement.clientHeight || 240;
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+
+        // Margens — esquerda maior para label Y, baixo maior para círculos + label X
+        const ml = 42, mr = 20, mt = 24, mb = 52;
+        const gW = W - ml - mr;
+        const gH = H - mt - mb;
+        const nPts = data.length;
+
+        // Escala Y — máximo entre séries visíveis
+        let maxVal = 1;
+        SERIES_DEF.forEach(s => {
+          if (!vis[s.key]) return;
+          seriesValues[s.key].forEach(v => { if (v > maxVal) maxVal = v; });
+        });
+        const yStep = maxVal <= 6 ? 1 : maxVal <= 12 ? 2 : maxVal <= 24 ? 3 : 5;
+        const yTop  = Math.ceil(maxVal / yStep) * yStep;
+
+        // ── Fundo ──
+        ctx.fillStyle = '#1a2d42';
+        ctx.fillRect(0, 0, W, H);
+
+        // ── Grid horizontal ──
+        for (let v = 0; v <= yTop; v += yStep) {
+          const y = mt + gH - (v / yTop) * gH;
+          ctx.strokeStyle = 'rgba(45,79,115,0.45)';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(ml, y); ctx.lineTo(ml + gW, y); ctx.stroke();
+          ctx.fillStyle = '#8a9ab0';
+          ctx.font = '10px Arial';
+          ctx.textAlign = 'right';
+          ctx.fillText(v, ml - 6, y + 4);
+        }
+
+        // ── Grid vertical + labels X + círculos de presença ──
+        const xStep = nPts > 1 ? gW / (nPts - 1) : gW;
+        data.forEach((d, i) => {
+          const x = ml + (nPts > 1 ? i * xStep : gW / 2);
+
+          // Linha guia vertical
+          ctx.strokeStyle = 'rgba(45,79,115,0.3)';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(x, mt); ctx.lineTo(x, mt + gH); ctx.stroke();
+
+          // Label "Rd N"
+          ctx.fillStyle = '#8a9ab0';
+          ctx.font = '10px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillText('Rd ' + d.round, x, mt + gH + 14);
+
+          // Círculo de presença (verde = jogou, vermelho = não jogou)
+          const circY = mt + gH + 34;
+          const circR = 6;
+          ctx.beginPath();
+          ctx.arc(x, circY, circR, 0, Math.PI * 2);
+          ctx.fillStyle = d.jogou ? '#5ecf82' : '#e4738a';
+          ctx.fill();
+          // Borda do círculo
+          ctx.strokeStyle = d.jogou ? '#3aad62' : '#c45570';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        });
+
+        // ── Eixos ──
+        ctx.strokeStyle = 'rgba(201,159,64,0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(ml, mt); ctx.lineTo(ml, mt + gH); ctx.lineTo(ml + gW, mt + gH);
+        ctx.stroke();
+
+        // ── Helpers de coordenada ──
+        function px(i) { return ml + (nPts > 1 ? i * xStep : gW / 2); }
+        function py(v) { return mt + gH - (v / yTop) * gH; }
+
+        // ── Desenha cada série ──
+        SERIES_DEF.forEach(s => {
+          if (!vis[s.key]) return;
+          const vals = seriesValues[s.key];
+          const def  = s;
+
+          // Área preenchida — conecta todos os pontos (zeros incluídos)
+          ctx.beginPath();
+          vals.forEach((v, i) => {
+            if (i === 0) ctx.moveTo(px(i), py(v));
+            else         ctx.lineTo(px(i), py(v));
+          });
+          // Fecha a área
+          ctx.lineTo(px(vals.length - 1), mt + gH);
+          ctx.lineTo(px(0), mt + gH);
+          ctx.closePath();
+          ctx.fillStyle = def.area;
+          ctx.fill();
+
+          // Linha
+          ctx.beginPath();
+          vals.forEach((v, i) => {
+            if (i === 0) ctx.moveTo(px(i), py(v));
+            else         ctx.lineTo(px(i), py(v));
+          });
+          ctx.strokeStyle = def.cor;
+          ctx.lineWidth   = 2.5;
+          ctx.lineJoin    = 'round';
+          ctx.stroke();
+
+          // Pontos (círculos) e valores
+          vals.forEach((v, i) => {
+            const r = v > 0 ? 5 : 3;
+            ctx.beginPath();
+            ctx.arc(px(i), py(v), r, 0, Math.PI * 2);
+            ctx.fillStyle   = v > 0 ? def.cor : 'rgba(138,154,176,0.4)';
+            ctx.strokeStyle = '#1a2d42';
+            ctx.lineWidth   = 1.5;
+            ctx.fill(); ctx.stroke();
+
+            if (v > 0) {
+              ctx.fillStyle  = def.cor;
+              ctx.font       = 'bold 10px Arial';
+              ctx.textAlign  = 'center';
+              ctx.fillText(v, px(i), py(v) - 9);
+            }
+          });
+        });
+
+        // ── Legenda ──
+        const legEl = document.getElementById(legendId);
+        if (!legEl) return;
+        legEl.innerHTML =
+          // Séries
+          SERIES_DEF.map(s =>
+            '<span class="chart-legend-item">' +
+              '<span class="chart-legend-dot" style="background:' + s.cor + '"></span>' +
+              s.label +
+            '</span>'
+          ).join('') +
+          // Círculos de presença
+          '<span class="chart-legend-item" style="margin-left:auto;">' +
+            '<span class="chart-legend-dot" style="background:#5ecf82;border:1.5px solid #3aad62"></span>' +
+            '<span style="color:#5ecf82;font-weight:700;">Partida presente</span>' +
+          '</span>' +
+          '<span class="chart-legend-item">' +
+            '<span class="chart-legend-dot" style="background:#e4738a;border:1.5px solid #c45570"></span>' +
+            '<span style="color:#e4738a;font-weight:700;">Partida ausente</span>' +
+          '</span>';
+      }
+
+      // ── Valores: Gráfico A — por rodada, zero quando ausente ──
+      const svA = {
+        pontos:  data.map(d => d.jogou ? d.points  : 0),
+        gols:    data.map(d => d.jogou ? d.gols    : 0),
+        assists: data.map(d => d.jogou ? d.assists  : 0),
+      };
+
+      // ── Valores: Gráfico B — acumulado ──
+      const svB = {
+        pontos:  data.map(d => d.acumPts),
+        gols:    data.map(d => d.acumGols),
+        assists: data.map(d => d.acumAss),
+      };
+
+      // ── Cria toggles ──
+      buildToggles('togglesPorRodada', visA, redrawA);
+      buildToggles('togglesAcumulado', visB, redrawB);
+
+      function redrawA() { drawChart('chartPorRodada', 'legendPorRodada', svA, visA, true); }
+      function redrawB() { drawChart('chartAcumulado', 'legendAcumulado', svB, visB, false); }
+
+      // Desenho inicial
+      requestAnimationFrame(() => { redrawA(); redrawB(); });
+
+      // Redesenha ao redimensionar
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { redrawA(); redrawB(); }, 150);
+      });
     }
   </script>
 </body>
-
-</html>

@@ -3038,3 +3038,158 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
 
 
 
+
+/* ============================================================
+   v1.15 — GRÁFICOS DE EVOLUÇÃO (jogador.html)
+   ============================================================ */
+
+.charts-section {
+  margin-top: 32px;
+  border-top: 1px solid var(--azul-borda);
+  padding-top: 28px;
+}
+
+/* Título igual ao padrão awards-title da página */
+.charts-title {
+  font-size: 24px;
+  color: var(--branco);
+  margin-bottom: 20px;
+}
+.charts-title span { color: var(--ouro); }
+
+/* Gráficos empilhados verticalmente — full width */
+.charts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card de cada gráfico */
+.chart-card {
+  background: var(--azul-medio);
+  border: 1px solid var(--azul-borda);
+  border-radius: var(--radius);
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color var(--transition);
+}
+.chart-card:hover { border-color: var(--ouro-escuro); }
+
+.chart-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.chart-card-header-left { display: flex; flex-direction: column; gap: 3px; }
+.chart-card-title {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ouro-claro);
+  letter-spacing: 0.03em;
+}
+.chart-card-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: var(--cinza);
+}
+
+/* Toggles de série (checkboxes visuais) */
+.chart-toggles {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.chart-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+  background: transparent;
+}
+.chart-toggle-btn.active {
+  /* cor de fundo aplicada via JS inline */
+}
+.chart-toggle-btn.inactive {
+  opacity: 0.38;
+  filter: grayscale(0.6);
+}
+.chart-toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Container do canvas — altura maior para acomodar 24 rodadas */
+.chart-wrap {
+  width: 100%;
+  height: 240px;
+  position: relative;
+}
+.chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 6px;
+  display: block;
+}
+
+/* Legenda com círculos de presença */
+.chart-legend-full {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px solid rgba(45,79,115,0.4);
+  padding-top: 10px;
+}
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cinza);
+  letter-spacing: 0.04em;
+}
+.chart-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Nota de rodapé do gráfico */
+.chart-note {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  color: var(--cinza-escuro);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Mobile: reduz altura do canvas */
+@media (max-width: 480px) {
+  .chart-wrap { height: 200px; }
+  .chart-card-header { flex-direction: column; }
+  .chart-toggles { gap: 6px; }
+  .chart-toggle-btn { font-size: 10px; padding: 4px 9px; }
+}
+

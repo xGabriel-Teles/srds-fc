@@ -436,7 +436,7 @@ const SRDS = {
       number: { uni1: 4, uni2: 4 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: "08/02/1976",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1976, idade atual: 50 anos)
+      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1976, idade atual: 50 anos)
       photo: {
         uni1: "img/players/germano-azul.png", 
         uni2: "img/players/germano-vermelho.png"
@@ -486,7 +486,7 @@ const SRDS = {
       number: { uni1: 2, uni2: 2 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: "16/11/1996",        // DD/MM/AAAA — data de nascimento (não informada)
+      birthDate: null,        // DD/MM/AAAA — data de nascimento (não informada)
       photo: {
         uni1: "img/players/cabelo-azul.png", 
         uni2: "img/players/cabelo-vermelho.png"
@@ -665,7 +665,7 @@ const SRDS = {
       number: { uni1: 90, uni2: 90 },
       position: "Meia",
       foot: "Direito",
-      birthDate: "31/05/1990",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
+      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
       photo: {
         uni1: "img/players/vander-azul.png", 
         uni2: "img/players/vander-vermelho.png"
@@ -809,7 +809,7 @@ const SRDS = {
       number: { uni1: 8, uni2: 8 },
       position: "Fixo",
       foot: "Direito",
-      birthDate: "13/01/1981",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1981, idade atual: 45 anos)
+      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1981, idade atual: 45 anos)
       photo: {
         uni1: "img/players/chico-azul.png", 
         uni2: "img/players/chico-vermelho.png"
@@ -991,7 +991,7 @@ const SRDS = {
       bannerImg: "img/sponsors/monello-banner.png",  // imagem 800x180px para o card master
       link: "https://www.instagram.com/monello_oficial/",
       instagram: "https://www.instagram.com/monello_oficial/",
-      facebook: "https://www.facebook.com/MonelloOficial/",             // preencha com a URL do Facebook se houver
+      facebook: null,             // preencha com a URL do Facebook se houver
       // whatsapp: "5551999999999",  // descomente e preencha para exibir ícone do WhatsApp
       photos: []
     },
@@ -1197,6 +1197,48 @@ function getAlphabetical() {
 /** Busca jogador por ID */
 function getPlayerById(id) {
   return SRDS.players.find(p => p.id === id) || null;
+}
+
+
+/**
+ * Retorna dados por rodada para o gráfico de evolução do jogador.
+ * Cada item representa uma rodada com resultado registrado.
+ * jouEu: se o jogador participou; gols/assists/points: stats daquela rodada.
+ * Usado nos dois gráficos do perfil (por rodada e acumulado).
+ */
+function getPlayerChartData(playerId) {
+  const rodadas = SRDS.matches.filter(m => m.result !== null);
+  let acumGols = 0, acumAss = 0, acumPts = 0;
+
+  return rodadas.map(m => {
+    const inAzul = (m.teamAzul  || []).includes(playerId);
+    const inVerm = (m.teamVermelho || []).includes(playerId);
+    const jogou  = inAzul || inVerm;
+
+    let gols = 0, assists = 0, points = 0;
+    if (jogou) {
+      const azulWin = m.result.azul > m.result.vermelho;
+      const vermWin = m.result.vermelho > m.result.azul;
+      if (m.result.azul === m.result.vermelho)    points = 1;
+      else if (inAzul && azulWin)                 points = 3;
+      else if (inVerm && vermWin)                 points = 3;
+      (m.scorers || []).forEach(ev => { if (ev.playerId === playerId) gols++; });
+      (m.assists || []).forEach(ev => { if (ev.playerId === playerId) assists++; });
+    }
+
+    acumGols += gols;
+    acumAss  += assists;
+    acumPts  += points;
+
+    return {
+      round:       m.round,
+      jogou,
+      // valores daquela rodada
+      gols, assists, points,
+      // valores acumulados até aqui
+      acumGols, acumAss, acumPts
+    };
+  });
 }
 
 /** Calcula rank de um jogador nas três categorias */
