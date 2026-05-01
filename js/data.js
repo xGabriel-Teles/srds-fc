@@ -991,7 +991,7 @@ const SRDS = {
       bannerImg: "img/sponsors/monello-banner.png",  // imagem 800x180px para o card master
       link: "https://www.instagram.com/monello_oficial/",
       instagram: "https://www.instagram.com/monello_oficial/",
-      facebook: null,             // preencha com a URL do Facebook se houver
+      facebook: "https://www.facebook.com/MonelloOficial/",             // preencha com a URL do Facebook se houver
       // whatsapp: "5551999999999",  // descomente e preencha para exibir ícone do WhatsApp
       photos: []
     },
