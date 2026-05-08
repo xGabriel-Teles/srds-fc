@@ -3193,3 +3193,33 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
   .chart-toggle-btn { font-size: 10px; padding: 4px 9px; }
 }
 
+
+/* ── Indicadores de movimento de posição (▲ subiu / ▼ desceu / — manteve) ── */
+.rank-movement {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.rank-up {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+.rank-down {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+.rank-same {
+  color: var(--cinza);
+  background: rgba(160, 160, 160, 0.12);
+  font-size: 13px;
+  padding: 0 5px;
+}

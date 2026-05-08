@@ -79,8 +79,9 @@
     renderHeader('gols.html');
     renderFooter();
 
-    var allPlayers = getGoalsRanking();
-    var list       = document.getElementById('rankingList');
+    var allPlayers  = getGoalsRanking();
+    var movement    = getRankingMovement('goals');
+    var list        = document.getElementById('rankingList');
     var filterBar  = document.getElementById('filterBar');
     var POSICOES   = ['Goleiro','Fixo','Ala','Meia','Ponta','Centroavante'];
     var filtroAtivo = null;
@@ -124,13 +125,14 @@
         var pct    = (p.stats.goals / maxGols) * 100;
         var posCls = rank <= 3 ? ' top' + rank : '';
         var injTag = p.injury ? '<span class="ranking-injury-tag">🚑</span>' : '';
+        var movBadge = renderMovementBadge(movement[p.id]);
 
         var item = document.createElement('div');
         item.className = 'ranking-item';
         item.innerHTML =
           '<div class="ranking-pos' + posCls + '">' + rank + '</div>' +
           '<div class="ranking-bar-wrap">' +
-            '<div class="ranking-name">' + p.name + injTag +
+            '<div class="ranking-name">' + p.name + injTag + movBadge +
               '<span style="font-size:11px;color:var(--cinza);font-weight:400;margin-left:6px;">' + p.position + '</span>' +
             '</div>' +
             '<div class="ranking-bar-bg">' +

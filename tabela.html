@@ -98,6 +98,7 @@
       disputadas + ' rodada' + (disputadas !== 1 ? 's' : '') + ' disputada' + (disputadas !== 1 ? 's' : '');
 
     const allStandings = getStandings();
+    const movement     = getRankingMovement('standings');
     const tbody        = document.getElementById('standingsBody');
     const filterBar    = document.getElementById('filterBar');
 
@@ -147,13 +148,14 @@
           ? '<td class="col-rank"><span class="rank-badge rank-' + rank + '">' + rank + '</span></td>'
           : '<td class="col-rank">' + rank + '</td>';
         var injuryTag = p.injury ? ' <span class="ranking-injury-tag">🚑</span>' : '';
+        var movBadge  = renderMovementBadge(movement[p.id]);
 
         var tr = document.createElement('tr');
         tr.className = rowCls;
         tr.innerHTML =
           rankCell +
           '<td class="col-name"><div class="player-name-cell">' +
-            p.name + injuryTag +
+            p.name + injuryTag + movBadge +
             '<span class="player-pos-pill">' + p.position + '</span>' +
           '</div></td>' +
           '<td>' + p.stats.matches  + '</td>' +
