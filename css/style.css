@@ -3223,3 +3223,20 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
   font-size: 13px;
   padding: 0 5px;
 }
+
+/* ── Cruz médica de lesão na legenda do gráfico ── */
+.chart-legend-injury-cross {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid #e4738a;
+  background: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  color: #e4738a;
+  flex-shrink: 0;
+}

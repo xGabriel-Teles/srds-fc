@@ -61,6 +61,15 @@
  *   injury: null                                     → sem lesão
  *   injury: { name: "Entorse", returnDate: "15/05/2026" } → lesionado
  *   Aparece com 🚑 no ranking e com banner no perfil.
+ *
+ * CAMPO injuredRounds (opcional) nos jogadores:
+ *   injuredRounds: [3, 4, 5]  → rodadas em que o atleta ficou ausente por lesão
+ *   injuredRounds: null       → nenhuma rodada perdida por lesão (ou não informado)
+ *   Essas rodadas aparecem no gráfico de evolução com uma cruz vermelha (✕)
+ *   em vez do círculo vermelho de ausência normal, preservando o histórico
+ *   mesmo após o término da lesão (quando injury for removido/zerado).
+ *   As estatísticas (frequência, aproveitamento) NÃO são afetadas — a ausência
+ *   por lesão continua contando normalmente como ausência.
  */
 
 const SRDS = {
@@ -373,6 +382,7 @@ const SRDS = {
         uni2: "img/players/gabriel-vermelho.png"
       },
       injury: { name: "Septoplastia", returnDate: "10/05/2026" },
+      injuredRounds: [6,7],
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
       ]
@@ -799,6 +809,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
+      injuredRounds: [1,2,3, 4, 5,6,7],
       awards: []
     },
     {
@@ -1210,10 +1221,19 @@ function getPlayerChartData(playerId) {
   const rodadas = SRDS.matches.filter(m => m.result !== null);
   let acumGols = 0, acumAss = 0, acumPts = 0;
 
+  // Conjunto de rodadas perdidas por lesão para este jogador
+  const player = getPlayerById(playerId);
+  const injuredRoundsSet = new Set(
+    (player && player.injuredRounds) ? player.injuredRounds : []
+  );
+
   return rodadas.map(m => {
     const inAzul = (m.teamAzul  || []).includes(playerId);
     const inVerm = (m.teamVermelho || []).includes(playerId);
     const jogou  = inAzul || inVerm;
+
+    // Ausência por lesão: não jogou E a rodada está em injuredRounds
+    const lesionado = !jogou && injuredRoundsSet.has(m.round);
 
     let gols = 0, assists = 0, points = 0;
     if (jogou) {
@@ -1233,6 +1253,7 @@ function getPlayerChartData(playerId) {
     return {
       round:       m.round,
       jogou,
+      lesionado,   // true = ausente por lesão (exibe ✕ no gráfico)
       // valores daquela rodada
       gols, assists, points,
       // valores acumulados até aqui

@@ -525,17 +525,47 @@
           ctx.textAlign = 'center';
           ctx.fillText('Rd ' + d.round, x, mt + gH + 14);
 
-          // Círculo de presença (verde = jogou, vermelho = não jogou)
+          // Círculo de presença (verde = jogou, vermelho = ausente normal)
+          // Cruz vermelha (✕) = ausente por lesão
           const circY = mt + gH + 34;
           const circR = 6;
-          ctx.beginPath();
-          ctx.arc(x, circY, circR, 0, Math.PI * 2);
-          ctx.fillStyle = d.jogou ? '#5ecf82' : '#e4738a';
-          ctx.fill();
-          // Borda do círculo
-          ctx.strokeStyle = d.jogou ? '#3aad62' : '#c45570';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
+          if (d.jogou) {
+            // ── Presente: círculo verde ──
+            ctx.beginPath();
+            ctx.arc(x, circY, circR, 0, Math.PI * 2);
+            ctx.fillStyle   = '#5ecf82';
+            ctx.strokeStyle = '#3aad62';
+            ctx.lineWidth   = 1.5;
+            ctx.fill();
+            ctx.stroke();
+          } else if (d.lesionado) {
+            // ── Ausente por lesão: cruz médica (+) dentro de círculo ──
+            // Círculo branco com borda vermelha (estilo Cruz Vermelha)
+            ctx.beginPath();
+            ctx.arc(x, circY, circR, 0, Math.PI * 2);
+            ctx.fillStyle   = '#ffffff';
+            ctx.strokeStyle = '#e4738a';
+            ctx.lineWidth   = 1.5;
+            ctx.fill();
+            ctx.stroke();
+            // Cruz médica (+): dois retângulos sobrepostos em vermelho
+            const armLen = circR * 0.52; // comprimento de cada braço a partir do centro
+            const armW   = circR * 0.28; // meia-largura do braço
+            ctx.fillStyle = '#e4738a';
+            ctx.beginPath();
+            ctx.rect(x - armW,   circY - armLen, armW * 2, armLen * 2); // vertical
+            ctx.rect(x - armLen, circY - armW,   armLen * 2, armW * 2); // horizontal
+            ctx.fill();
+          } else {
+            // ── Ausente normal: círculo vermelho ──
+            ctx.beginPath();
+            ctx.arc(x, circY, circR, 0, Math.PI * 2);
+            ctx.fillStyle   = '#e4738a';
+            ctx.strokeStyle = '#c45570';
+            ctx.lineWidth   = 1.5;
+            ctx.fill();
+            ctx.stroke();
+          }
         });
 
         // ── Eixos ──
@@ -612,12 +642,18 @@
           // Círculos de presença
           '<span class="chart-legend-item" style="margin-left:auto;">' +
             '<span class="chart-legend-dot" style="background:#5ecf82;border:1.5px solid #3aad62"></span>' +
-            '<span style="color:#5ecf82;font-weight:700;">Partida presente</span>' +
+            '<span style="color:#5ecf82;font-weight:700;">Presente</span>' +
           '</span>' +
           '<span class="chart-legend-item">' +
             '<span class="chart-legend-dot" style="background:#e4738a;border:1.5px solid #c45570"></span>' +
-            '<span style="color:#e4738a;font-weight:700;">Partida ausente</span>' +
-          '</span>';
+            '<span style="color:#e4738a;font-weight:700;">Ausente</span>' +
+          '</span>' +
+          (data.some(function(d) { return d.lesionado; })
+            ? '<span class="chart-legend-item">' +
+                '<span class="chart-legend-injury-cross" aria-hidden="true">+</span>' +
+                '<span style="color:#e4738a;font-weight:700;">Lesionado</span>' +
+              '</span>'
+            : '');
       }
 
       // ── Valores: Gráfico A — por rodada, zero quando ausente ──
