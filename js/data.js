@@ -339,6 +339,45 @@ const SRDS = {
         { playerId: "rodrigo-p", team: "azul" }
       ]
     },
+    {
+      round: 8,
+      date: "09/05/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 5, vermelho: 10 },
+      mvp: "rodrigo-p",
+      teamAzul: [{guest: true, name: "Rafael", position: "Goleiro", number: 1}, "ivan", "thiago","alemao", "milica", "wesley", "alef", "gabriel", "augusto", "filipe", "vander"],
+      teamVermelho: ["vinicius", "biro","germano", "everson", "erig", "cabelo", "alexandre", "krigor", "rodrigo-p", "marcelo"],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "alexandre", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "alef", team: "azul" },
+        { playerId: "alemao", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+      ],
+      assists: [
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "alef", team: "azul" }
+      ]
+    },
   ],
 
   /**
@@ -381,7 +420,7 @@ const SRDS = {
         uni1: "img/players/gabriel-azul.png", 
         uni2: "img/players/gabriel-vermelho.png"
       },
-      injury: { name: "Septoplastia", returnDate: "10/05/2026" },
+      //injury: { name: "Septoplastia", returnDate: "10/05/2026" },
       injuredRounds: [6,7],
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
