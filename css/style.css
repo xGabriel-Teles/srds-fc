@@ -1891,10 +1891,10 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 .match-teams-grid { display:none; grid-template-columns:1fr 1fr; gap:20px; }
 @media (min-width: 700px) { .match-teams-grid { display:grid; } }
 
-.match-team-col { border-radius:var(--radius); overflow:hidden; border:1px solid var(--azul-borda); }
+.match-team-col { border-radius:var(--radius); overflow:hidden; border:1px solid var(--azul-borda); display:flex; flex-direction:column; }
 
 /* Ajuste 7 — cores internas dos times */
-.match-team-body { }
+.match-team-body { flex:1; }
 .azul-body  { background: rgba(20, 38, 64, 0.85); }
 .vermelho-body { background: rgba(72, 18, 30, 0.7); }
 
@@ -3209,20 +3209,9 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
   line-height: 1.4;
   flex-shrink: 0;
 }
-.rank-up {
-  color: #22c55e;
-  background: rgba(34, 197, 94, 0.12);
-}
-.rank-down {
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.12);
-}
-.rank-same {
-  color: var(--cinza);
-  background: rgba(160, 160, 160, 0.12);
-  font-size: 13px;
-  padding: 0 5px;
-}
+.rank-up   { color: #22c55e; background: rgba(34,197,94,0.12); }
+.rank-down { color: #ef4444; background: rgba(239,68,68,0.12); }
+.rank-same { color: var(--cinza); background: rgba(160,160,160,0.12); font-size: 13px; padding: 0 5px; }
 
 /* ── Cruz médica de lesão na legenda do gráfico ── */
 .chart-legend-injury-cross {
@@ -3239,4 +3228,76 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
   line-height: 1;
   color: #e4738a;
   flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   GRÁFICO RADAR DE ATRIBUTOS
+   Desktop: 3ª coluna do profile-hero (ao lado da foto e info)
+   Mobile : entre foto e info, via CSS order
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Desktop: profile-hero vira 3 colunas quando há radar */
+.profile-hero.has-radar {
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Wrapper da 3ª coluna — alinha o card ao centro verticalmente */
+.profile-hero-radar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card container — mesmo padrão dos chart-card / profile-stat-card */
+.radar-hero-card {
+  background: var(--azul-medio);
+  border: 1px solid var(--azul-borda);
+  border-radius: var(--radius);
+  padding: 8px 8px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: border-color var(--transition);
+}
+.radar-hero-card:hover { border-color: var(--ouro-escuro); }
+
+/* Título "ATRIBUTOS" */
+.radar-hero-title {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ouro);
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+/* Canvas do radar */
+#radarCanvas {
+  display: block;
+}
+
+/* Seção standalone — mantida oculta (não usada) */
+.radar-section { display: none; }
+
+/* Mobile: empilha tudo em coluna única, radar entre foto e info */
+@media (max-width: 640px) {
+  .profile-hero.has-radar {
+    grid-template-columns: 1fr;
+  }
+  .profile-hero.has-radar > div:first-child { order: 1; }
+  .profile-hero-radar                       { order: 2; }
+  .profile-hero.has-radar .profile-info     { order: 3; }
+
+  .radar-hero-card {
+    padding: 10px 10px 8px;
+  }
+  .radar-hero-title {
+    font-size: 15px;
+  }
 }

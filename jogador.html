@@ -126,6 +126,9 @@
       </div>
     </section>
 
+    <!-- ── Gráfico Radar de Atributos ── -->
+    <!-- O canvas #radarCanvas é injetado dentro do profile-hero como 3ª coluna via JS -->
+
   </main>
 
   <footer class="site-footer"></footer>
@@ -209,8 +212,6 @@
           : '<span class="profile-tag tag-foot">' + idadeCalc + ' anos</span>';
         tags += idadeTag;
       }
-      if (p.nickname && p.nickname !== p.name) tags += `<span class="profile-tag tag-foot">"${p.nickname}"</span>`;
-
       // Banner de aniversário — aparece no topo do perfil se for o aniversário do jogador
       var birthdayBannerHtml = '';
       if (ehAniversario) {
@@ -254,12 +255,17 @@
       </div>
     `).join('');
 
+      // ── Calcula dados do radar para incluir no hero ──
+      const radarData = getRadarData(p.id);
+      const heroEl = document.getElementById('profileHero');
+      if (radarData) heroEl.classList.add('has-radar');
+
       // Renderiza o banner de aniversário ACIMA do grid de perfil (fora do profile-hero)
-      var heroEl = document.getElementById('profileHero');
+      var heroElRef = document.getElementById('profileHero');
       if (birthdayBannerHtml) {
         var bannerWrap = document.createElement('div');
         bannerWrap.innerHTML = birthdayBannerHtml;
-        heroEl.parentNode.insertBefore(bannerWrap, heroEl);
+        heroElRef.parentNode.insertBefore(bannerWrap, heroElRef);
       }
 
       document.getElementById('profileHero').innerHTML = `
@@ -322,6 +328,15 @@
           <div class="profile-ranks">${rankItems}</div>
         </div>
       </div>
+
+      <!-- Radar (desktop: 3ª coluna; mobile: entre foto e info via CSS order) -->
+      ${radarData ? `
+        <div class="profile-hero-radar">
+          <div class="radar-hero-card">
+            <div class="radar-hero-title">ATRIBUTOS</div>
+            <canvas id="radarCanvas"></canvas>
+          </div>
+        </div>` : ''}
     `;
 
       // Flip interaction
@@ -420,6 +435,8 @@
       }
       // ── Gráficos de evolução ──────────────────────────────────────
       renderCharts(p.id);
+      // ── Gráfico radar de atributos ────────────────────────────────
+      renderRadar(p.id);
     }
 
     // ─────────────────────────────────────────────────────────────────
@@ -685,6 +702,146 @@
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => { redrawA(); redrawB(); }, 150);
+      });
+    }
+    // ─────────────────────────────────────────────────────────────────
+    // GRÁFICO RADAR DE ATRIBUTOS — embutido no profile-hero
+    // Desktop: 3ª coluna | Mobile: entre foto e info
+    // Sem valores nos pontos, sem legenda lateral — só o gráfico
+    // ─────────────────────────────────────────────────────────────────
+    function renderRadar(playerId) {
+      const radarData = getRadarData(playerId);
+      if (!radarData) return; // sem dados → não exibe nada
+
+      const canvas = document.getElementById('radarCanvas');
+      if (!canvas) return;
+
+      // Cores por grupo (sentido horário a partir do topo)
+      // FINALIZAÇÃO no topo (posição 0) — label horizontal, não corta
+      var GROUP_COLORS = [
+        '#7eb3e8', // FINALIZAÇÃO — azul claro  (topo)
+        '#5ecf82', // PASSE       — verde
+        '#e4738a', // DRIBLE      — rosa
+        '#a78bde', // DEFESA      — lilás
+        '#f5a623', // FÍSICO      — laranja
+        '#c99f40', // RITMO       — ouro
+      ];
+
+      function draw() {
+        var dpr      = window.devicePixelRatio || 1;
+        var isMobile = window.innerWidth <= 640;
+
+        // Canvas −5% sobre v2.3d (299→284 desktop, 243→231 mobile)
+        var maxSize = isMobile ? 231 : 284;
+        var size    = Math.min(canvas.parentElement.clientWidth || maxSize, maxSize);
+
+        canvas.width        = size * dpr;
+        canvas.height       = size * dpr;
+        canvas.style.width  = size + 'px';
+        canvas.style.height = size + 'px';
+
+        var ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+
+        var cx  = size / 2;
+        var cy  = size / 2;
+
+        // Raio maior = hexágono ocupa mais área, restando menos espaço
+        // para os labels — equilíbrio entre gráfico grande e labels legíveis
+        var R   = size * 0.34;
+        var N   = radarData.length; // 6
+        var MAX = 10;
+
+        // Offset reduzido: labels mais colados ao hexágono
+        var LABEL_OFFSET = size * 0.065;
+
+        ctx.clearRect(0, 0, size, size);
+
+        function angle(i) { return (2 * Math.PI * i / N) - Math.PI / 2; }
+        function pt(i, val) {
+          var a = angle(i);
+          var r = (val / MAX) * R;
+          return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+        }
+
+        // ── Anéis de referência (2, 4, 6, 8, 10) ──
+        [2, 4, 6, 8, 10].forEach(function(v) {
+          ctx.beginPath();
+          for (var i = 0; i < N; i++) {
+            var p = pt(i, v);
+            i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+          }
+          ctx.closePath();
+          ctx.strokeStyle = v === 10 ? 'rgba(201,159,64,0.30)' : 'rgba(45,79,115,0.55)';
+          ctx.lineWidth   = v === 10 ? 1.5 : 1;
+          ctx.stroke();
+        });
+
+        // ── Linhas dos eixos ──
+        for (var i = 0; i < N; i++) {
+          var ep = pt(i, 10);
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(ep.x, ep.y);
+          ctx.strokeStyle = 'rgba(45,79,115,0.45)';
+          ctx.lineWidth   = 1;
+          ctx.stroke();
+        }
+
+        // ── Área preenchida ──
+        ctx.beginPath();
+        radarData.forEach(function(g, i) {
+          var p = pt(i, g.hasData ? g.value : 0);
+          i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+        });
+        ctx.closePath();
+        ctx.fillStyle   = 'rgba(201,159,64,0.18)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(201,159,64,0.75)';
+        ctx.lineWidth   = 1.8;
+        ctx.stroke();
+
+        // ── Pontos coloridos — levemente maiores (0.038 → era 0.028) ──
+        radarData.forEach(function(g, i) {
+          if (!g.hasData) return;
+          var val = g.value;
+          var p   = pt(i, val);
+          var col = GROUP_COLORS[i];
+          var r   = size * 0.015; // 60% menor que antes (era 0.038)
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fillStyle   = col;
+          ctx.strokeStyle = 'rgba(25,42,62,0.9)';
+          ctx.lineWidth   = 1.8;
+          ctx.fill();
+          ctx.stroke();
+        });
+
+        // ── Labels dos grupos — +22% em relação à versão anterior (0.031 → 0.038) ──
+        var fSize = Math.round(size * 0.038);
+        radarData.forEach(function(g, i) {
+          var a   = angle(i);
+          var lx  = cx + (R + LABEL_OFFSET) * Math.cos(a);
+          var ly  = cy + (R + LABEL_OFFSET) * Math.sin(a);
+          var col = GROUP_COLORS[i];
+
+          ctx.font         = 'bold ' + fSize + 'px \'Barlow Semi Condensed\', Arial';
+          ctx.fillStyle    = col;
+          ctx.textAlign    = Math.abs(Math.cos(a)) < 0.15 ? 'center'
+                           : Math.cos(a) < 0             ? 'right' : 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(g.label, lx, ly);
+          ctx.textBaseline = 'alphabetic';
+        });
+      }
+
+      requestAnimationFrame(draw);
+
+      var radarResizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(radarResizeTimer);
+        radarResizeTimer = setTimeout(draw, 150);
       });
     }
   </script>
