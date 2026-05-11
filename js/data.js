@@ -1578,7 +1578,7 @@ const SRDS = {
       number: { uni1: 90, uni2: 90 },
       position: "Meia",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
+      birthDate: "31/05/1990",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1991, idade atual: 35 anos)
       photo: {
         uni1: "img/players/vander-azul.png", 
         uni2: "img/players/vander-vermelho.png"
