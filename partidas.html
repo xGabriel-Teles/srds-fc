@@ -71,7 +71,7 @@
     document.getElementById('matchCount').textContent =
       `${SRDS.matches.length} rodada${SRDS.matches.length !== 1 ? 's' : ''}`;
     const grid = document.getElementById('partidasGrid');
-    SRDS.matches.forEach(m => {
+    [...SRDS.matches].reverse().forEach(m => {
       const hasResult = m.result !== null;
       const hasDetails = hasResult || m.location || m.time ||
         (m.teamAzul && m.teamAzul.length > 0) ||
