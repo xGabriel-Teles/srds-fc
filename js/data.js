@@ -368,6 +368,7 @@ const SRDS = {
       assists: [
         { playerId: "krigor", team: "vermelho" },
         { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
@@ -376,6 +377,38 @@ const SRDS = {
         { playerId: "milica", team: "azul" },
         { playerId: "milica", team: "azul" },
         { playerId: "alef", team: "azul" }
+      ]
+    },
+    {
+      round: 9,
+      date: "17/05/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 9, vermelho: 1 },
+      mvp: "krigor",
+      teamAzul: ["vinicius", "cabelo", "thiago", "chico", "alexandre", "wesley", "rodrigo-costa", "adler", "marcelo", "krigor"],
+      teamVermelho: ["edu", "biro","germano", "ivan", "erig", "gabriel", "iago", "augusto", "rodrigo-p", "alef"],
+      scorers: [
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "chico", team: "azul" },
+        { playerId: "rodrigo-costa", team: "azul" },
+        { playerId: "rodrigo-costa", team: "azul" },
+        { playerId: "alef", team: "vermelho" },
+      ],
+      assists: [
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "alexandre", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "thiago", team: "azul" },
+        { playerId: "adler", team: "azul" },
+        { playerId: "chico", team: "azul" }
       ]
     },
   ],
