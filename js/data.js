@@ -411,6 +411,35 @@ const SRDS = {
         { playerId: "chico", team: "azul" }
       ]
     },
+    {
+      round: 10,
+      date: "23/05/2026",
+      time: "09:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 4, vermelho: 4 },
+      mvp: "milica",
+      teamAzul: ["milica", "germano", "alemao", "alexandre", "gabriel", "vander", "augusto", "alef", "weslley", {guest: true, name: "Adrian", position: "Ponta", number: 20}],
+      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "goleiro", number: 1}, "cabelo","thiago", "wesley", "erig", "marcelo", "iago", "keke", {guest: true, name: "Jederson", position: "Ponta", number: 20}, "filipe", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { guestName: "Jederson", team: "vermelho" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "weslley", team: "azul" },
+        { playerId: "alef", team: "azul" }
+      ],
+      assists: [
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { playerId: "alemao", team: "azul" },
+        { playerId: "filipe", team: "vermelho" },
+        { playerId: "filipe", team: "vermelho" },
+        { guestName: "Anderson", team: "vermelho" },
+        { playerId: "erig", team: "vermelho" }
+      ]
+    },
   ],
 
   /**
@@ -1037,7 +1066,7 @@ const SRDS = {
         uni1: "img/players/vinicius-azul.png", 
         uni2: "img/players/vinicius-amarelo.png"
       },
-      injury: null,
+      injury: { name: "Distensão muscular do adutor direito", returnDate: "13/06/2026" },
       awards: [
         { year: 2025, title: "Melhor Goleiro", icon: "🧤" }
       ],
