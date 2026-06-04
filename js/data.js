@@ -322,7 +322,7 @@ const SRDS = {
       result: { azul: 2, vermelho: 4 },
       mvp: "weslley",
       teamAzul: ["vinicius", "biro", "thiago","alexandre", "iago",  "krigor", "adler", "rodrigo-p", "marcelo"],
-      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "vander", "jean", "weslley", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
+      teamVermelho: ["silvio", "milica","chico", "wesley", "erig", "vander", "jean", "weslley", "anderson"],
       scorers: [
         { playerId: "weslley", team: "vermelho" },
         { playerId: "weslley", team: "vermelho" },
@@ -419,12 +419,12 @@ const SRDS = {
       result: { azul: 4, vermelho: 4 },
       mvp: "milica",
       teamAzul: ["milica", "germano", "alemao", "alexandre", "gabriel", "vander", "augusto", "alef", "weslley", {guest: true, name: "Adrian", position: "Ponta", number: 20}],
-      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "goleiro", number: 1}, "cabelo","thiago", "wesley", "erig", "marcelo", "iago", "keke", {guest: true, name: "Jederson", position: "Ponta", number: 20}, "filipe", { guest: true, name: "Anderson", position: "Centroavante", number: 333 }],
+      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "goleiro", number: 1}, "cabelo","thiago", "wesley", "erig", "marcelo", "iago", "keke", "jederson", "filipe", "anderson"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
-        { guestName: "Jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
         { playerId: "weslley", team: "azul" },
         { playerId: "weslley", team: "azul" },
         { playerId: "weslley", team: "azul" },
@@ -436,7 +436,7 @@ const SRDS = {
         { playerId: "alemao", team: "azul" },
         { playerId: "filipe", team: "vermelho" },
         { playerId: "filipe", team: "vermelho" },
-        { guestName: "Anderson", team: "vermelho" },
+        { playerId: "anderson", team: "vermelho" },
         { playerId: "erig", team: "vermelho" }
       ]
     },
@@ -2797,6 +2797,134 @@ const SRDS = {
       photo: {
         uni1: "img/players/silvio-azul.png", 
         uni2: "img/players/silvio-vermelho.png"
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    {
+      id: "jederson",
+      name: "Jéderson",
+      fullName: "Jéderson dos Santos Ablo",
+      nickname: "Jéder",
+      number: { uni1: null, uni2: null},
+      position: "Ponta",
+      foot: "Esquerdo",
+      birthDate: "15/05/1993",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: null, 
+        uni2: null, 
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    {
+      id: "anderson",
+      name: "Anderson",
+      fullName: "Anderson Carvalho",
+      nickname: "Calcinha",
+      number: { uni1: null, uni2: null },
+      position: "Centroavante",
+      foot: "Direito",
+      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: null, 
+        uni2: null,
       },
       injury: null,
       awards: [],
