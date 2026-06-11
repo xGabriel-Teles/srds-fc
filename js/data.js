@@ -446,7 +446,7 @@ const SRDS = {
       time: "10:00",
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 4, vermelho: 12 },
-      mvp: "milica",
+      mvp: "edu",
       teamAzul: ["miliquinha", "cabelo", "alemao", "thiago", "gabriel", "krigor", "rodrigo-p", "rodrigo-costa", "chico", {guest: true, name: "Eder", position: "Meia", number: 333}],
       teamVermelho: ["edu", "biro","germano", "wesley", "milica", "marcelo", "anderson", "jederson", "adler", "gustavo"],
       scorers: [
