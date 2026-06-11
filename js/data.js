@@ -129,13 +129,13 @@ const SRDS = {
       result: { azul: 4, vermelho: 5 },
       mvp: "gabriel",
       teamAzul: ["vinicius", "milica","chico", "alexandre", "adler", "wesley", "gustavo", "filipe", "alef", "augusto"],
-      teamVermelho: ["edu", "thiago", "germano", "biro", "gabriel", "diego", "baracy", "rodrigo-costa", "weslley", "marcelo"],
+      teamVermelho: ["edu", "thiago", "germano", "biro", "gabriel", {guest: true, name: "Diego", position: "Meia", number: 20}, "baracy", "rodrigo-costa", "weslley", "marcelo"],
       scorers: [
         { playerId: "gabriel", team: "vermelho" },
         { playerId: "gabriel", team: "vermelho" },
         { playerId: "germano", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
-        { playerId: "diego", team: "vermelho" },
+        { guestName: "diego", team: "vermelho" },
         { playerId: "wesley", team: "azul" },
         { playerId: "augusto", team: "azul" },
         { playerId: "filipe", team: "azul" },
@@ -438,6 +438,52 @@ const SRDS = {
         { playerId: "filipe", team: "vermelho" },
         { playerId: "anderson", team: "vermelho" },
         { playerId: "erig", team: "vermelho" }
+      ]
+    },
+    {
+      round: 11,
+      date: "06/06/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 4, vermelho: 12 },
+      mvp: "milica",
+      teamAzul: ["miliquinha", "cabelo", "alemao", "thiago", "gabriel", "krigor", "rodrigo-p", "rodrigo-costa", "chico", {guest: true, name: "Eder", position: "Meia", number: 333}],
+      teamVermelho: ["edu", "biro","germano", "wesley", "milica", "marcelo", "anderson", "jederson", "adler", "gustavo"],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "anderson", team: "vermelho" },
+        { playerId: "anderson", team: "vermelho" },
+        { playerId: "adler", team: "vermelho" },
+        { playerId: "adler", team: "vermelho" },
+        { playerId: "gustavo", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" }
+      ],
+      assists: [
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "alemao", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "anderson", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" }
       ]
     },
   ],
@@ -1379,7 +1425,7 @@ const SRDS = {
         },
       },
     },
-    {
+    /*{
       id: "diego",
       name: "Diego Menezes",
       fullName: "Diego Menezes Peixoto",
@@ -1439,7 +1485,7 @@ const SRDS = {
           agressividade: null, // Agressividade
         },
       },
-    },
+    },*/
     {
       id: "giovane",
       name: "Giovane 'Maninho'",
@@ -2916,12 +2962,12 @@ const SRDS = {
     {
       id: "anderson",
       name: "Anderson",
-      fullName: "Anderson Carvalho",
+      fullName: "Anderson Carvalho da Silva",
       nickname: "Calcinha",
-      number: { uni1: null, uni2: null },
+      number: { uni1: "87", uni2: "99" },
       position: "Centroavante",
       foot: "Direito",
-      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      birthDate: "27/04/1987",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
       photo: {
         uni1: null, 
         uni2: null,
