@@ -486,6 +486,34 @@ const SRDS = {
         { playerId: "wesley", team: "vermelho" }
       ]
     },
+    {
+      round: 12,
+      date: "13/06/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 5, vermelho: 3 },
+      mvp: "silvio",
+      teamAzul: ["silvio", "germano", "ivan", "erig", "iago", "wesley", "augusto", "marcelo", "jederson", "chico"],
+      teamVermelho: ["vinicius", "milica","thiago", "rodrigo-costa", "gabriel", "anderson", "adler", "biro", "jean", "weslley"],
+      scorers: [
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "weslley", team: "vermelho" },
+        { playerId: "adler", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "jederson", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { playerId: "chico", team: "azul" }
+      ],
+      assists: [
+        { playerId: "wesley", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "jederson", team: "azul" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "anderson", team: "vermelho" }
+      ]
+    },
   ],
 
   /**
@@ -662,7 +690,8 @@ const SRDS = {
         uni1: "img/players/alexandre-azul.png", 
         uni2: "img/players/alexandre-vermelho.png"
       },
-      injury: null,
+      //injury: { name: "xxxxxxxxx", returnDate: "xx/0x/2026" },
+      injuredRounds: [11,12],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -1112,7 +1141,8 @@ const SRDS = {
         uni1: "img/players/vinicius-azul.png", 
         uni2: "img/players/vinicius-amarelo.png"
       },
-      injury: { name: "Distensão muscular do adutor direito", returnDate: "13/06/2026" },
+      //injury: { name: "Distensão muscular do adutor direito", returnDate: "13/06/2026" },
+      injuredRounds: [10, 11],
       awards: [
         { year: 2025, title: "Melhor Goleiro", icon: "🧤" }
       ],
@@ -2009,7 +2039,7 @@ const SRDS = {
         uni1: "img/players/erig-azul.png", 
         uni2: "img/players/erig-vermelho.png"
       },
-      injury: null,
+      //injury: { name: "xxxxxxxxx", returnDate: "xx/0x/2026" },
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2900,7 +2930,7 @@ const SRDS = {
       name: "Jéderson",
       fullName: "Jéderson dos Santos Ablo",
       nickname: "Jéder",
-      number: { uni1: null, uni2: null},
+      number: { uni1: "11", uni2: "11"},
       position: "Ponta",
       foot: "Esquerdo",
       birthDate: "15/05/1993",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
