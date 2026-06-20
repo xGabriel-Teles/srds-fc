@@ -514,6 +514,35 @@ const SRDS = {
         { playerId: "anderson", team: "vermelho" }
       ]
     },
+    {
+      round: 13,
+      date: "20/06/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 4, vermelho: 6 },
+      mvp: "miliquinha",
+      teamAzul: [{guest: true, name: "João", position: "Goleiro", number: 1}, "germano", "ivan", "thiago", "adler", "krigor", "augusto", "marcelo", "baracy", "biro"],
+      teamVermelho: ["vinicius", "milica","miliquinha", {guest: true, name: "Rodrigo", position: "Meia", number: 333}, "gabriel", "chico", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, {guest: true, name: "Adrian", position: "Ponta", number: 20}],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "vinicius", team: "vermelho" },
+        { playerId: "chico", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "filipe", team: "vermelho" },        
+        { guestName: "Rodrigo", team: "vermelho" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "adler", team: "azul" }
+      ],
+      assists: [
+        { playerId: "biro", team: "azul" },
+        { playerId: "thiago", team: "azul" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "gabriel", team: "vermelho" },
+        { guestName: "Adrian", team: "vermelho" }
+      ]
+    },
   ],
 
   /**
@@ -690,8 +719,8 @@ const SRDS = {
         uni1: "img/players/alexandre-azul.png", 
         uni2: "img/players/alexandre-vermelho.png"
       },
-      //injury: { name: "xxxxxxxxx", returnDate: "xx/0x/2026" },
-      injuredRounds: [11,12],
+      injury: { name: "Controle da carga", returnDate: "25/10/2026" },
+      injuredRounds: [11,12,13],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2039,7 +2068,8 @@ const SRDS = {
         uni1: "img/players/erig-azul.png", 
         uni2: "img/players/erig-vermelho.png"
       },
-      //injury: { name: "xxxxxxxxx", returnDate: "xx/0x/2026" },
+      injury: { name: "Lesão ligamentar do joelho", returnDate: "15/09/2026" },
+      injuredRounds: [13],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2234,7 +2264,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      injuredRounds: [1,2,3, 4, 5,6,7],
+      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
