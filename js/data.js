@@ -611,7 +611,12 @@ const SRDS = {
         { playerId: "gabriel", team: "vermelho" },
         { guestName: "Adrian", team: "vermelho" }
       ],
-      interview: null,
+      interview: {  youtubeId: "EU079MPwSv0",  // código do vídeo NORMAL (não Shorts)
+      players: [
+    { team: "azul",     playerId: "baracy", playerName: null },
+    { team: "vermelho", playerId: "vinicius",   playerName: null }
+  ]
+},
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
   ],
