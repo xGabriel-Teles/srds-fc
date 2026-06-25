@@ -575,7 +575,12 @@ const SRDS = {
         { playerId: "biro", team: "vermelho" },
         { playerId: "anderson", team: "vermelho" }
       ],
-      interview: null,
+      interview: {  youtubeId: "D8KiHd1JiHg",  // código do vídeo NORMAL (não Shorts)
+      players: [
+    { team: "azul",     playerId: "wesley", playerName: null },
+    { team: "vermelho", playerId: "milica",   playerName: null }
+  ]
+},
       highlight: null
     },
     {
@@ -606,13 +611,8 @@ const SRDS = {
         { playerId: "gabriel", team: "vermelho" },
         { guestName: "Adrian", team: "vermelho" }
       ],
-      interview: {  youtubeId: "D8KiHd1JiHg",  // código do vídeo NORMAL (não Shorts)
-      players: [
-    { team: "azul",     playerId: "wesley", playerName: null },
-    { team: "vermelho", playerId: "milica",   playerName: null }
-  ]
-},
-highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
   ],
 
