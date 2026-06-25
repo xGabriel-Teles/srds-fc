@@ -31,6 +31,9 @@ function renderHeader(activePage) {
         </div>
       </a>
       <nav class="nav-links">${links}</nav>
+      <a href="https://www.youtube.com/@SRDSFC" target="_blank" rel="noopener" class="nav-youtube" style="display:flex" title="Nosso canal no YouTube">
+        ${youtubeIcon()}
+      </a>
       <a href="https://instagram.com/${SRDS.club.instagram}" target="_blank" rel="noopener" class="nav-instagram" style="display:flex">
         ${instagramIcon()}
         @${SRDS.club.instagram}
@@ -41,6 +44,9 @@ function renderHeader(activePage) {
     </div>
     <nav class="nav-drawer" id="navDrawer">
       ${drawerLinks}
+      <a href="https://www.youtube.com/@SRDSFC" target="_blank" rel="noopener" class="nav-youtube">
+        ${youtubeIcon()} YouTube
+      </a>
       <a href="https://instagram.com/${SRDS.club.instagram}" target="_blank" rel="noopener" class="nav-instagram">
         ${instagramIcon()} @${SRDS.club.instagram}
       </a>
@@ -95,6 +101,13 @@ function instagramIcon() {
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
     <circle cx="12" cy="12" r="4"/>
     <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>`;
+}
+
+function youtubeIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 8.6c0-1.7-1.3-3-3-3.1C16.7 5.3 14.4 5.2 12 5.2s-4.7.1-7 .3c-1.7.1-3 1.4-3 3.1C1.9 10.1 1.8 11.6 1.8 13s.1 2.9.2 4.4c0 1.7 1.3 3 3 3.1 2.3.2 4.6.3 7 .3s4.7-.1 7-.3c1.7-.1 3-1.4 3-3.1.1-1.5.2-3 .2-4.4s-.1-2.9-.2-4.4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M10 9.8l5 3.2-5 3.2V9.8z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
   </svg>`;
 }
 

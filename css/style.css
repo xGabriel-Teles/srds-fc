@@ -138,6 +138,38 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 .nav-instagram:hover { background: rgba(201,159,64,0.1); border-color: var(--ouro); }
 .nav-instagram svg { width: 16px; height: 16px; }
 
+/* YouTube — ícone compacto no header (sem texto), ao lado do Instagram */
+.nav-youtube {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--cinza);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+.nav-youtube:hover { background: rgba(255,0,0,0.08); border-color: #ff0000; color: #ff3b30; }
+.nav-youtube svg { width: 19px; height: 19px; }
+
+/* No drawer mobile, exibe com texto "YouTube" como o Instagram */
+.nav-drawer .nav-youtube {
+  width: auto;
+  height: auto;
+  gap: 6px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  margin-top: 8px;
+  justify-content: center;
+  color: var(--branco);
+}
+.nav-drawer .nav-youtube:hover { color: #ff3b30; }
+.nav-drawer .nav-youtube svg { width: 16px; height: 16px; }
+
 /* Hamburger */
 .hamburger {
   display: none;
@@ -1140,7 +1172,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
    ──────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hamburger { display: flex; }
-  .nav-links, .nav-instagram { display: none; }
+  .nav-links, .nav-instagram, .nav-youtube { display: none; }
 
   .standings-table thead th:nth-child(4),
   .standings-table thead th:nth-child(5) { display: none; }
