@@ -42,6 +42,37 @@
  *
  *   assists → assistências da partida (mesmo formato de scorers)
  *
+ * CAMPO interview (opcional) nas partidas — vídeo ÚNICO com até 2 atletas entrevistados:
+ *   interview: null  → sem entrevista nesta rodada
+ *   interview: {
+ *     youtubeId: "dQw4w9WgXcQ",       // código do vídeo (NUNCA use Shorts — ver nota abaixo)
+ *     players: [
+ *       { team: "azul",     playerId: "rodrigo-p", playerName: null },
+ *       { team: "vermelho", playerId: "gabriel",   playerName: null }
+ *     ]
+ *   }
+ *   - Os dois atletas aparecem juntos no MESMO card (é um vídeo só com as duas entrevistas).
+ *   - Se o entrevistado for avulso (sem ID no elenco), use playerId: null e playerName: "Nome".
+ *   - Pode ter só 1 atleta no array "players" se for o caso.
+ *
+ * CAMPO highlight (opcional) nas partidas — vídeo dos melhores momentos da rodada:
+ *   highlight: null somente um se valor não houver vídeo nesta rodada
+ *   highlight: { youtubeId: "dQw4w9WgXcQ" }
+ *
+ * ⚠️ IMPORTANTE SOBRE O youtubeId (interview e highlight):
+ *   - Use APENAS o código do vídeo normal do YouTube, NUNCA links de Shorts.
+ *     Exemplo correto:    https://youtu.be/dQw4w9WgXcQ        → youtubeId: "dQw4w9WgXcQ"
+ *     Exemplo correto:    https://youtube.com/watch?v=dQw4w9WgXcQ → youtubeId: "dQw4w9WgXcQ"
+ *     NÃO use:            https://youtube.com/shorts/XXXXXXX  (Shorts não suportam embed)
+ *   - Mesmo com "Permitir incorporação" ativado no YouTube Studio, vídeos do tipo Shorts
+ *     costumam dar Erro 153 quando embedados — converta o vídeo para um upload normal
+ *     (vídeo "longo", ainda que curto) se quiser que ele toque dentro do site.
+ *   - Se o vídeo continuar bloqueado mesmo sendo um vídeo normal, o site detecta a falha
+ *     automaticamente e abre um modal com player alternativo, sem quebrar a página.
+ *
+ *   Se nenhum dos dois campos (interview/highlight) estiver preenchido na rodada,
+ *   a seção "Entrevistas Pós-Jogo" não aparece na página da partida.
+ *
  * ⚡ STATS AUTOMÁTICOS (v1.9) — campo stats{} REMOVIDO dos jogadores:
  *   As funções getComputedStats(playerId) e getStandings() calculam
  *   partidas, gols, assistências e pontos diretamente das partidas —
@@ -119,7 +150,18 @@ const SRDS = {
         { playerId: "rafael-isco", team: "vermelho" },
         { playerId: "krigor", team: "azul" },
         { playerId: "krigor", team: "azul" },
-      ]
+      ],
+      // Exemplo de preenchimento — substitua pelos códigos reais do YouTube
+      interview: null,
+      // interview: {
+      //   youtubeId: "SEU_CODIGO_AQUI",
+      //   players: [
+      //     { team: "azul",     playerId: "rodrigo-p", playerName: null },
+      //     { team: "vermelho", playerId: "gabriel",   playerName: null }
+      //   ]
+      // },
+      highlight: null
+      // highlight: { youtubeId: "SEU_CODIGO_AQUI" }
     },
     {
       round: 2,
@@ -147,7 +189,9 @@ const SRDS = {
         { playerId: "weslley", team: "vermelho" },
         { playerId: "wesley", team: "azul" },
         { playerId: "gustavo", team: "azul" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 3,
@@ -186,7 +230,9 @@ const SRDS = {
         { playerId: "rodrigo-p", team: "azul" },
         { playerId: "rodrigo-p", team: "azul" },
         { playerId: "giovane", team: "azul" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 4,
@@ -229,7 +275,9 @@ const SRDS = {
         { playerId: "rodrigo-p", team: "azul" },        
         { playerId: "rafael-isco", team: "azul" },
         { playerId: "alexandre", team: "azul" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 5,
@@ -262,7 +310,9 @@ const SRDS = {
         { guestName: "Adriel", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" },
         { playerId: "rodrigo-p", team: "vermelho" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 6,
@@ -312,7 +362,9 @@ const SRDS = {
         { playerId: "iago", team: "azul" },
         { playerId: "germano", team: "azul" },        
         { playerId: "vinicius", team: "azul" },
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 7,
@@ -337,7 +389,9 @@ const SRDS = {
         { playerId: "chico", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
         { playerId: "rodrigo-p", team: "azul" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 8,
@@ -377,7 +431,9 @@ const SRDS = {
         { playerId: "milica", team: "azul" },
         { playerId: "milica", team: "azul" },
         { playerId: "alef", team: "azul" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 9,
@@ -409,7 +465,9 @@ const SRDS = {
         { playerId: "thiago", team: "azul" },
         { playerId: "adler", team: "azul" },
         { playerId: "chico", team: "azul" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 10,
@@ -438,7 +496,9 @@ const SRDS = {
         { playerId: "filipe", team: "vermelho" },
         { playerId: "anderson", team: "vermelho" },
         { playerId: "erig", team: "vermelho" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 11,
@@ -484,7 +544,9 @@ const SRDS = {
         { playerId: "wesley", team: "vermelho" },
         { playerId: "wesley", team: "vermelho" },
         { playerId: "wesley", team: "vermelho" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 12,
@@ -512,7 +574,9 @@ const SRDS = {
         { playerId: "jederson", team: "azul" },
         { playerId: "biro", team: "vermelho" },
         { playerId: "anderson", team: "vermelho" }
-      ]
+      ],
+      interview: null,
+      highlight: null
     },
     {
       round: 13,
@@ -541,7 +605,14 @@ const SRDS = {
         { playerId: "augusto", team: "azul" },
         { playerId: "gabriel", team: "vermelho" },
         { guestName: "Adrian", team: "vermelho" }
-      ]
+      ],
+      interview: {  youtubeId: "D8KiHd1JiHg",  // código do vídeo NORMAL (não Shorts)
+      players: [
+    { team: "azul",     playerId: "wesley", playerName: null },
+    { team: "vermelho", playerId: "milica",   playerName: null }
+  ]
+},
+highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
   ],
 

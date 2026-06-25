@@ -62,9 +62,61 @@
 
   <footer class="site-footer"></footer>
 
+  <!-- ── Modal de vídeo (fallback para Erro 153 / abrir em destaque) ── -->
+  <div id="videoModalOverlay" class="video-modal-overlay" onclick="if(event.target===this) closeVideoModal()">
+    <div class="video-modal-box">
+      <div class="video-modal-head">
+        <span id="videoModalTitle" class="video-modal-title"></span>
+        <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Fechar">✕</button>
+      </div>
+      <div class="video-modal-body" id="videoModalBody"></div>
+      <div class="video-modal-footer">
+        <a id="videoModalYoutubeLink" href="#" target="_blank" rel="noopener" class="video-modal-yt-link">
+          Assistir diretamente no YouTube →
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script src="js/components.js"></script>
   <script>
+    // ── Modal de vídeo: usado como destaque (botão ⛶) e como fallback de Erro 153 ──
+    function openVideoModal(youtubeId, title) {
+      const overlay = document.getElementById('videoModalOverlay');
+      const body    = document.getElementById('videoModalBody');
+      const titleEl = document.getElementById('videoModalTitle');
+      const ytLink  = document.getElementById('videoModalYoutubeLink');
+
+      titleEl.textContent = title || 'Vídeo';
+      ytLink.href = `https://www.youtube.com/watch?v=${youtubeId}`;
+      body.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&autoplay=1"
+          title="${title || 'Vídeo'}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>`;
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      const overlay = document.getElementById('videoModalOverlay');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      // Limpa o iframe para parar a reprodução
+      setTimeout(() => { document.getElementById('videoModalBody').innerHTML = ''; }, 200);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
+  </script>
+  <script>
+
     renderHeader('partidas.html');
     renderFooter();
 
@@ -83,6 +135,30 @@
     } else {
       renderMatch(match);
     }
+
+    /**
+     * Gera o HTML do embed de vídeo. O YouTube não dispara erro de JS quando
+     * bloqueia incorporação (Erro 153) — por isso sempre oferecemos o botão
+     * "⛶" que abre o vídeo em um modal maior / direciona para o YouTube.
+     */
+    function renderVideoEmbed(youtubeId, title) {
+      const safeTitle = String(title).replace(/'/g, "\\'");
+      return `
+        <div class="interview-video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1"
+            title="${title}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+          <button class="interview-fallback-btn" onclick="openVideoModal('${youtubeId}','${safeTitle}')" title="Problemas para assistir? Clique aqui">
+            ⛶ Ampliar / Abrir vídeo
+          </button>
+        </div>`;
+    }
+
 
     function renderMatch(m) {
       document.title = `SRDS FC — Rodada ${m.round}`;
@@ -324,6 +400,72 @@
           </div>
         </div>
       </div>
+
+      ${(function() {
+        const interview = m.interview;
+        const highlight = m.highlight;
+        if (!interview && !highlight) return '';
+
+        // ── Card de Entrevista (1 vídeo, até 2 atletas) ──
+        let interviewCard = '';
+        if (interview && interview.youtubeId) {
+          const peopleHtml = (interview.players || []).map(person => {
+            const p = person.playerId ? getPlayerById(person.playerId) : null;
+            const name = p ? p.name : (person.playerName || 'Atleta');
+            const photoSrc = p && p.photo ? (p.photo.uni1 || null) : null;
+            const photoHtml = photoSrc
+              ? `<img src="${photoSrc}" alt="${name}" class="interview-player-photo">`
+              : `<div class="interview-player-photo-ph">${name.charAt(0)}</div>`;
+            const teamCls   = person.team === 'azul' ? 'azul' : 'vermelho';
+            const teamLabel = person.team === 'azul' ? 'Time Azul' : 'Time Vermelho';
+            return `
+              <div class="interview-person">
+                ${photoHtml}
+                <div class="interview-card-info">
+                  <div class="interview-team-badge ${teamCls}">${teamLabel}</div>
+                  <div class="interview-player-name">${name}</div>
+                </div>
+              </div>`;
+          }).join('');
+
+          interviewCard = `
+          <div class="interview-card">
+            <div class="interview-card-head multi">
+              ${peopleHtml}
+            </div>
+            ${renderVideoEmbed(interview.youtubeId, 'Entrevista pós-jogo')}
+          </div>`;
+        }
+
+        // ── Card de Highlights ──
+        let highlightCard = '';
+        if (highlight && highlight.youtubeId) {
+          highlightCard = `
+          <div class="interview-card">
+            <div class="interview-card-head highlight-head">
+              <div class="interview-card-info">
+                <div class="interview-label-big">🎬 Melhores Momentos</div>
+                <div class="interview-label">Highlights da rodada</div>
+              </div>
+            </div>
+            ${renderVideoEmbed(highlight.youtubeId, 'Highlights da rodada')}
+          </div>`;
+        }
+
+        const onlyOneCard = (interviewCard && !highlightCard) || (!interviewCard && highlightCard);
+
+        return `
+        <section class="interviews-section">
+          <div class="section-header" style="margin-bottom:12px;">
+            <h2 class="section-title">Entrevistas <span>Pós-Jogo</span></h2>
+          </div>
+          <div class="gold-line"></div>
+          <div class="interviews-grid${onlyOneCard ? ' single' : ''}">
+            ${interviewCard}
+            ${highlightCard}
+          </div>
+        </section>`;
+      })()}
 
       <div style="margin-top:32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
         <a href="partidas.html"

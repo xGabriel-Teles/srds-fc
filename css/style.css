@@ -3301,3 +3301,267 @@ a.partida-location-row-addr:hover { color: var(--ouro); text-decoration: underli
     font-size: 15px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SEÇÃO DE ENTREVISTAS PÓS-JOGO — partida.html
+═══════════════════════════════════════════════════════════ */
+
+.interviews-section {
+  margin-top: 36px;
+}
+
+/* Grade: dois vídeos lado a lado no desktop, empilhados no mobile.
+   Quando há só 1 card (entrevista OU highlight), ele ocupa a largura toda. */
+.interviews-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.interviews-grid:has(.interview-card:only-child),
+.interviews-grid.single {
+  grid-template-columns: 1fr;
+}
+@media (max-width: 700px) {
+  .interviews-grid { grid-template-columns: 1fr; }
+}
+
+/* Card individual */
+.interview-card {
+  background: var(--azul-medio);
+  border: 1px solid var(--azul-borda);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.interview-card:hover { border-color: var(--ouro-escuro); }
+
+/* Cabeçalho do card com info do atleta */
+.interview-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--azul-borda);
+}
+.interview-card-head.azul {
+  background: linear-gradient(135deg, rgba(20,60,120,.35) 0%, transparent 70%);
+  border-bottom-color: rgba(30,90,180,.3);
+}
+.interview-card-head.vermelho {
+  background: linear-gradient(135deg, rgba(120,20,20,.35) 0%, transparent 70%);
+  border-bottom-color: rgba(180,30,30,.3);
+}
+
+/* Foto do atleta */
+.interview-player-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--azul-borda);
+  flex-shrink: 0;
+}
+.interview-player-photo-ph {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 2px solid var(--azul-borda);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--cinza);
+  flex-shrink: 0;
+}
+
+.interview-card-info { flex: 1; min-width: 0; }
+
+/* Badge do time */
+.interview-team-badge {
+  display: inline-block;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+.interview-team-badge.azul {
+  color: #7eb3e8;
+  background: rgba(30,90,180,.2);
+  border: 1px solid rgba(30,90,180,.35);
+}
+.interview-team-badge.vermelho {
+  color: #e4738a;
+  background: rgba(180,30,30,.2);
+  border: 1px solid rgba(180,30,30,.35);
+}
+
+.interview-player-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: .05em;
+  color: var(--branco);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.interview-label {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  color: var(--cinza);
+  margin-top: 1px;
+}
+
+/* Wrapper do iframe — aspect ratio 16:9 */
+.interview-video-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+}
+.interview-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Cabeçalho com 2 entrevistados no mesmo vídeo ── */
+.interview-card-head.multi {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, rgba(20,60,120,.28) 0%, rgba(120,20,20,.28) 100%);
+}
+.interview-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 140px;
+}
+
+/* ── Cabeçalho do card de Highlights ── */
+.interview-card-head.highlight-head {
+  background: linear-gradient(135deg, rgba(201,159,64,.22) 0%, transparent 75%);
+  border-bottom-color: rgba(201,159,64,.3);
+}
+.interview-label-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: .04em;
+  color: var(--ouro);
+  line-height: 1.2;
+}
+
+/* ── Botão de fallback "Ampliar / Abrir vídeo" ── */
+.interview-fallback-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 5;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--branco);
+  background: rgba(10,20,35,.75);
+  border: 1px solid rgba(201,159,64,.4);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  backdrop-filter: blur(4px);
+}
+.interview-fallback-btn:hover {
+  background: rgba(201,159,64,.25);
+  border-color: var(--ouro);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL DE VÍDEO — fallback de Erro 153 / visualização ampliada
+═══════════════════════════════════════════════════════════ */
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: rgba(5,10,18,.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+.video-modal-overlay.open {
+  display: flex;
+}
+.video-modal-box {
+  background: var(--azul-medio);
+  border: 1px solid var(--azul-borda);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 860px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.video-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--azul-borda);
+}
+.video-modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: .04em;
+  color: var(--branco);
+}
+.video-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--cinza);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: color .2s, background .2s;
+}
+.video-modal-close:hover {
+  color: var(--branco);
+  background: rgba(255,255,255,.08);
+}
+.video-modal-body {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+}
+.video-modal-body iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.video-modal-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--azul-borda);
+  text-align: center;
+}
+.video-modal-yt-link {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ouro);
+  text-decoration: none;
+}
+.video-modal-yt-link:hover { text-decoration: underline; }
