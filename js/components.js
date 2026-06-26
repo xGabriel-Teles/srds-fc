@@ -31,8 +31,9 @@ function renderHeader(activePage) {
         </div>
       </a>
       <nav class="nav-links">${links}</nav>
-      <a href="https://www.youtube.com/@SRDSFC" target="_blank" rel="noopener" class="nav-youtube" style="display:flex" title="Nosso canal no YouTube">
+      <a href="https://www.youtube.com/${SRDS.club.youtube}" target="_blank" rel="noopener" class="nav-youtube" style="display:flex" title="Inscreva-se no nosso canal">
         ${youtubeIcon()}
+        ${SRDS.club.youtube}
       </a>
       <a href="https://instagram.com/${SRDS.club.instagram}" target="_blank" rel="noopener" class="nav-instagram" style="display:flex">
         ${instagramIcon()}
@@ -44,8 +45,8 @@ function renderHeader(activePage) {
     </div>
     <nav class="nav-drawer" id="navDrawer">
       ${drawerLinks}
-      <a href="https://www.youtube.com/@SRDSFC" target="_blank" rel="noopener" class="nav-youtube">
-        ${youtubeIcon()} YouTube
+      <a href="https://www.youtube.com/${SRDS.club.youtube}" target="_blank" rel="noopener" class="nav-youtube">
+        ${youtubeIcon()} ${SRDS.club.youtube}
       </a>
       <a href="https://instagram.com/${SRDS.club.instagram}" target="_blank" rel="noopener" class="nav-instagram">
         ${instagramIcon()} @${SRDS.club.instagram}

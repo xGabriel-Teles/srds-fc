@@ -107,6 +107,7 @@ const SRDS = {
   club: {
     name: "SRDS FC",
     instagram: "srds.fc",
+    youtube: "@SRDSFC",
     city: "Porto Alegre",
     state: "RS",
     country: "Brasil",

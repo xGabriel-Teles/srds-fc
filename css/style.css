@@ -120,55 +120,42 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   background: rgba(201,159,64,0.08);
 }
 
-/* Instagram */
-.nav-instagram {
+/* Instagram e YouTube — mesmo tamanho/padding, cores da respectiva marca */
+.nav-instagram,
+.nav-youtube {
   display: flex;
   align-items: center;
   gap: 6px;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: var(--ouro);
   padding: 8px 14px;
-  border: 1px solid rgba(201,159,64,0.3);
   border-radius: var(--radius-sm);
   transition: all var(--transition);
   flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav-instagram {
+  color: var(--ouro);
+  border: 1px solid rgba(201,159,64,0.3);
 }
 .nav-instagram:hover { background: rgba(201,159,64,0.1); border-color: var(--ouro); }
 .nav-instagram svg { width: 16px; height: 16px; }
 
-/* YouTube — ícone compacto no header (sem texto), ao lado do Instagram */
 .nav-youtube {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  color: var(--cinza);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-sm);
-  transition: all var(--transition);
-  flex-shrink: 0;
+  color: var(--ouro);
+  border: 1px solid rgba(201,159,64,0.3);
 }
-.nav-youtube:hover { background: rgba(255,0,0,0.08); border-color: #ff0000; color: #ff3b30; }
-.nav-youtube svg { width: 19px; height: 19px; }
+.nav-youtube:hover { background: rgba(201,159,64,0.1); border-color: var(--ouro); }
+.nav-youtube svg { width: 16px; height: 16px; color: #ff0000; }
 
-/* No drawer mobile, exibe com texto "YouTube" como o Instagram */
+/* No drawer mobile — mesmo padrão visual entre os dois botões */
+.nav-drawer .nav-instagram,
 .nav-drawer .nav-youtube {
-  width: auto;
-  height: auto;
-  gap: 6px;
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 14px;
   margin-top: 8px;
   justify-content: center;
-  color: var(--branco);
 }
-.nav-drawer .nav-youtube:hover { color: #ff3b30; }
-.nav-drawer .nav-youtube svg { width: 16px; height: 16px; }
 
 /* Hamburger */
 .hamburger {
@@ -203,7 +190,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 }
 .nav-drawer.open { display: flex; }
 .nav-drawer .nav-link { padding: 12px 16px; font-size: 15px; }
-.nav-drawer .nav-instagram { margin-top: 8px; justify-content: center; }
 
 /* ────────────────────────────────────────────────────────────
    HERO
@@ -1287,6 +1273,75 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 }
 .insta-cta:hover .insta-cta-arrow { transform: translateX(4px); }
 
+/* YouTube — mesmo padrão visual do Instagram, com cores da marca */
+.youtube-cta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(255,0,0,0.12) 0%, rgba(255,0,0,0.06) 100%);
+  border: 1px solid rgba(201,159,64,0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  transition: all var(--transition);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.youtube-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,0,0,0.08) 0%, rgba(255,0,0,0.02) 100%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.youtube-cta:hover { border-color: rgba(201,159,64,0.5); transform: translateY(-2px); }
+.youtube-cta:hover::before { opacity: 1; }
+
+.youtube-cta-icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff0000;
+  border-radius: 18px;
+  padding: 14px;
+  color: #fff;
+}
+.youtube-cta-icon svg { width: 100%; height: 100%; }
+
+.youtube-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.youtube-cta-handle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  color: var(--branco);
+  line-height: 1;
+}
+.youtube-cta-label {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+.youtube-cta-arrow {
+  font-size: 22px;
+  color: var(--ouro);
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+.youtube-cta:hover .youtube-cta-arrow { transform: translateX(4px); }
+
 /* KPIs Sociais */
 .social-kpi-grid {
   display: grid;
@@ -1792,6 +1847,32 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 .insta-cta-label { font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--cinza); }
 .insta-cta-arrow { font-size:22px; color:var(--ouro); flex-shrink:0; transition:transform var(--transition); }
 .insta-cta:hover .insta-cta-arrow { transform:translateX(4px); }
+
+.youtube-cta {
+  display: flex; align-items: center; gap: 20px;
+  background: linear-gradient(135deg, rgba(255,0,0,0.12) 0%, rgba(255,0,0,0.06) 100%);
+  border: 1px solid rgba(201,159,64,0.25); border-radius: var(--radius);
+  padding: 20px 24px; margin-bottom: 28px;
+  transition: all var(--transition); text-decoration: none; position: relative; overflow: hidden;
+}
+.youtube-cta::before {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(135deg,rgba(255,0,0,0.08) 0%,rgba(255,0,0,0.02) 100%);
+  opacity:0; transition:opacity var(--transition);
+}
+.youtube-cta:hover { border-color:rgba(201,159,64,0.5); transform:translateY(-2px); }
+.youtube-cta:hover::before { opacity:1; }
+.youtube-cta-icon {
+  width:64px; height:64px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background: #ff0000;
+  border-radius:18px; padding:14px; color:#fff;
+}
+.youtube-cta-icon svg { width:100%; height:100%; }
+.youtube-cta-text { display:flex; flex-direction:column; gap:4px; flex:1; }
+.youtube-cta-handle { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:0.06em; color:var(--branco); line-height:1; }
+.youtube-cta-label { font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--cinza); }
+.youtube-cta-arrow { font-size:22px; color:var(--ouro); flex-shrink:0; transition:transform var(--transition); }
+.youtube-cta:hover .youtube-cta-arrow { transform:translateX(4px); }
 
 .social-kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; margin-bottom:24px; }
 .social-kpi { background:var(--azul-medio); border:1px solid var(--azul-borda); border-radius:var(--radius); padding:16px 14px; text-align:center; transition:border-color var(--transition); }
