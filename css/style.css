@@ -78,7 +78,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-width: 0;
 }
 
 /* Logo */
@@ -121,42 +120,23 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   background: rgba(201,159,64,0.08);
 }
 
-/* Instagram e YouTube — mesmo tamanho/padding, cores da respectiva marca */
-.nav-instagram,
-.nav-youtube {
+/* Instagram */
+.nav-instagram {
   display: flex;
   align-items: center;
   gap: 6px;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 13px;
   font-weight: 600;
+  color: var(--ouro);
   padding: 8px 14px;
+  border: 1px solid rgba(201,159,64,0.3);
   border-radius: var(--radius-sm);
   transition: all var(--transition);
   flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.nav-instagram {
-  color: var(--ouro);
-  border: 1px solid rgba(201,159,64,0.3);
 }
 .nav-instagram:hover { background: rgba(201,159,64,0.1); border-color: var(--ouro); }
 .nav-instagram svg { width: 16px; height: 16px; }
-
-.nav-youtube {
-  color: var(--ouro);
-  border: 1px solid rgba(201,159,64,0.3);
-}
-.nav-youtube:hover { background: rgba(201,159,64,0.1); border-color: var(--ouro); }
-.nav-youtube svg { width: 16px; height: 16px; color: #ff0000; }
-
-/* No drawer mobile — mesmo padrão visual entre os dois botões */
-.nav-drawer .nav-instagram,
-.nav-drawer .nav-youtube {
-  margin-top: 8px;
-  justify-content: center;
-}
 
 /* Hamburger */
 .hamburger {
@@ -191,6 +171,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 }
 .nav-drawer.open { display: flex; }
 .nav-drawer .nav-link { padding: 12px 16px; font-size: 15px; }
+.nav-drawer .nav-instagram { margin-top: 8px; justify-content: center; }
 
 /* ────────────────────────────────────────────────────────────
    HERO
@@ -1159,7 +1140,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
    ──────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hamburger { display: flex; }
-  .nav-links, .nav-instagram, .nav-youtube { display: none; }
+  .nav-links, .nav-instagram { display: none; }
 
   .standings-table thead th:nth-child(4),
   .standings-table thead th:nth-child(5) { display: none; }
@@ -1169,18 +1150,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   .profile-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .averages-grid { grid-template-columns: 1fr 1fr; }
   .award-card { min-width: unset; width: 100%; }
-}
-
-/* Header em telas muito estreitas: garante zero rolagem lateral
-   reduzindo padding/tamanhos antes de qualquer overflow ocorrer */
-@media (max-width: 430px) {
-  .site-header { padding: 0 12px; }
-  .header-inner { gap: 8px; }
-  .site-logo { gap: 8px; }
-  .site-logo .header-logo-img { width: 34px; height: 34px; }
-  .club-name { font-size: 15px; }
-  .season-badge { font-size: 10px; }
-  .hamburger { margin-left: 0; }
 }
 
 @media (max-width: 480px) {
@@ -1285,75 +1254,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   transition: transform var(--transition);
 }
 .insta-cta:hover .insta-cta-arrow { transform: translateX(4px); }
-
-/* YouTube — mesmo padrão visual do Instagram, com cores da marca */
-.youtube-cta {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  background: linear-gradient(135deg, rgba(255,0,0,0.12) 0%, rgba(255,0,0,0.06) 100%);
-  border: 1px solid rgba(201,159,64,0.25);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 28px;
-  transition: all var(--transition);
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
-.youtube-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,0,0,0.08) 0%, rgba(255,0,0,0.02) 100%);
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-.youtube-cta:hover { border-color: rgba(201,159,64,0.5); transform: translateY(-2px); }
-.youtube-cta:hover::before { opacity: 1; }
-
-.youtube-cta-icon {
-  width: 64px;
-  height: 64px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ff0000;
-  border-radius: 18px;
-  padding: 14px;
-  color: #fff;
-}
-.youtube-cta-icon svg { width: 100%; height: 100%; }
-
-.youtube-cta-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
-}
-.youtube-cta-handle {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px;
-  letter-spacing: 0.06em;
-  color: var(--branco);
-  line-height: 1;
-}
-.youtube-cta-label {
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cinza);
-}
-.youtube-cta-arrow {
-  font-size: 22px;
-  color: var(--ouro);
-  flex-shrink: 0;
-  transition: transform var(--transition);
-}
-.youtube-cta:hover .youtube-cta-arrow { transform: translateX(4px); }
 
 /* KPIs Sociais */
 .social-kpi-grid {
@@ -1861,32 +1761,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 .insta-cta-arrow { font-size:22px; color:var(--ouro); flex-shrink:0; transition:transform var(--transition); }
 .insta-cta:hover .insta-cta-arrow { transform:translateX(4px); }
 
-.youtube-cta {
-  display: flex; align-items: center; gap: 20px;
-  background: linear-gradient(135deg, rgba(255,0,0,0.12) 0%, rgba(255,0,0,0.06) 100%);
-  border: 1px solid rgba(201,159,64,0.25); border-radius: var(--radius);
-  padding: 20px 24px; margin-bottom: 28px;
-  transition: all var(--transition); text-decoration: none; position: relative; overflow: hidden;
-}
-.youtube-cta::before {
-  content:''; position:absolute; inset:0;
-  background: linear-gradient(135deg,rgba(255,0,0,0.08) 0%,rgba(255,0,0,0.02) 100%);
-  opacity:0; transition:opacity var(--transition);
-}
-.youtube-cta:hover { border-color:rgba(201,159,64,0.5); transform:translateY(-2px); }
-.youtube-cta:hover::before { opacity:1; }
-.youtube-cta-icon {
-  width:64px; height:64px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-  background: #ff0000;
-  border-radius:18px; padding:14px; color:#fff;
-}
-.youtube-cta-icon svg { width:100%; height:100%; }
-.youtube-cta-text { display:flex; flex-direction:column; gap:4px; flex:1; }
-.youtube-cta-handle { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:0.06em; color:var(--branco); line-height:1; }
-.youtube-cta-label { font-family:'Barlow Semi Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--cinza); }
-.youtube-cta-arrow { font-size:22px; color:var(--ouro); flex-shrink:0; transition:transform var(--transition); }
-.youtube-cta:hover .youtube-cta-arrow { transform:translateX(4px); }
-
 .social-kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; margin-bottom:24px; }
 .social-kpi { background:var(--azul-medio); border:1px solid var(--azul-borda); border-radius:var(--radius); padding:16px 14px; text-align:center; transition:border-color var(--transition); }
 .social-kpi:hover { border-color:var(--ouro-escuro); }
@@ -1939,8 +1813,11 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
 .partida-card.card-win-vermelho:hover { background: rgba(90,22,40,0.85); border-color:#b83a56; }
 
 .partida-card.card-win-empate {
-  border-left: 3px solid var(--ouro-escuro);
+  background: rgba(60,64,70,0.55);
+  border-color: rgba(120,126,136,0.4);
+  border-left: 3px solid #8a9099;
 }
+.partida-card.card-win-empate:hover { background: rgba(68,72,80,0.7); border-color: #8a9099; }
 
 .partida-card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
 .partida-round { font-family:'Barlow Semi Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ouro-claro); background:rgba(201,159,64,0.1); border:1px solid rgba(201,159,64,0.2); padding:3px 10px; border-radius:20px; }
@@ -2430,16 +2307,7 @@ a.partida-location-addr:hover { color: var(--ouro); opacity: 1; text-decoration:
 .award-card-mvp {
   border-color: rgba(201,159,64,0.35);
   background: rgba(201,159,64,0.06);
-  text-decoration: none;
-  cursor: pointer;
-  transition: border-color var(--transition), background var(--transition), transform var(--transition);
 }
-.award-card-mvp:hover {
-  border-color: var(--ouro);
-  background: rgba(201,159,64,0.12);
-  transform: translateY(-2px);
-}
-.award-card-mvp .award-title { color: var(--ouro); }
 .mvp-count-badge {
   display: inline-block;
   font-family: 'Bebas Neue', sans-serif;
