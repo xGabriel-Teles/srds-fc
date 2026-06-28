@@ -3330,6 +3330,18 @@ function getMvpCount(playerId) {
   return SRDS.matches.filter(m => m.mvp === playerId).length;
 }
 
+/**
+ * Retorna a lista de rodadas em que o atleta foi eleito MVP,
+ * ordenadas da mais recente para a mais antiga.
+ * Cada item: { round, date }
+ */
+function getMvpRounds(playerId) {
+  return SRDS.matches
+    .filter(m => m.mvp === playerId)
+    .map(m => ({ round: m.round, date: m.date }))
+    .sort((a, b) => b.round - a.round);
+}
+
 /** Frequência do atleta: partidas jogadas / total de rodadas disputadas */
 function getFrequency(player) {
   const disputadas = SRDS.matches.filter(m => m.result !== null).length;

@@ -402,28 +402,25 @@
       </div>
     `;
 
-      // ── Prêmios + MVP count ──
-      const awardsEl  = document.getElementById('awardsGrid');
-      const mvpCount  = getMvpCount(p.id);
-      const allAwards = [...(p.awards || [])];
+      // ── Prêmios + MVP por rodada (clicável) ──
+      const awardsEl   = document.getElementById('awardsGrid');
+      const mvpRounds  = getMvpRounds(p.id);
+      const allAwards  = [...(p.awards || [])];
 
-      // Adiciona card de MVP da temporada se houver
-      let mvpAwardHtml = '';
-      if (mvpCount > 0) {
-        mvpAwardHtml = `
-        <div class="award-card award-card-mvp">
+      // Um card por rodada em que o atleta foi MVP — clicável, leva à partida
+      const mvpAwardsHtml = mvpRounds.map(mv => `
+        <a href="partida.html?round=${mv.round}" class="award-card award-card-mvp" title="Ver detalhes da Rodada ${mv.round}">
           <div class="award-icon">🏆</div>
           <div class="award-info">
-            <div class="award-title">MVP da Partida${mvpCount > 1 ? ' <span class="mvp-count-badge">' + mvpCount + 'x</span>' : ''}</div>
-            <div class="award-year">Temporada 2026</div>
+            <div class="award-title">MVP da Rodada ${mv.round}</div>
+            <div class="award-year">${mv.date || 'Temporada 2026'}</div>
           </div>
-        </div>`;
-      }
+        </a>`).join('');
 
-      if (allAwards.length === 0 && mvpCount === 0) {
+      if (allAwards.length === 0 && mvpRounds.length === 0) {
         awardsEl.innerHTML = `<p class="no-awards">Nenhum prêmio individual registrado ainda.</p>`;
       } else {
-        awardsEl.innerHTML = mvpAwardHtml + allAwards.map(a => `
+        awardsEl.innerHTML = mvpAwardsHtml + allAwards.map(a => `
         <div class="award-card">
           <div class="award-icon">${a.icon}</div>
           <div class="award-info">
