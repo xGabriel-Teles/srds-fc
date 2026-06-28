@@ -633,8 +633,8 @@ const SRDS = {
         { playerId: "gabriel", team: "vermelho" },
         { playerId: "wesley", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
-        { playerId: "krigor", team: "azul" },
-        { playerId: "krigor", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+        { playerId: "rodrigo-costa", team: "azul" },
         { guestName: "Eder (contra)", team: "azul" }
       ],
       assists: [
