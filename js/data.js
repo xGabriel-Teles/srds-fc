@@ -620,6 +620,38 @@ const SRDS = {
 },
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
+    {
+      round: 14,
+      date: "27/06/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 3, vermelho: 3 },
+      mvp: "vinicius",
+      teamAzul: ["milica", "krigor", "rodrigo-costa", "rodrigo-p", "iago", "jederson", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, {guest: true, name: "Eder", position: "Fixo", number: 333}],
+      teamVermelho: ["vinicius", "ivan","germano", "gabriel", "wesley", "marcelo", "valdir", {guest: true, name: "Bruno", position: "Centroavante", number: 20},],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { guestName: "Eder (contra)", team: "azul" }
+      ],
+      assists: [
+        { playerId: "milica", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { guestName: "Bruno", team: "vermelho" }
+      ],
+      interview: {  youtubeId: "DGYc2spRLKQ",  // código do vídeo NORMAL (não Shorts)
+      players: [
+    { team: "azul",     playerId: "iago", playerName: null },
+    { team: "vermelho", playerId: "valdir",   playerName: null }
+  ]
+},
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
   ],
 
   /**
@@ -797,7 +829,7 @@ const SRDS = {
         uni2: "img/players/alexandre-vermelho.png"
       },
       injury: { name: "Controle da carga", returnDate: "25/10/2026" },
-      injuredRounds: [11,12,13],
+      injuredRounds: [11,12,13,14],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -991,7 +1023,8 @@ const SRDS = {
         uni1: "img/players/edu-azul.png", 
         uni2: "img/players/edu-amarelo.png"
       },
-      injury: null,
+      injury: { name: "Lesão na lombar", returnDate: "Sem previsão" },
+      injuredRounds: [14],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2081,7 +2114,8 @@ const SRDS = {
       photo: { 
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
-      injury: null,
+      injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
+      injuredRounds: [12,13,14],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2146,7 +2180,7 @@ const SRDS = {
         uni2: "img/players/erig-vermelho.png"
       },
       injury: { name: "Lesão ligamentar do joelho", returnDate: "15/09/2026" },
-      injuredRounds: [13],
+      injuredRounds: [13,14],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2341,7 +2375,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13],
+      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
