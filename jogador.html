@@ -85,6 +85,13 @@
       <div class="awards-grid" id="awardsGrid"></div>
     </section>
 
+    <!-- ── Maiores Parceiros de Elenco ── -->
+    <section class="partners-section">
+      <h3 class="awards-title">Maiores Parceiros de <span>Elenco</span></h3>
+      <p class="partners-subtitle">Com quem este atleta mais dividiu o mesmo time na temporada.</p>
+      <div class="partners-grid" id="partnersGrid"></div>
+    </section>
+
     <!-- ── Gráficos de Evolução ── -->
     <section class="charts-section">
       <h3 class="awards-title">Evolução na <span>Temporada</span></h3>
@@ -430,6 +437,52 @@
         </div>
       `).join('');
       }
+
+      // ── Maiores Parceiros de Elenco ──────────────────────────────
+      const partnersEl = document.getElementById('partnersGrid');
+      const partners   = getElencoPartners(p.id);
+
+      function partnerPhotoHtml(partnerPlayer) {
+        const src = partnerPlayer.photo ? (partnerPlayer.photo.uni1 || null) : null;
+        if (src) return `<img src="${src}" alt="${partnerPlayer.name}" class="partner-photo">`;
+        return `<div class="partner-photo-ph">${partnerPlayer.name.charAt(0)}</div>`;
+      }
+
+      function buildPartnerCard(data, cls, label, statText) {
+        if (!data) {
+          return `
+          <div class="partner-card partner-card-empty ${cls}">
+            <div class="partner-card-label">${label}</div>
+            <div class="partner-empty-text">Ainda sem dados suficientes</div>
+          </div>`;
+        }
+        return `
+        <a href="jogador.html?id=${data.player.id}" class="partner-card ${cls}" title="Ver perfil de ${data.player.name}">
+          <div class="partner-card-label">${label}</div>
+          <div class="partner-card-body">
+            ${partnerPhotoHtml(data.player)}
+            <div class="partner-card-info">
+              <div class="partner-card-name">${data.player.name}</div>
+              <div class="partner-card-stat">${statText}</div>
+            </div>
+          </div>
+        </a>`;
+      }
+
+      partnersEl.innerHTML =
+        buildPartnerCard(
+          partners.topJogou, 'partner-jogou', 'Mais jogou junto',
+          partners.topJogou ? `${partners.topJogou.partidasJuntos} partidas juntos` : ''
+        ) +
+        buildPartnerCard(
+          partners.topVenceu, 'partner-venceu', 'Mais venceu junto',
+          partners.topVenceu ? `${partners.topVenceu.vitoriasJuntos} de ${partners.topVenceu.partidasJuntos} vitórias` : ''
+        ) +
+        buildPartnerCard(
+          partners.topPerdeu, 'partner-perdeu', 'Mais perdeu junto',
+          partners.topPerdeu ? `${partners.topPerdeu.derrotasJuntos} de ${partners.topPerdeu.partidasJuntos} derrotas` : ''
+        );
+
       // ── Gráficos de evolução ──────────────────────────────────────
       renderCharts(p.id);
       // ── Gráfico radar de atributos ────────────────────────────────

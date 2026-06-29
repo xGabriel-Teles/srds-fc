@@ -633,8 +633,8 @@ const SRDS = {
         { playerId: "gabriel", team: "vermelho" },
         { playerId: "wesley", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
-        { playerId: "filipe", team: "azul" },
-        { playerId: "rodrigo-costa", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "krigor", team: "azul" },
         { guestName: "Eder (contra)", team: "azul" }
       ],
       assists: [
@@ -3374,6 +3374,99 @@ function getMvpRounds(playerId) {
     .filter(m => m.mvp === playerId)
     .map(m => ({ round: m.round, date: m.date }))
     .sort((a, b) => b.round - a.round);
+}
+
+/**
+ * Analisa o histórico de partidas e retorna os "parceiros de elenco" de um atleta:
+ * companheiros de TIME (mesmo lado), nunca adversários.
+ *
+ * Retorna { topJogou, topVenceu, topPerdeu } — cada um no formato:
+ *   { player, partidasJuntos, vitoriasJuntos, derrotasJuntos, empatesJuntos }
+ *   ou null se não houver dados suficientes (mínimo de 2 partidas juntos).
+ *
+ * Guests (atletas avulsos sem cadastro) são ignorados — só conta companheiros
+ * que têm perfil próprio no elenco.
+ */
+function getElencoPartners(playerId, minPartidas = 2) {
+  const disputadas = SRDS.matches.filter(m => m.result !== null);
+  const partnerStats = {}; // { partnerId: { partidas, vitorias, derrotas, empates } }
+
+  disputadas.forEach(m => {
+    const inAzul = (m.teamAzul || []).includes(playerId);
+    const inVerm = (m.teamVermelho || []).includes(playerId);
+    if (!inAzul && !inVerm) return; // atleta não jogou esta rodada
+
+    const meuTime = inAzul ? (m.teamAzul || []) : (m.teamVermelho || []);
+    const azulWin  = m.result.azul > m.result.vermelho;
+    const vermWin  = m.result.vermelho > m.result.azul;
+    const empate   = m.result.azul === m.result.vermelho;
+
+    let resultado; // 'vitoria' | 'derrota' | 'empate'
+    if (empate) resultado = 'empate';
+    else if (inAzul && azulWin) resultado = 'vitoria';
+    else if (inVerm && vermWin) resultado = 'vitoria';
+    else resultado = 'derrota';
+
+    meuTime.forEach(entry => {
+      // Ignora guests (objetos) e o próprio atleta
+      if (typeof entry !== 'string' || entry === playerId) return;
+
+      if (!partnerStats[entry]) {
+        partnerStats[entry] = { partidas: 0, vitorias: 0, derrotas: 0, empates: 0 };
+      }
+      partnerStats[entry].partidas++;
+      if (resultado === 'vitoria') partnerStats[entry].vitorias++;
+      else if (resultado === 'derrota') partnerStats[entry].derrotas++;
+      else partnerStats[entry].empates++;
+    });
+  });
+
+  // Monta lista de parceiros elegíveis (mínimo de partidas juntos)
+  const partners = Object.keys(partnerStats)
+    .filter(id => partnerStats[id].partidas >= minPartidas)
+    .map(id => ({
+      player: getPlayerById(id),
+      partidasJuntos:  partnerStats[id].partidas,
+      vitoriasJuntos:  partnerStats[id].vitorias,
+      derrotasJuntos:  partnerStats[id].derrotas,
+      empatesJuntos:   partnerStats[id].empates,
+    }))
+    .filter(p => p.player); // remove caso o ID não exista mais no elenco
+
+  if (partners.length === 0) {
+    return { topJogou: null, topVenceu: null, topPerdeu: null };
+  }
+
+  // ── Top "jogou junto" — mais partidas, desempate por nome ──
+  const topJogou = [...partners].sort((a, b) =>
+    b.partidasJuntos - a.partidasJuntos || a.player.name.localeCompare(b.player.name, 'pt-BR')
+  )[0];
+
+  // ── Top "venceu junto" — mais vitórias, desempate por % de aproveitamento, depois nome ──
+  const comVitorias = partners.filter(p => p.vitoriasJuntos > 0);
+  const topVenceu = comVitorias.length
+    ? [...comVitorias].sort((a, b) => {
+        if (b.vitoriasJuntos !== a.vitoriasJuntos) return b.vitoriasJuntos - a.vitoriasJuntos;
+        const pctA = a.vitoriasJuntos / a.partidasJuntos;
+        const pctB = b.vitoriasJuntos / b.partidasJuntos;
+        if (pctB !== pctA) return pctB - pctA;
+        return a.player.name.localeCompare(b.player.name, 'pt-BR');
+      })[0]
+    : null;
+
+  // ── Top "perdeu junto" — mais derrotas, desempate por % de derrotas, depois nome ──
+  const comDerrotas = partners.filter(p => p.derrotasJuntos > 0);
+  const topPerdeu = comDerrotas.length
+    ? [...comDerrotas].sort((a, b) => {
+        if (b.derrotasJuntos !== a.derrotasJuntos) return b.derrotasJuntos - a.derrotasJuntos;
+        const pctA = a.derrotasJuntos / a.partidasJuntos;
+        const pctB = b.derrotasJuntos / b.partidasJuntos;
+        if (pctB !== pctA) return pctB - pctA;
+        return a.player.name.localeCompare(b.player.name, 'pt-BR');
+      })[0]
+    : null;
+
+  return { topJogou, topVenceu, topPerdeu };
 }
 
 /** Frequência do atleta: partidas jogadas / total de rodadas disputadas */
