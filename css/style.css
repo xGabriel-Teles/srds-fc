@@ -78,6 +78,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  min-width: 0;
 }
 
 /* Logo */
@@ -93,7 +94,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   object-fit: contain;
   flex-shrink: 0;
 }
-.site-logo-text { display: flex; flex-direction: column; line-height: 1; }
+.site-logo-text { display: flex; flex-direction: column; line-height: 1; min-width: 0; }
 .site-logo-text .club-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; color: var(--ouro); }
 .site-logo-text .season-badge { font-family: 'Barlow Semi Condensed', sans-serif; font-size: 10px; font-weight: 600; color: var(--cinza); letter-spacing: 0.12em; text-transform: uppercase; }
 
@@ -1286,6 +1287,28 @@ h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line
   .profile-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .averages-grid { grid-template-columns: 1fr 1fr; }
   .award-card { min-width: unset; width: 100%; }
+}
+
+/* Cabeçalho em telas estreitas: reduz padding/gaps/tamanhos
+   proativamente para nunca gerar rolagem lateral */
+@media (max-width: 480px) {
+  .site-header { padding: 0 12px; }
+  .header-inner { gap: 8px; }
+  .site-logo { gap: 8px; }
+  .site-logo .header-logo-img { width: 34px; height: 34px; }
+  .site-logo-text .club-name { font-size: 16px; letter-spacing: 0.04em; }
+  .site-logo-text .season-badge { font-size: 9px; letter-spacing: 0.06em; }
+  .hamburger { padding: 6px; }
+  .hamburger span { width: 20px; }
+}
+
+@media (max-width: 360px) {
+  .site-header { padding: 0 8px; }
+  .header-inner { gap: 6px; }
+  .site-logo { gap: 6px; }
+  .site-logo .header-logo-img { width: 30px; height: 30px; }
+  .site-logo-text .club-name { font-size: 14px; }
+  .site-logo-text .season-badge { display: none; }
 }
 
 @media (max-width: 480px) {
