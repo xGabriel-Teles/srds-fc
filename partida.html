@@ -412,7 +412,9 @@
           const peopleHtml = (interview.players || []).map(person => {
             const p = person.playerId ? getPlayerById(person.playerId) : null;
             const name = p ? p.name : (person.playerName || 'Atleta');
-            const photoSrc = p && p.photo ? (p.photo.uni1 || null) : null;
+            const photoSrc = p && p.photo
+              ? (person.team === 'vermelho' ? (p.photo.uni2 || p.photo.uni1 || null) : (p.photo.uni1 || null))
+              : null;
             const photoHtml = photoSrc
               ? `<img src="${photoSrc}" alt="${name}" class="interview-player-photo">`
               : `<div class="interview-player-photo-ph">${name.charAt(0)}</div>`;
