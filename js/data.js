@@ -508,7 +508,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 4, vermelho: 12 },
       mvp: "edu",
-      teamAzul: ["miliquinha", "cabelo", "alemao", "thiago", "gabriel", "krigor", "rodrigo-p", "rodrigo-costa", "chico", {guest: true, name: "Eder", position: "Meia", number: 333}],
+      teamAzul: ["miliquinha", "cabelo", "alemao", "thiago", "gabriel", "krigor", "rodrigo-p", "rodrigo-costa", "chico", "eder"],
       teamVermelho: ["edu", "biro","germano", "wesley", "milica", "marcelo", "anderson", "jederson", "adler", "gustavo"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
@@ -627,7 +627,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 3, vermelho: 3 },
       mvp: "vinicius",
-      teamAzul: ["milica", "krigor", "rodrigo-costa", "rodrigo-p", "iago", "jederson", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, {guest: true, name: "Eder", position: "Fixo", number: 333}],
+      teamAzul: ["milica", "krigor", "rodrigo-costa", "rodrigo-p", "iago", "jederson", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, "eder"],
       teamVermelho: ["vinicius", "ivan","germano", "gabriel", "wesley", "marcelo", "valdir", {guest: true, name: "Bruno", position: "Centroavante", number: 20},],
       scorers: [
         { playerId: "gabriel", team: "vermelho" },
@@ -3142,6 +3142,70 @@ const SRDS = {
       photo: {
         uni1: null, 
         uni2: null,
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    {
+      id: "eder",
+      name: "Éder",
+      fullName: "Éder Vieira Nogueira de Lima",
+      nickname: null,
+      number: { uni1: "2", uni2: "2" },
+      position: "Ala",
+      foot: "Direito",
+      birthDate: "20/08/1999",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: "img/players/eder-azul.png", 
+        uni2: "img/players/eder-vermelho.png"
       },
       injury: null,
       awards: [],
