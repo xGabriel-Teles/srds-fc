@@ -477,7 +477,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 4, vermelho: 4 },
       mvp: "milica",
-      teamAzul: ["milica", "germano", "alemao", "alexandre", "gabriel", "vander", "augusto", "alef", "weslley", {guest: true, name: "Adrian", position: "Ponta", number: 20}],
+      teamAzul: ["milica", "germano", "alemao", "alexandre", "gabriel", "vander", "augusto", "alef", "weslley", "adrian"],
       teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "goleiro", number: 1}, "cabelo","thiago", "wesley", "erig", "marcelo", "iago", "keke", "jederson", "filipe", "anderson"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
@@ -592,7 +592,7 @@ const SRDS = {
       result: { azul: 4, vermelho: 6 },
       mvp: "miliquinha",
       teamAzul: [{guest: true, name: "João", position: "Goleiro", number: 1}, "germano", "ivan", "thiago", "adler", "krigor", "augusto", "marcelo", "baracy", "biro"],
-      teamVermelho: ["vinicius", "milica","miliquinha", {guest: true, name: "Rodrigo", position: "Meia", number: 333}, "gabriel", "chico", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, {guest: true, name: "Adrian", position: "Ponta", number: 20}],
+      teamVermelho: ["vinicius", "milica","miliquinha", {guest: true, name: "Rodrigo", position: "Meia", number: 333}, "gabriel", "chico", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, "adrian"],
       scorers: [
         { playerId: "gabriel", team: "vermelho" },
         { playerId: "vinicius", team: "vermelho" },
@@ -610,7 +610,7 @@ const SRDS = {
         { playerId: "thiago", team: "azul" },
         { playerId: "augusto", team: "azul" },
         { playerId: "gabriel", team: "vermelho" },
-        { guestName: "Adrian", team: "vermelho" }
+        { playerId: "adrian", team: "vermelho" }
       ],
       interview: {  youtubeId: "EU079MPwSv0",  // código do vídeo NORMAL (não Shorts)
       players: [
@@ -3206,6 +3206,70 @@ const SRDS = {
       photo: {
         uni1: "img/players/eder-azul.png", 
         uni2: "img/players/eder-vermelho.png"
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    {
+      id: "adrian",
+      name: "Adrian",
+      fullName: "Adrian Correa Dias Teles",
+      nickname: null,
+      number: { uni1: "15", uni2: "15" },
+      position: "Ponta",
+      foot: "Direito",
+      birthDate: "26/03/2011",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: "img/players/adrian-azul.png", 
+        uni2: "img/players/adrian-vermelho.png"
       },
       injury: null,
       awards: [],
