@@ -10,7 +10,7 @@
 
 <br/>
 
-**Plataforma digital oficial do SRDS FC — estatísticas, rankings, partidas e perfis dos atletas da temporada 2026.**
+**Plataforma digital oficial do SRDS FC — estatísticas, rankings, partidas e perfis dos atletas.**
 
 🌐 **[srdsfc.com.br](https://srdsfc.com.br)**
 
