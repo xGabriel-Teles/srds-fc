@@ -92,6 +92,13 @@
       <div class="partners-grid" id="partnersGrid"></div>
     </section>
 
+    <!-- ── Adversários Mais Frequentes ── -->
+    <section class="partners-section">
+      <h3 class="awards-title">Adversários Mais <span>Frequentes</span></h3>
+      <p class="partners-subtitle">Contra quem este atleta mais jogou, venceu e perdeu na temporada.</p>
+      <div class="partners-grid" id="opponentsGrid"></div>
+    </section>
+
     <!-- ── Gráficos de Evolução ── -->
     <section class="charts-section">
       <h3 class="awards-title">Evolução na <span>Temporada</span></h3>
@@ -481,6 +488,24 @@
         buildPartnerCard(
           partners.topPerdeu, 'partner-perdeu', 'Mais perdeu junto',
           partners.topPerdeu ? `${partners.topPerdeu.derrotasJuntos} de ${partners.topPerdeu.partidasJuntos} derrotas` : ''
+        );
+
+      // ── Adversários Mais Frequentes ───────────────────────────────
+      const opponentsEl = document.getElementById('opponentsGrid');
+      const opponents   = getElencoOpponents(p.id);
+
+      opponentsEl.innerHTML =
+        buildPartnerCard(
+          opponents.topJogou, 'partner-jogou', 'Mais jogou contra',
+          opponents.topJogou ? `${opponents.topJogou.partidasContra} partidas contra` : ''
+        ) +
+        buildPartnerCard(
+          opponents.topVenceu, 'partner-venceu', 'Mais venceu contra',
+          opponents.topVenceu ? `${opponents.topVenceu.vitoriasContra} de ${opponents.topVenceu.partidasContra} vitórias` : ''
+        ) +
+        buildPartnerCard(
+          opponents.topPerdeu, 'partner-perdeu', 'Mais perdeu contra',
+          opponents.topPerdeu ? `${opponents.topPerdeu.derrotasContra} de ${opponents.topPerdeu.partidasContra} derrotas` : ''
         );
 
       // ── Gráficos de evolução ──────────────────────────────────────

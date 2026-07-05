@@ -3636,6 +3636,93 @@ function getElencoPartners(playerId, minPartidas = 2) {
   return { topJogou, topVenceu, topPerdeu };
 }
 
+/**
+ * Calcula os adversários mais frequentes de um atleta: contra quem mais jogou,
+ * contra quem mais venceu e contra quem mais perdeu. Mesmo raciocínio de
+ * getElencoPartners(), porém olhando para o time adversário em vez do próprio time.
+ */
+function getElencoOpponents(playerId, minPartidas = 2) {
+  const disputadas = SRDS.matches.filter(m => m.result !== null);
+  const oppStats = {}; // { oppId: { partidas, vitorias, derrotas, empates } }
+
+  disputadas.forEach(m => {
+    const inAzul = (m.teamAzul || []).includes(playerId);
+    const inVerm = (m.teamVermelho || []).includes(playerId);
+    if (!inAzul && !inVerm) return; // atleta não jogou esta rodada
+
+    const timeAdversario = inAzul ? (m.teamVermelho || []) : (m.teamAzul || []);
+    const azulWin  = m.result.azul > m.result.vermelho;
+    const vermWin  = m.result.vermelho > m.result.azul;
+    const empate   = m.result.azul === m.result.vermelho;
+
+    let resultado; // 'vitoria' | 'derrota' | 'empate' — do ponto de vista do playerId
+    if (empate) resultado = 'empate';
+    else if (inAzul && azulWin) resultado = 'vitoria';
+    else if (inVerm && vermWin) resultado = 'vitoria';
+    else resultado = 'derrota';
+
+    timeAdversario.forEach(entry => {
+      // Ignora guests (objetos), só considera atletas do elenco
+      if (typeof entry !== 'string') return;
+
+      if (!oppStats[entry]) {
+        oppStats[entry] = { partidas: 0, vitorias: 0, derrotas: 0, empates: 0 };
+      }
+      oppStats[entry].partidas++;
+      if (resultado === 'vitoria') oppStats[entry].vitorias++;
+      else if (resultado === 'derrota') oppStats[entry].derrotas++;
+      else oppStats[entry].empates++;
+    });
+  });
+
+  // Monta lista de adversários elegíveis (mínimo de partidas contra)
+  const opponents = Object.keys(oppStats)
+    .filter(id => oppStats[id].partidas >= minPartidas)
+    .map(id => ({
+      player: getPlayerById(id),
+      partidasContra: oppStats[id].partidas,
+      vitoriasContra: oppStats[id].vitorias,
+      derrotasContra: oppStats[id].derrotas,
+      empatesContra:  oppStats[id].empates,
+    }))
+    .filter(o => o.player); // remove caso o ID não exista mais no elenco
+
+  if (opponents.length === 0) {
+    return { topJogou: null, topVenceu: null, topPerdeu: null };
+  }
+
+  // ── Top "jogou contra" — mais partidas, desempate por nome ──
+  const topJogou = [...opponents].sort((a, b) =>
+    b.partidasContra - a.partidasContra || a.player.name.localeCompare(b.player.name, 'pt-BR')
+  )[0];
+
+  // ── Top "venceu contra" — mais vitórias, desempate por % de aproveitamento, depois nome ──
+  const comVitorias = opponents.filter(o => o.vitoriasContra > 0);
+  const topVenceu = comVitorias.length
+    ? [...comVitorias].sort((a, b) => {
+        if (b.vitoriasContra !== a.vitoriasContra) return b.vitoriasContra - a.vitoriasContra;
+        const pctA = a.vitoriasContra / a.partidasContra;
+        const pctB = b.vitoriasContra / b.partidasContra;
+        if (pctB !== pctA) return pctB - pctA;
+        return a.player.name.localeCompare(b.player.name, 'pt-BR');
+      })[0]
+    : null;
+
+  // ── Top "perdeu contra" — mais derrotas, desempate por % de derrotas, depois nome ──
+  const comDerrotas = opponents.filter(o => o.derrotasContra > 0);
+  const topPerdeu = comDerrotas.length
+    ? [...comDerrotas].sort((a, b) => {
+        if (b.derrotasContra !== a.derrotasContra) return b.derrotasContra - a.derrotasContra;
+        const pctA = a.derrotasContra / a.partidasContra;
+        const pctB = b.derrotasContra / b.partidasContra;
+        if (pctB !== pctA) return pctB - pctA;
+        return a.player.name.localeCompare(b.player.name, 'pt-BR');
+      })[0]
+    : null;
+
+  return { topJogou, topVenceu, topPerdeu };
+}
+
 /** Frequência do atleta: partidas jogadas / total de rodadas disputadas */
 function getFrequency(player) {
   const disputadas = SRDS.matches.filter(m => m.result !== null).length;
