@@ -132,7 +132,7 @@ const SRDS = {
       result: { azul: 5, vermelho: 6 },
       mvp: "vinicius",
       teamAzul: ["miliquinha", "germano", "alemao", "filipe", "iago", "adler", "vander", "krigor", {guest: true, name: "Daniel", position: "Meia", number: 0}, "everson", "rodrigo-p"],
-      teamVermelho: ["vinicius", "cabelo", "alexandre", "biro", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 20}, {guest: true, name: "Diego", position: "Meia", number: 333}, "gabriel", "rafael-isco", "marcelo", "augusto"],
+      teamVermelho: ["vinicius", "cabelo", "alexandre", "biro", "rafael", {guest: true, name: "Diego", position: "Meia", number: 333}, "gabriel", "rafael-isco", "marcelo", "augusto"],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
@@ -592,7 +592,7 @@ const SRDS = {
       result: { azul: 4, vermelho: 6 },
       mvp: "miliquinha",
       teamAzul: [{guest: true, name: "João", position: "Goleiro", number: 1}, "germano", "ivan", "thiago", "adler", "krigor", "augusto", "marcelo", "baracy", "biro"],
-      teamVermelho: ["vinicius", "milica","miliquinha", {guest: true, name: "Rodrigo", position: "Meia", number: 333}, "gabriel", "chico", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, "adrian"],
+      teamVermelho: ["vinicius", "milica","miliquinha", {guest: true, name: "Rodrigo", position: "Meia", number: 333}, "gabriel", "chico", "filipe", "rafael", "adrian"],
       scorers: [
         { playerId: "gabriel", team: "vermelho" },
         { playerId: "vinicius", team: "vermelho" },
@@ -627,7 +627,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 3, vermelho: 3 },
       mvp: "vinicius",
-      teamAzul: ["milica", "krigor", "rodrigo-costa", "rodrigo-p", "iago", "jederson", "filipe", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, "eder"],
+      teamAzul: ["milica", "krigor", "rodrigo-costa", "rodrigo-p", "iago", "jederson", "filipe", "rafael", "eder"],
       teamVermelho: ["vinicius", "ivan","germano", "gabriel", "wesley", "marcelo", "valdir", {guest: true, name: "Bruno", position: "Centroavante", number: 20},],
       scorers: [
         { playerId: "gabriel", team: "vermelho" },
@@ -659,7 +659,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 8, vermelho: 2},
       mvp: "miliquinha",
-      teamAzul: ["miliquinha", "germano", "adrian", "alemao", "wesley", "jederson", "valdir", "milica", {guest: true, name: "Rafael Nascimento", position: "Ala", number: 0}, "eder"],
+      teamAzul: ["miliquinha", "germano", "adrian", "alemao", "wesley", "jederson", "valdir", "milica", "rafael", "eder"],
       teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "Goleiro", number: 1}, "ivan","thiago", "gabriel", "cabelo", "biro","everson", "marcelo", "adler", {guest: true, name: "Pedro", position: "Meia", number: 20},],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
@@ -687,6 +687,49 @@ const SRDS = {
       players: [
     { team: "azul",     playerId: "miliquinha", playerName: null },
     { team: "vermelho", playerId: "adler",   playerName: null }
+  ]
+},
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 16,
+      date: "11/07/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 7, vermelho: 6},
+      mvp: "rodrigo-p",
+      teamAzul: [{guest: true, name: "José Leonardo", position: "Goleiro", number: 1}, "germano", "rodrigo-p", "jean", "biro", "wesley", "valdir", "everson", {guest: true, name: "Diego", position: "Meia", number: 0}],
+      teamVermelho: ["miliquinha", "milica","thiago", "gabriel", "rafael", "augusto","jederson", "marcelo", "adler", {guest: true, name: "Nine", position: "Ponta", number: 333}],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { guestName: "Nine", team: "vermelho" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "biro", team: "azul" }
+      ],
+      assists: [
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "biro", team: "azul" },
+        { playerId: "everson", team: "azul" },
+        { playerId: "thiago", team: "vermelho" }
+      ],
+      interview: {  youtubeId: "xxxxxxx",  // código do vídeo NORMAL (não Shorts)
+      players: [
+    { team: "azul",     playerId: "everson", playerName: null },
+    { team: "vermelho", playerId: "thiago",   playerName: null }
   ]
 },
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
@@ -3360,7 +3403,136 @@ const SRDS = {
           agressividade: null, // Agressividade
         },
       },
-    }
+    },
+    {
+      id: "rafael",
+      name: "Rafael Nascimento",
+      fullName: "Rafael Flores do Nascimento",
+      nickname: null,
+      number: { uni1: "21", uni2: "21" },
+      position: "Ala",
+      foot: "Esquerdo",
+      birthDate: "23/09/1996",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: null,// "img/players/adrian-azul.png", 
+        uni2: null,// "img/players/adrian-vermelho.png"
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    /* 
+    {
+      id: "leo",
+      name: "José Leonardo",
+      fullName: "xxxxx",
+      nickname: "Léo",
+      number: { uni1: "1", uni2: "1" },
+      position: "Goleiro",
+      foot: "Direito",
+      birthDate: "xx/xx/xxxx",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: "img/players/xxxx-azul.png", 
+        uni2: "img/players/xxxxx-vermelho.png"
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    }*/
   ],
 
   /**
