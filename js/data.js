@@ -726,7 +726,7 @@ const SRDS = {
         { playerId: "everson", team: "azul" },
         { playerId: "thiago", team: "vermelho" }
       ],
-      interview: {  youtubeId: "xxxxxxx",  // código do vídeo NORMAL (não Shorts)
+      interview: {  youtubeId: "bh-s84-JST8",  // código do vídeo NORMAL (não Shorts)
       players: [
     { team: "azul",     playerId: "everson", playerName: null },
     { team: "vermelho", playerId: "thiago",   playerName: null }
@@ -911,7 +911,7 @@ const SRDS = {
         uni2: "img/players/alexandre-vermelho.png"
       },
       injury: { name: "Controle da carga", returnDate: "25/10/2026" },
-      injuredRounds: [11,12,13,14,15],
+      injuredRounds: [11,12,13,14,15,16],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -1106,7 +1106,7 @@ const SRDS = {
         uni2: "img/players/edu-amarelo.png"
       },
       injury: { name: "Lesão na lombar", returnDate: "Sem previsão" },
-      injuredRounds: [14,15],
+      injuredRounds: [14,15,16],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2197,7 +2197,7 @@ const SRDS = {
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
       injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
-      injuredRounds: [12,13,14,15],
+      injuredRounds: [12,13,14,15,16],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2262,7 +2262,7 @@ const SRDS = {
         uni2: "img/players/erig-vermelho.png"
       },
       injury: { name: "Lesão ligamentar do joelho", returnDate: "15/09/2026" },
-      injuredRounds: [13,14,15],
+      injuredRounds: [13,14,15,16],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2457,7 +2457,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -3222,8 +3222,8 @@ const SRDS = {
       foot: "Direito",
       birthDate: "27/04/1987",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
       photo: {
-        uni1: null, 
-        uni2: null,
+        uni1: "img/players/anderson-azul.png", 
+        uni2: "img/players/anderson-vermelho.png"
       },
       injury: null,
       awards: [],
@@ -3414,8 +3414,8 @@ const SRDS = {
       foot: "Esquerdo",
       birthDate: "23/09/1996",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
       photo: {
-        uni1: null,// "img/players/adrian-azul.png", 
-        uni2: null,// "img/players/adrian-vermelho.png"
+        uni1: "img/players/rafael-azul.png", 
+        uni2: "img/players/rafael-vermelho.png"
       },
       injury: null,
       awards: [],
