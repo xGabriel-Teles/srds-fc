@@ -760,7 +760,7 @@ const SRDS = {
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "alemao", team: "vermelho" }
       ],
-      interview: {  youtubeId: "xxxxxxxx",  // código do vídeo NORMAL (não Shorts)
+      interview: {  youtubeId: "ASazgiUNBgc",  // código do vídeo NORMAL (não Shorts)
       players: [
     { team: "azul",     playerId: "eder", playerName: null },
     { team: "vermelho", playerId: "chico",   playerName: null }
