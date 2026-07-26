@@ -768,6 +768,49 @@ const SRDS = {
 },
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
+    {
+      round: 18,
+      date: "25/07/2026",
+      time: "10:00",
+      location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
+      result: { azul: 9, vermelho: 5},
+      mvp: "iago",
+      teamAzul: [{guest: true, name: "Leo", position: "Goleiro", number: 1},"chico", "gabriel", "iago", "adler", "jederson", "valdir", "gustavo", "vinicius"],
+      teamVermelho: ["miliquinha", "germano","milica", "thiago", "adrian", "biro", "everson", "krigor", {guest: true, name: "Nine", position: "Ponta", number: 20},],
+      scorers: [
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "valdir", team: "azul" },
+        { playerId: "valdir", team: "azul" },
+        { playerId: "jederson", team: "azul" },
+        { playerId: "gustavo", team: "azul" },
+        { guestName: "Everson (Contra)", team: "azul" },
+        { playerId: "vinicius", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+
+      ],
+      assists: [
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "jederson", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "adrian", team: "vermelho" }
+      ],
+      interview: {  youtubeId: "h3FkjLzvZDE",  // código do vídeo NORMAL (não Shorts)
+      players: [
+    { team: "azul",     playerId: "jederson", playerName: null },
+    { team: "vermelho", playerId: "adrian",   playerName: null }
+  ]
+},
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
   ],
 
   /**
@@ -945,7 +988,7 @@ const SRDS = {
         uni2: "img/players/alexandre-vermelho.png"
       },
       injury: { name: "Controle da carga", returnDate: "25/10/2026" },
-      injuredRounds: [11,12,13,14,15,16,17],
+      injuredRounds: [11,12,13,14,15,16,17,18],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2231,7 +2274,7 @@ const SRDS = {
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
       injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
-      injuredRounds: [12,13,14,15,16,17],
+      injuredRounds: [12,13,14,15,16,17,18],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2296,7 +2339,7 @@ const SRDS = {
         uni2: "img/players/erig-vermelho.png"
       },
       injury: { name: "Lesão ligamentar do joelho", returnDate: "15/09/2026" },
-      injuredRounds: [13,14,15,16,17],
+      injuredRounds: [13,14,15,16,17,18],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2491,7 +2534,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
