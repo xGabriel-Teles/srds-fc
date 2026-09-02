@@ -660,7 +660,7 @@ const SRDS = {
       result: { azul: 8, vermelho: 2},
       mvp: "miliquinha",
       teamAzul: ["miliquinha", "germano", "adrian", "alemao", "wesley", "jederson", "valdir", "milica", "rafael", "eder"],
-      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "Goleiro", number: 1}, "ivan","thiago", "gabriel", "cabelo", "biro","everson", "marcelo", "adler", {guest: true, name: "Pedro", position: "Meia", number: 20},],
+      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "Goleiro", number: 1}, "ivan","thiago", "gabriel", "cabelo", "biro","everson", "marcelo", "adler", {guest: true, name: "Pedro Vidal", position: "Ala", number: 32},],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
@@ -809,6 +809,111 @@ const SRDS = {
     { team: "vermelho", playerId: "adrian",   playerName: null }
   ]
 },
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 19,
+      date: "08/08/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 3, vermelho: 6},
+      mvp: null,
+      teamAzul: ["miliquinha","eder", "gabriel", "germano", "chico", "wesley", "valdir", "gustavo", "marcelo", "alef", "adrian"],
+      teamVermelho: ["vinicius", "jean","milica", "thiago", "biro", "iago", "krigor", "rodrigo-costa", "rodrigo-p", "jederson", "vander"],
+      scorers: [
+        { playerId: "iago", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "wesley", team: "azul" },
+        { playerId: "valdir", team: "azul" },
+
+      ],
+      assists: [
+        { playerId: "vander", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "alef", team: "azul" },
+        { playerId: "iago", team: "vermelho" },
+        { playerId: "iago", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" }
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 20,
+      date: "22/08/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 5, vermelho: 9},
+      mvp: null,
+      teamAzul: ["edu","germano", "iago", "rafael", "adler", {guest: true, name: "Diego", position: "Meia", number: 333}, {guest: true, name: "Pedro Vidal", position: "Ala", number: 32}, "rodrigo-p", "rodrigo-costa"],
+      teamVermelho: ["miliquinha", "milica", "thiago", "vinicius", "biro", "jederson", "krigor", {guest: true, name: "Adenir", position: "Ponta", number: 20}, "marcelo",],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "rodrigo-costa", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { guestName: "Pedro Vidal", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" },
+
+      ],
+      assists: [
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "adler", team: "azul" }
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 21,
+      date: "29/08/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 2, vermelho: 5},
+      mvp: null,
+      teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "biro", "iago", "marcelo", "jederson", "valdir", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}],
+      teamVermelho: ["miliquinha", "germano","milica", "alemao", "gabriel",  "adler", "rodrigo-p", "filipe", "anderson"],
+      scorers: [
+        { playerId: "rodrigo-p", team: "vermelho" },
+        { playerId: "filipe", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { guestName: "Diego", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "anderson", team: "vermelho" },
+        { playerId: "anderson", team: "vermelho" },
+
+      ],
+      assists: [
+        { playerId: "germano", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" }
+      ],
+      interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
   ],
