@@ -916,6 +916,36 @@ const SRDS = {
       interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
+    {
+      round: 22,
+      date: "12/09/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 3, vermelho: 5},
+      mvp: null,
+      teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "milica","filipe", "germano", "adler", "vander", "rodrigo-p", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}, {guest: true, name: "William", position: "Fixo", number: 0}],
+      teamVermelho: ["miliquinha", "biro","iago", "alemao", "gabriel", "wesley", {guest: true, name: "Anderson", position: "Fixo", number: 333}, "jederson", "valdir", "rafael"],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "filipe", team: "azul" },
+        { guestName: "William", team: "azul" },
+        { playerId: "rodrigo-p", team: "azul" },
+
+      ],
+      assists: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { guestName: "Anderson", team: "vermelho" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
   ],
 
   /**
