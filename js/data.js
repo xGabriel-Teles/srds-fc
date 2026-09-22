@@ -946,6 +946,45 @@ const SRDS = {
       interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
+    {
+      round: 23,
+      date: "19/09/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 5, vermelho: 6},
+      mvp: null,
+      teamAzul: ["miliquinha", "vinicius", {guest: true, name: "Ezequiel", position: "Ala", number: 20}, "iago","filipe", "germano", "adler", "erig", "marcelo", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}],
+      teamVermelho: [{guest: true, name: "Goleiro Aluguel", position: "Goleiro", number: 1}, "biro","alexandre", "milica","adrian", "gabriel","anderson", {guest: true, name: "Pedro Vidal", position: "Ala", number: 32}, "jederson", "eder", {guest: true, name: "Douglas", position: "Fixo", number: 0}],
+      scorers: [
+        { guestName: "Pedro Vidal", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { guestName: "Rodrigo W.", team: "azul" },
+        { guestName: "Ezequiel.", team: "azul" }
+
+      ],
+      assists: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "anderson", team: "vermelho" },
+        { playerId: "eder", team: "vermelho" },
+        { playerId: "eder", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "vinicius", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "germano", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "erig", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
   ],
 
   /**
