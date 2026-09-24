@@ -660,7 +660,7 @@ const SRDS = {
       result: { azul: 8, vermelho: 2},
       mvp: "miliquinha",
       teamAzul: ["miliquinha", "germano", "adrian", "alemao", "wesley", "jederson", "valdir", "milica", "rafael", "eder"],
-      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "Goleiro", number: 1}, "ivan","thiago", "gabriel", "cabelo", "biro","everson", "marcelo", "adler", {guest: true, name: "Pedro Vidal", position: "Ala", number: 32},],
+      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "Goleiro", number: 1}, "ivan","thiago", "gabriel", "cabelo", "biro","everson", "marcelo", "adler", "pedro",],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
         { playerId: "marcelo", team: "vermelho" },
@@ -851,7 +851,7 @@ const SRDS = {
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 5, vermelho: 9},
       mvp: null,
-      teamAzul: ["edu","germano", "iago", "rafael", "adler", {guest: true, name: "Diego", position: "Meia", number: 333}, {guest: true, name: "Pedro Vidal", position: "Ala", number: 32}, "rodrigo-p", "rodrigo-costa"],
+      teamAzul: ["edu","germano", "iago", "rafael", "adler", {guest: true, name: "Diego", position: "Meia", number: 333}, "pedro", "rodrigo-p", "rodrigo-costa"],
       teamVermelho: ["miliquinha", "milica", "thiago", "vinicius", "biro", "jederson", "krigor", {guest: true, name: "Adenir", position: "Ponta", number: 20}, "marcelo",],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
@@ -865,7 +865,7 @@ const SRDS = {
         { playerId: "jederson", team: "vermelho" },
         { playerId: "rodrigo-costa", team: "azul" },
         { playerId: "rodrigo-p", team: "azul" },
-        { guestName: "Pedro Vidal", team: "azul" },
+        { playerId: "pedro", team: "azul" },
         { playerId: "iago", team: "azul" },
         { playerId: "iago", team: "azul" },
 
@@ -954,9 +954,9 @@ const SRDS = {
       result: { azul: 5, vermelho: 6},
       mvp: null,
       teamAzul: ["miliquinha", "vinicius", {guest: true, name: "Ezequiel", position: "Ala", number: 20}, "iago","filipe", "germano", "adler", "erig", "marcelo", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}],
-      teamVermelho: [{guest: true, name: "Goleiro Aluguel", position: "Goleiro", number: 1}, "biro","alexandre", "milica","adrian", "gabriel","anderson", {guest: true, name: "Pedro Vidal", position: "Ala", number: 32}, "jederson", "eder", {guest: true, name: "Douglas", position: "Fixo", number: 0}],
+      teamVermelho: [{guest: true, name: "Goleiro Aluguel", position: "Goleiro", number: 1}, "biro","alexandre", "milica","adrian", "gabriel","anderson", "pedro", "jederson", "eder", {guest: true, name: "Douglas", position: "Fixo", number: 0}],
       scorers: [
-        { guestName: "Pedro Vidal", team: "vermelho" },
+        { playerId: "pedro", team: "vermelho" },
         { playerId: "jederson", team: "vermelho" },
         { playerId: "jederson", team: "vermelho" },
         { playerId: "milica", team: "vermelho" },
@@ -3667,6 +3667,70 @@ const SRDS = {
       photo: {
         uni1: "img/players/rafael-azul.png", 
         uni2: "img/players/rafael-vermelho.png"
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    {
+      id: "pedro",
+      name: "Pedro Vidal",
+      fullName: "Pedro Henrique Machado Vidal",
+      nickname: "Phenryck",
+      number: { uni1: "32", uni2: "32" },
+      position: "Ala",
+      foot: "Ambidestro",
+      birthDate: "10/05/1986",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: "img/players/pedro-azul.png", 
+        uni2: "img/players/pedro-vermelho.png"
       },
       injury: null,
       awards: [],
