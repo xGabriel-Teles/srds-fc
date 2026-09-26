@@ -895,7 +895,7 @@ const SRDS = {
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 2, vermelho: 5},
       mvp: null,
-      teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "biro", "iago", "marcelo", "jederson", "valdir", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}],
+      teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "biro", "iago", "marcelo", "jederson", "valdir", "rodrigo-w"],
       teamVermelho: ["miliquinha", "germano","milica", "alemao", "gabriel",  "adler", "rodrigo-p", "filipe", "anderson"],
       scorers: [
         { playerId: "rodrigo-p", team: "vermelho" },
@@ -923,7 +923,7 @@ const SRDS = {
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 3, vermelho: 5},
       mvp: null,
-      teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "milica","filipe", "germano", "adler", "vander", "rodrigo-p", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}, {guest: true, name: "William", position: "Fixo", number: 0}],
+      teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "milica","filipe", "germano", "adler", "vander", "rodrigo-p", "rodrigo-w", {guest: true, name: "William", position: "Fixo", number: 0}],
       teamVermelho: ["miliquinha", "biro","iago", "alemao", "gabriel", "wesley", {guest: true, name: "Anderson", position: "Fixo", number: 333}, "jederson", "valdir", "rafael"],
       scorers: [
         { playerId: "gabriel", team: "vermelho" },
@@ -953,7 +953,7 @@ const SRDS = {
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 5, vermelho: 6},
       mvp: null,
-      teamAzul: ["miliquinha", "vinicius", {guest: true, name: "Ezequiel", position: "Ala", number: 20}, "iago","filipe", "germano", "adler", "erig", "marcelo", {guest: true, name: "Rodrigo W.", position: "Centroavante", number: 333}],
+      teamAzul: ["miliquinha", "vinicius", {guest: true, name: "Ezequiel", position: "Ala", number: 20}, "iago","filipe", "germano", "adler", "erig", "marcelo", "rodrigo-w"],
       teamVermelho: [{guest: true, name: "Goleiro Aluguel", position: "Goleiro", number: 1}, "biro","alexandre", "milica","adrian", "gabriel","anderson", "pedro", "jederson", "eder", {guest: true, name: "Douglas", position: "Fixo", number: 0}],
       scorers: [
         { playerId: "pedro", team: "vermelho" },
@@ -965,7 +965,7 @@ const SRDS = {
         { playerId: "marcelo", team: "azul" },
         { playerId: "marcelo", team: "azul" },
         { playerId: "marcelo", team: "azul" },
-        { guestName: "Rodrigo W.", team: "azul" },
+        { playerId: "rodrigo-w", team: "azul" },
         { guestName: "Ezequiel.", team: "azul" }
 
       ],
@@ -981,6 +981,40 @@ const SRDS = {
         { playerId: "germano", team: "azul" },
         { playerId: "erig", team: "azul" },
         { playerId: "erig", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 24,
+      date: "19/09/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 3, vermelho: 6},
+      mvp: null,
+      teamAzul: ["miliquinha", "biro", "augusto","valdir", "germano",  "erig", "jederson", "rodrigo-p", "rodrigo-w"],
+      teamVermelho: ["vinicius", "alexandre", "milica","krigor", "gabriel","alemao", "pedro", {guest: true, name: "Ezequiel", position: "Ala", number: 0}, "marcelo","adler"],
+      scorers: [
+        { playerId: "pedro", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { guestName: "Ezequiel.", team: "vermelho" },
+        { guestName: "Ezequiel.", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "rodrigo-p", team: "azul" },
+        { playerId: "biro", team: "azul" },
+        { playerId: "biro", team: "azul" }
+
+      ],
+      assists: [
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "pedro", team: "vermelho" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "augusto", team: "azul" },
       ],
       interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
@@ -1161,8 +1195,8 @@ const SRDS = {
         uni1: "img/players/alexandre-azul.png", 
         uni2: "img/players/alexandre-vermelho.png"
       },
-      injury: { name: "Controle da carga", returnDate: "25/10/2026" },
-      injuredRounds: [11,12,13,14,15,16,17,18],
+      //injury: { name: "Controle da carga", returnDate: "25/10/2026" },
+      injuredRounds: [11,12,13,14,15,16,17,18,19,20,21,22],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2512,8 +2546,8 @@ const SRDS = {
         uni1: "img/players/erig-azul.png", 
         uni2: "img/players/erig-vermelho.png"
       },
-      injury: { name: "Lesão ligamentar do joelho", returnDate: "15/09/2026" },
-      injuredRounds: [13,14,15,16,17,18],
+      //injury: { name: "Lesão ligamentar do joelho", returnDate: "15/09/2026" },
+      injuredRounds: [13,14,15,16,17,18,19,20,21],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -3028,7 +3062,7 @@ const SRDS = {
         uni1: "img/players/ivan-azul.png", 
         uni2: "img/players/ivan-vermelho.png"
       },
-      injury: null,
+      injury: { name: "Cirurgia na vesícula", returnDate: "18/10/2026" },
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -3731,6 +3765,70 @@ const SRDS = {
       photo: {
         uni1: "img/players/pedro-azul.png", 
         uni2: "img/players/pedro-vermelho.png"
+      },
+      injury: null,
+      awards: [],
+      attributes: {
+        // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
+        // Preencha cada atributo individualmente. As médias dos grupos são
+        // calculadas automaticamente e exibidas no gráfico radar do perfil.
+        // Deixe null enquanto o valor não tiver sido avaliado.
+        ritmo: {
+          aceleracao:    null, // Aceleração
+          pique:         null, // Pique (Sprint)
+          recomposicao:  null, // Recomposição
+        },
+        finalizacao: {
+          posicionamento:    null, // Posicionamento
+          precisao:          null, // Precisão
+          forcaChute:        null, // Força do Chute
+          chuteLongo:        null, // Chute Longo
+          precCabeceio:      null, // Prec. de Cabeceio
+          penalti:           null, // Pênalti
+        },
+        passe: {
+          visao:        null, // Visão
+          dominio:      null, // Domínio
+          nocaoTatica:  null, // Noção tática
+          passeCurto:   null, // Passe Curto
+          passeLongo:   null, // Passe Longo
+        },
+        drible: {
+          agilidade:      null, // Agilidade
+          equilibrio:     null, // Equilíbrio
+          reacao:         null, // Reação
+          controleBola:   null, // Controle de Bola
+          conducao:       null, // Condução
+          compostura:     null, // Compostura
+        },
+        defesa: {
+          interceptacao:    null, // Interceptação
+          saidaPressao:     null, // Saída sob pressão
+          precCabeceio:     null, // Prec. de Cabeceio
+          nocaoDefensiva:   null, // Noção Defensiva
+          dividida:         null, // Dividida em Pé
+          carrinho:         null, // Carrinho
+        },
+        fisico: {
+          impulsao:      null, // Impulsão
+          folego:        null, // Fôlego
+          forca:         null, // Força
+          agressividade: null, // Agressividade
+        },
+      },
+    },
+    {
+      id: "rodrigo-w",
+      name: "Rodrigo Wagner",
+      fullName: "Rodrigo Soares Wagner",
+      nickname: "Peppa",
+      number: { uni1: "77", uni2: "77" },
+      position: "Ala",
+      foot: "Direito",
+      birthDate: "23/11/1991",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      photo: {
+        uni1: "img/players/rodrigo-w-azul.png", 
+        uni2: "img/players/rodrigo-w-vermelho.png"
       },
       injury: null,
       awards: [],
