@@ -987,7 +987,7 @@ const SRDS = {
     },
     {
       round: 24,
-      date: "19/09/2026",
+      date: "26/09/2026",
       time: "11:00",
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 3, vermelho: 6},
