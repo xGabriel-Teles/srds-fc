@@ -922,7 +922,7 @@ const SRDS = {
       time: "11:00",
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 3, vermelho: 5},
-      mvp: null,
+      mvp: "gabriel",
       teamAzul: ["vinicius","thiago", {guest: true, name: "Diego", position: "Meia", number: 20}, "milica","filipe", "germano", "adler", "vander", "rodrigo-p", "rodrigo-w", {guest: true, name: "William", position: "Fixo", number: 0}],
       teamVermelho: ["miliquinha", "biro","iago", "alemao", "gabriel", "wesley", {guest: true, name: "Anderson", position: "Fixo", number: 333}, "jederson", "valdir", "rafael"],
       scorers: [
@@ -991,7 +991,7 @@ const SRDS = {
       time: "11:00",
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 3, vermelho: 6},
-      mvp: null,
+      mvp: "gabriel",
       teamAzul: ["miliquinha", "biro", "augusto","valdir", "germano",  "erig", "jederson", "rodrigo-p", "rodrigo-w"],
       teamVermelho: ["vinicius", "alexandre", "milica","krigor", "gabriel","alemao", "pedro", {guest: true, name: "Ezequiel", position: "Ala", number: 0}, "marcelo","adler"],
       scorers: [
