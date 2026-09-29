@@ -1062,6 +1062,7 @@ const SRDS = {
         uni2: "img/players/gabriel-vermelho.png"
       },
       //injury: { name: "Septoplastia", returnDate: "10/05/2026" },
+      injury: { name: "Estiramento da Panturrilha", returnDate: "09/10/2026" },
       injuredRounds: [6,7],
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
