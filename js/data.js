@@ -1019,6 +1019,33 @@ const SRDS = {
       interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
     },
+    {
+      round: 25,
+      date: "03/10/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 4, vermelho: 2},
+      mvp: "iago",
+      teamAzul: [  "silvio","everson", "germano", "eder", "jederson","krigor", "marcelo", "adler", "rodrigo-w", "vander", "iago"],
+      teamVermelho: ["vinicius","miliquinha","augusto", "alexandre", "milica", "gabriel","jean","biro","erig", "wesley", {guest: true, name: "Ezequiel", position: "Ala", number: 0}],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "jederson", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" }
+
+      ],
+      assists: [
+        { guestName: "Ezequiel", team: "vermelho" },
+        { playerId: "milica", team: "vermelho" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "vander", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
   ],
 
   /**
@@ -1062,7 +1089,7 @@ const SRDS = {
         uni2: "img/players/gabriel-vermelho.png"
       },
       //injury: { name: "Septoplastia", returnDate: "10/05/2026" },
-      injury: { name: "Estiramento da Panturrilha", returnDate: "09/10/2026" },
+      //injury: { name: "Estiramento da Panturrilha", returnDate: "09/10/2026" },
       injuredRounds: [6,7],
       awards: [
         { year: 2025, title: "Melhor Meia", icon: "🥇" }
@@ -2482,7 +2509,8 @@ const SRDS = {
       photo: { 
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
-      injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
+      //injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
+      injury: { name: "Distenção muscular", returnDate: "15/10/2026" },
       injuredRounds: [12,13,14,15,16,17,18],
       awards: [],
       attributes: {
@@ -2743,7 +2771,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
