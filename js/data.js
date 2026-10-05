@@ -2510,7 +2510,7 @@ const SRDS = {
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
       //injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
-      injury: { name: "Distenção muscular", returnDate: "15/10/2026" },
+      injury: { name: "Distensão muscular", returnDate: "15/10/2026" },
       injuredRounds: [12,13,14,15,16,17,18],
       awards: [],
       attributes: {
