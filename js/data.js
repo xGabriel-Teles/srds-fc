@@ -698,7 +698,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 7, vermelho: 6},
       mvp: "rodrigo-p",
-      teamAzul: [{guest: true, name: "José Leonardo", position: "Goleiro", number: 1}, "germano", "rodrigo-p", "jean", "biro", "wesley", "valdir", "everson", {guest: true, name: "Diego", position: "Meia", number: 0}],
+      teamAzul: ["leo", "germano", "rodrigo-p", "jean", "biro", "wesley", "valdir", "everson", {guest: true, name: "Diego", position: "Meia", number: 0}],
       teamVermelho: ["miliquinha", "milica","thiago", "gabriel", "rafael", "augusto","jederson", "marcelo", "adler", {guest: true, name: "Nine", position: "Ponta", number: 333}],
       scorers: [
         { playerId: "marcelo", team: "vermelho" },
@@ -775,7 +775,7 @@ const SRDS = {
       location: { venue: "MCM ESPORTES - Porto Seco", address: "Av. Francisco Silveira Bitencourt, 1035 - Sarandi, Porto Alegre - RS" },
       result: { azul: 9, vermelho: 5},
       mvp: "iago",
-      teamAzul: [{guest: true, name: "Leo", position: "Goleiro", number: 1},"chico", "gabriel", "iago", "adler", "jederson", "valdir", "gustavo", "vinicius"],
+      teamAzul: ["leo","chico", "gabriel", "iago", "adler", "jederson", "valdir", "gustavo", "vinicius"],
       teamVermelho: ["miliquinha", "germano","milica", "thiago", "adrian", "biro", "everson", "krigor", {guest: true, name: "Nine", position: "Ponta", number: 20},],
       scorers: [
         { playerId: "gabriel", team: "azul" },
@@ -1042,6 +1042,70 @@ const SRDS = {
         { playerId: "milica", team: "vermelho" },
         { playerId: "krigor", team: "azul" },
         { playerId: "vander", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 26,
+      date: "24/10/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 4, vermelho: 4},
+      mvp: "miliquinha",
+      teamAzul: [ "leo","milica", "alemao", "eder", "jederson","augusto", "wesley",  "vander", "iago", "anderson"],
+      teamVermelho: ["germano","miliquinha","pedro", "alexandre", "gabriel","biro","adler","everson", "rodrigo-w", "filipe"],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "pedro", team: "vermelho" },
+        { playerId: "pedro", team: "vermelho" },
+        { playerId: "augusto", team: "azul" },
+        { playerId: "anderson", team: "azul" },
+        { playerId: "iago", team: "azul" },
+        { playerId: "iago", team: "azul" }
+
+      ],
+      assists: [
+        { playerId: "pedro", team: "vermelho" },
+        { playerId: "eder", team: "azul" },
+        { playerId: "milica", team: "azul" },
+        { playerId: "anderson", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 27,
+      date: "24/10/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 6, vermelho: 6},
+      mvp: null,
+      teamAzul: [ "miliquinha","milica", "vinicius", "eder", "thiago","alexandre", "rodrigo-w", "jean", "krigor", "marcelo", "adrian"],
+      teamVermelho: [{guest: true, name: "Goleiro de Aluguel", position: "goleiro", number: 1},"germano","jederson", "adler", "gabriel","biro","ivan","alef", {guest: true, name: "Paulo Martins", position: "Meia", number: 333}, {guest: true, name: "Ezequiel", position: "Ala", number: 0}],
+      scorers: [
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "gabriel", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "alef", team: "vermelho" },
+        { guestName: "Ezequiel", team: "vermelho" },
+        { playerId: "vinicius", team: "azul" },
+        { playerId: "rodrigo-w", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "krigor", team: "azul" }
+
+      ],
+      assists: [
+        { playerId: "alef", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "thiago", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "marcelo", team: "azul" },
+        { playerId: "vinicius", team: "azul" },
       ],
       interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
@@ -3910,19 +3974,18 @@ const SRDS = {
         },
       },
     },
-    /* 
     {
       id: "leo",
       name: "José Leonardo",
-      fullName: "xxxxx",
+      fullName: null,
       nickname: "Léo",
       number: { uni1: "1", uni2: "1" },
       position: "Goleiro",
       foot: "Direito",
-      birthDate: "xx/xx/xxxx",        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
+      birthDate: null,        // DD/MM/AAAA — preencha a data real (nascido aprox. em 1985, idade atual: 41 anos)
       photo: {
-        uni1: "img/players/xxxx-azul.png", 
-        uni2: "img/players/xxxxx-vermelho.png"
+        //uni1: "img/players/leo-azul.png", 
+        //uni2: "img/players/leo-vermelho.png"
       },
       injury: null,
       awards: [],
@@ -3974,7 +4037,7 @@ const SRDS = {
           agressividade: null, // Agressividade
         },
       },
-    }*/
+    }
   ],
 
   /**
