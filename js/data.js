@@ -1077,7 +1077,7 @@ const SRDS = {
     },
     {
       round: 27,
-      date: "24/10/2026",
+      date: "31/10/2026",
       time: "11:00",
       location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
       result: { azul: 6, vermelho: 6},
@@ -1106,6 +1106,83 @@ const SRDS = {
         { playerId: "krigor", team: "azul" },
         { playerId: "marcelo", team: "azul" },
         { playerId: "vinicius", team: "azul" },
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 28,
+      date: "07/11/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 6, vermelho: 6},
+      mvp: "rodrigo-w",
+      teamAzul: [ "leo","germano", "alexandre", "gabriel","wesley","anderson", "vinicius", "filipe","erig",],
+      teamVermelho: ["miliquinha","biro", "alemao", "eder", "rodrigo-w", "iago", "cabelo", "marcelo", "krigor", "everson"],
+      scorers: [
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "rodrigo-w", team: "vermelho" },
+        { playerId: "rodrigo-w", team: "vermelho" },
+        { playerId: "rodrigo-w", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "vinicius", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "anderson", team: "azul" },
+        { playerId: "anderson", team: "azul" }
+
+      ],
+      assists: [
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "biro", team: "vermelho" },
+        { playerId: "marcelo", team: "vermelho" },
+        { playerId: "krigor", team: "vermelho" },
+        { playerId: "alemao", team: "vermelho" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "wesley", team: "azul" }
+      ],
+      interview: null,
+      highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
+    },
+    {
+      round: 29,
+      date: "14/11/2026",
+      time: "11:00",
+      location: { venue: "HD Sports Complex", address: "R. Lauro Müller, 850 - Navegantes, Porto Alegre - RS"  },
+      result: { azul: 6, vermelho: 7},
+      mvp: "augusto",
+      teamAzul: [ {guest: true, name: "Goleiro de Aluguel", position: "goleiro", number: 1}, "biro", "vander", "erig", "thiago","adler", "rodrigo-w", "gabriel", "krigor", "filipe"],
+      teamVermelho: ["miliquinha","germano","jederson", "chico", "wesley","augusto","eder","valdir", {guest: true, name: "Ezequiel", position: "Ala", number: 0}, "marcelo"],
+      scorers: [
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "jederson", team: "vermelho" },
+        { playerId: "eder", team: "vermelho" },
+        { playerId: "valdir", team: "vermelho" },
+        { playerId: "gabriel", team: "azul" },
+        { playerId: "adler", team: "azul" },
+        { playerId: "adler", team: "azul" },
+        { playerId: "adler", team: "azul" },
+        { playerId: "filipe", team: "azul" },
+        { playerId: "krigor", team: "azul" }
+
+      ],
+      assists: [
+        { playerId: "augusto", team: "vermelho" },
+        { playerId: "valdir", team: "vermelho" },
+        { playerId: "wesley", team: "vermelho" },
+        { playerId: "chico", team: "vermelho" },
+        { playerId: "chico", team: "vermelho" },
+        { playerId: "biro", team: "azul" },
+        { playerId: "krigor", team: "azul" },
+        { playerId: "rodrigo-w", team: "azul" },
+        { playerId: "erig", team: "azul" },
+        { playerId: "filipe", team: "azul" },
       ],
       interview: null,
       highlight: null //{ youtubeId: "OUTRO_CODIGO" }  // ou null se não houver highlights
@@ -2255,7 +2332,8 @@ const SRDS = {
         uni1: "img/players/milica-azul.png", 
         uni2: "img/players/milica-vermelho.png"
       },
-      injury: null,
+      injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
+      injuredRounds: [28,29,30],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -2574,7 +2652,7 @@ const SRDS = {
         uni1: "img/players/alef-azul.png", 
         uni2: "img/players/alef-vermelho.png" },
       //injury: { name: "Entorse no tornozelo", returnDate: "15/07/2026" },
-      injury: { name: "Distensão muscular", returnDate: "15/10/2026" },
+      //injury: { name: "Distensão muscular", returnDate: "15/10/2026" },
       injuredRounds: [12,13,14,15,16,17,18],
       awards: [],
       attributes: {
@@ -2835,7 +2913,7 @@ const SRDS = {
         uni2: "img/players/juliano-vermelho.png"
       },
       injury: { name: "Ligamento Cruzado Anterior", returnDate: "Sem previsão" },
-      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+      injuredRounds: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29],
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
@@ -3155,7 +3233,7 @@ const SRDS = {
         uni1: "img/players/ivan-azul.png", 
         uni2: "img/players/ivan-vermelho.png"
       },
-      injury: { name: "Cirurgia na vesícula", returnDate: "18/10/2026" },
+      //injury: { name: "Cirurgia na vesícula", returnDate: "18/10/2026" },
       awards: [],
       attributes: {
         // ── Atributos detalhados por grupo (escala 1–10) ──────────────────────
